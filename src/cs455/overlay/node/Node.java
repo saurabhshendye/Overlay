@@ -1,8 +1,8 @@
-package cs455.overlay.node;
-
 /*
  * Created by Saurabh Shendye on 1/23/17.
  */
+
+package cs455.overlay.node;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -10,12 +10,12 @@ import java.net.ServerSocket;
 
 public class Node
 {
-    public Node(int port) throws IOException
+    Node(int port) throws IOException
     {
         ServerSocket server = new ServerSocket(port, 5);
     }
 
-    public Node() throws IOException
+    Node() throws IOException
     {
         // This will create a socket and will not bind to any of the port
         ServerSocket server = new ServerSocket();
