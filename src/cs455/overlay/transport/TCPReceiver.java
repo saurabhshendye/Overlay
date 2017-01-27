@@ -7,7 +7,8 @@ import java.io.IOException;
 import java.net.Socket;
 
 
-public class TCPReceiver extends Thread {
+public class TCPReceiver extends Thread
+{
 
     private Socket Serving;
     private DataInputStream din;
@@ -21,22 +22,19 @@ public class TCPReceiver extends Thread {
     public void run()
     {
         int D_len;
-        while(Serving != null)
+        try
         {
-            try
-            {
-                D_len = din.readInt();
-                byte[] data = new byte[D_len];
+            D_len = din.readInt();
+            byte[] data = new byte[D_len];
 //                InputStream din = Serving.getInputStream();
-                din.readFully(data, 0, D_len);
+            din.readFully(data, 0, D_len);
 
-                String msg = new String(data);
-                System.out.print("Received Message" + msg);
-            }
-            catch (IOException e1)
-            {
-                System.out.println(e1.getMessage());
-            }
+            String msg = new String(data);
+            System.out.print("Received Message" + msg);
+        }
+        catch (IOException e1)
+        {
+        System.out.println(e1.getMessage());
         }
 
     }
