@@ -1,4 +1,4 @@
-PACKAGES = cs455/overlay/node cs455/overlay/transport
+PACKAGES = cs455/overlay/node cs455/overlay/transport cs455/overlay/UserIn
 
 # Java compiler
 JAVAC = javac
