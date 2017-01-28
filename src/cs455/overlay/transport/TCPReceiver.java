@@ -21,10 +21,11 @@ public class TCPReceiver extends Thread
 
     public void run()
     {
-        int D_len;
+
         try
         {
-            D_len = din.readInt();
+//            int D_len;
+            int D_len = din.readInt();
             byte[] data = new byte[D_len];
 //                InputStream din = Serving.getInputStream();
             din.readFully(data, 0, D_len);

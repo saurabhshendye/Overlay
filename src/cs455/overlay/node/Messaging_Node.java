@@ -4,7 +4,9 @@
 
 package cs455.overlay.node;
 
+import cs455.overlay.UserIn.User_Input;
 import cs455.overlay.WireFormats.Register_request;
+import cs455.overlay.transport.TCPReceiver;
 import cs455.overlay.transport.TCPSender;
 
 import java.io.IOException;
@@ -40,8 +42,21 @@ public class Messaging_Node extends Node
 
         Register_request request = new Register_request(port, IP);
         byte[] request_inBytes =  request.getBytearray();
+
 //        String req = "Test";
 //        byte[] request_inBytes = req.getBytes();
+        // Sending the request
         register.send_data(request_inBytes);
+
+        User_Input In = new User_Input();
+        In.start();
+
+        while(true)
+        {
+            Socket serving = Msg_server.accept();
+            System.out.println("creating thread");
+            Thread thread_2 = new TCPReceiver(serving);
+            thread_2.start();
+        }
     }
 }

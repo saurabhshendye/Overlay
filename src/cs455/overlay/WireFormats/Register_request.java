@@ -12,6 +12,8 @@ import java.io.IOException;
 
 public class Register_request
 {
+//    This class creates a register message object
+
     private int port;
     private String IP;
     private int type = 0;
@@ -24,7 +26,7 @@ public class Register_request
 
     public byte[] getBytearray() throws IOException
     {
-
+//        This method creates a byte array which needs to be written onto the socket
         ByteArrayOutputStream baopstream = new ByteArrayOutputStream();
         DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(baopstream));
         dout.writeInt(type);
