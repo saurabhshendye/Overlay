@@ -31,7 +31,6 @@ public class Registry extends Node
         // The while loop is created in order to continuously accept the inputs from the network
         while (true)
         {
-//            System.out.print("In the While Loop");
             // The execution of a program is blocked here
             // It will not go further till there is a input from the network
             Socket serving = Reg_server.accept();

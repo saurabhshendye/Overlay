@@ -24,5 +24,6 @@ public class TCPSender
         dout.writeInt(D_len);
         dout.write(data_to_send,0,D_len);
         dout.flush();
+        dout.close();
     }
 }

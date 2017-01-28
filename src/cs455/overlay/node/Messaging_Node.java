@@ -20,8 +20,6 @@ public class Messaging_Node extends Node
 
     public static void main(String args[]) throws IOException
     {
-//        Node Messaging_N = new Messaging_Node();
-
         // Accept the inputs from the command Line
         String registry_ip = args[0];
         int registry_port = Integer.parseInt(args[1]);
@@ -29,9 +27,11 @@ public class Messaging_Node extends Node
         // Create the Server Socket to continuously Listen
         ServerSocket Msg_server = new ServerSocket();
         Msg_server.bind(null, 5);
-
+        int port = Msg_server.getLocalPort();
+        System.out.println("Port Number: "+ port);
         // Create a temporary Socket and send the registration Request to Registry
         Socket temp_socket = new Socket(registry_ip,registry_port);
+        System.out.println("Temp Socket address: " + temp_socket.getLocalAddress());
         TCPSender register = new TCPSender(temp_socket);
         String request = "Test";
         byte[] request_inBytes = request.getBytes();
