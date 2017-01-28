@@ -45,8 +45,7 @@ public class Messaging_Node extends Node
 
         byte[] request_inBytes =  request.getBytearray();
 
-//        String req = "Test";
-//        byte[] request_inBytes = req.getBytes();
+
         // Sending the request
         register.send_data(request_inBytes);
 

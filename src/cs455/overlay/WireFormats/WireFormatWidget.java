@@ -13,8 +13,6 @@ import static cs455.overlay.node.Registry.getRegistered;
 
 public class WireFormatWidget {
     private int type;
-//    private byte[] data;
-//    private String identifier;
     private byte[] identifier;
 
     public WireFormatWidget(byte[] marshaledBytes) throws IOException
@@ -23,12 +21,11 @@ public class WireFormatWidget {
         DataInputStream din = new DataInputStream(new BufferedInputStream(baInputStream));
 
         this.type = din.readInt();
-        System.out.println("Type of the message: "+ this.type);
+
         int Len = din.readInt();
         byte[] data = new byte[Len];
 
         din.readFully(data);
-//        identifier = new String(data);
         identifier = data;
 
         din.close();
