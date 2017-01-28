@@ -14,7 +14,8 @@ import static cs455.overlay.node.Registry.getRegistered;
 public class WireFormatWidget {
     private int type;
 //    private byte[] data;
-    private String identifier;
+//    private String identifier;
+    private byte[] identifier;
 
     public WireFormatWidget(byte[] marshaledBytes) throws IOException
     {
@@ -27,7 +28,8 @@ public class WireFormatWidget {
         byte[] data = new byte[Len];
 
         din.readFully(data);
-        identifier = new String(data);
+//        identifier = new String(data);
+        identifier = data;
 
         din.close();
         baInputStream.close();
@@ -38,7 +40,7 @@ public class WireFormatWidget {
         return this.type;
     }
 
-    public void register()
+    public void register() throws IOException
     {
         System.out.println("Getting the node registered..");
         getRegistered(this.identifier);

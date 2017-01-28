@@ -37,10 +37,12 @@ public class Messaging_Node extends Node
         // Create a temporary Socket and send the registration Request to Registry
         Socket temp_socket = new Socket(registry_ip,registry_port);
         String IP = temp_socket.getLocalAddress().toString();
-        System.out.println("Temp Socket address: " + temp_socket.getLocalAddress().toString());
+        IP = IP.replace("/", "");
+        System.out.println("Temp Socket address: " + IP);
         TCPSender register = new TCPSender(temp_socket);
 
         Register_request request = new Register_request(port, IP);
+
         byte[] request_inBytes =  request.getBytearray();
 
 //        String req = "Test";

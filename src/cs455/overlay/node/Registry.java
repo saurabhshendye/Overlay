@@ -7,7 +7,7 @@ package cs455.overlay.node;
 import cs455.overlay.UserIn.User_Input;
 import cs455.overlay.transport.TCPReceiver;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -40,9 +40,22 @@ public class Registry extends Node
         }
     }
 
-    public static void getRegistered(String data)
+    public static void getRegistered(byte[] byte_data) throws IOException
     {
-        System.out.println("Got Registered : " +data);
+//        System.out.println("Got Registered : " +data);
+//        byte[] byte_data = data.getBytes();
+        ByteArrayInputStream bin = new ByteArrayInputStream(byte_data);
+        DataInputStream din = new DataInputStream(new BufferedInputStream(bin));
+
+        System.out.println("Port Number is: " + din.readInt());
+
+        byte[] IP_byte = new byte[byte_data.length - 4];
+        din.readFully(IP_byte);
+        String IP  = new String(IP_byte);
+        System.out.println("IP Address is : " + IP);
+
+
+
     }
 
 }
