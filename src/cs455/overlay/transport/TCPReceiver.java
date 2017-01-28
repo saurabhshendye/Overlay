@@ -34,7 +34,7 @@ public class TCPReceiver extends Thread
             int type = WireFormat.getType();
             switch (type)
             {
-                case 0: WireFormat.register();
+                case 0: WireFormat.register();              // 0 for Registration Request
                         break;
             }
 

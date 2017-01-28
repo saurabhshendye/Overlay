@@ -10,9 +10,14 @@ import cs455.overlay.transport.TCPReceiver;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Registry extends Node
 {
+    private static int Node_Count;
+    private static ArrayList<String[]> Node_info = new ArrayList<String[]>();
+//    private static ArrayList<String[]> Node_info;
+
     Registry(int port) throws IOException {
         super(port);
     }
@@ -46,16 +51,18 @@ public class Registry extends Node
 //        byte[] byte_data = data.getBytes();
         ByteArrayInputStream bin = new ByteArrayInputStream(byte_data);
         DataInputStream din = new DataInputStream(new BufferedInputStream(bin));
+        String[] info;
+        int port = din.readInt();
 
-        System.out.println("Port Number is: " + din.readInt());
+        System.out.println("Port Number is: " + port);
 
         byte[] IP_byte = new byte[byte_data.length - 4];
         din.readFully(IP_byte);
         String IP  = new String(IP_byte);
         System.out.println("IP Address is : " + IP);
 
-
-
+        info = new String[]{IP, Integer.toString(port)};
+        Node_info.add(info);
     }
 
 }
