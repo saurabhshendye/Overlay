@@ -40,9 +40,9 @@ public class Registry extends Node
         }
     }
 
-    public static void getRegistered()
+    public static void getRegistered(String data)
     {
-
+        System.out.println("Got Registered : " +data);
     }
 
 }

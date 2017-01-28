@@ -40,7 +40,7 @@ public class WireFormatWidget {
 
     public void register()
     {
-        getRegistered();
+        getRegistered(this.identifier);
     }
 
 }
