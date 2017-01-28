@@ -4,6 +4,7 @@
 
 package cs455.overlay.node;
 
+import cs455.overlay.WireFormats.Register_request;
 import cs455.overlay.transport.TCPSender;
 
 import java.io.IOException;
@@ -28,13 +29,19 @@ public class Messaging_Node extends Node
         ServerSocket Msg_server = new ServerSocket();
         Msg_server.bind(null, 5);
         int port = Msg_server.getLocalPort();
+
         System.out.println("Port Number: "+ port);
+
         // Create a temporary Socket and send the registration Request to Registry
         Socket temp_socket = new Socket(registry_ip,registry_port);
-        System.out.println("Temp Socket address: " + temp_socket.getLocalAddress());
+        String IP = temp_socket.getLocalAddress().toString();
+        System.out.println("Temp Socket address: " + temp_socket.getLocalAddress().toString());
         TCPSender register = new TCPSender(temp_socket);
-        String request = "Test";
-        byte[] request_inBytes = request.getBytes();
+
+        Register_request request = new Register_request(port, IP);
+        byte[] request_inBytes =  request.getBytearray();
+//        String req = "Test";
+//        byte[] request_inBytes = req.getBytes();
         register.send_data(request_inBytes);
     }
 }

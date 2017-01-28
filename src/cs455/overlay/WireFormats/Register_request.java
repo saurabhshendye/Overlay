@@ -4,10 +4,11 @@
 
 package cs455.overlay.WireFormats;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.InetAddress;
+
 
 public class Register_request
 {
@@ -21,19 +22,22 @@ public class Register_request
         this.port = port;
     }
 
-    public byte[] getBytes() throws IOException
+    public byte[] getBytearray() throws IOException
     {
-        byte[] marshaled = null;
+
         ByteArrayOutputStream baopstream = new ByteArrayOutputStream();
-        DataOutputStream dout = new DataOutputStream(baopstream);
+        DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(baopstream));
         dout.writeInt(type);
-        byte[] b = this.getBytes();
-        int Len = b.length;
+
+        byte[] IP_array = this.IP.getBytes();
+        int IP_Len = IP_array.length;
+        int Len = IP_Len + 4;
         dout.writeInt(Len);
-        dout.write(b);
+        dout.writeInt(port);
+        dout.write(IP_array);
         dout.flush();
 
-        marshaled = baopstream.toByteArray();
+        byte[] marshaled = baopstream.toByteArray();
 
         baopstream.close();
         dout.close();
