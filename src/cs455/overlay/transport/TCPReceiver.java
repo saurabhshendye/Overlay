@@ -2,6 +2,8 @@
  * Created by saurabh on 1/24/17.
  */
 package cs455.overlay.transport;
+import cs455.overlay.WireFormats.WireFormatWidget;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -24,14 +26,23 @@ public class TCPReceiver extends Thread
 
         try
         {
-//            int D_len;
             int D_len = din.readInt();
             byte[] data = new byte[D_len];
-//                InputStream din = Serving.getInputStream();
             din.readFully(data, 0, D_len);
 
-            String msg = new String(data);
-            System.out.print("Received Message" + msg);
+            WireFormatWidget WireFormat = new WireFormatWidget(data);
+            int type = WireFormat.getType();
+
+            switch (type)
+            {
+                case 1: WireFormat.register();
+                        break;
+            }
+
+
+
+//            String msg = new String(data);
+//            System.out.print("Received Message" + msg);
         }
         catch (IOException e1)
         {

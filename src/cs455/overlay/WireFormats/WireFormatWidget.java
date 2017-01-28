@@ -9,9 +9,12 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+import static cs455.overlay.node.Registry.getRegistered;
+
 public class WireFormatWidget {
     private int type;
 //    private byte[] data;
+    private String identifier;
 
     public WireFormatWidget(byte[] marshaledBytes) throws IOException
     {
@@ -24,8 +27,20 @@ public class WireFormatWidget {
         byte[] data = new byte[Len];
 
         din.readFully(data);
+        identifier = new String(data);
 
         din.close();
         baInputStream.close();
     }
+
+    public int getType()
+    {
+        return this.type;
+    }
+
+    public void register()
+    {
+        getRegistered();
+    }
+
 }
