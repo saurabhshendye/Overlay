@@ -29,13 +29,15 @@ public class TCPReceiver extends Thread
             int D_len = din.readInt();
             byte[] data = new byte[D_len];
             din.readFully(data, 0, D_len);
-
+            String testing = new String(data);
+            System.out.println("Data Received: " +testing);
             WireFormatWidget WireFormat = new WireFormatWidget(data);
             int type = WireFormat.getType();
 
+            System.out.println("Going to Switch case");
             switch (type)
             {
-                case 1: WireFormat.register();
+                case 0: WireFormat.register();
                         break;
             }
 

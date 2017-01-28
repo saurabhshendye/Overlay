@@ -22,7 +22,7 @@ public class WireFormatWidget {
         DataInputStream din = new DataInputStream(new BufferedInputStream(baInputStream));
 
         this.type = din.readInt();
-
+        System.out.println("Type of the message: "+ this.type);
         int Len = din.readInt();
         byte[] data = new byte[Len];
 
@@ -40,6 +40,7 @@ public class WireFormatWidget {
 
     public void register()
     {
+        System.out.println("Getting the node registered..");
         getRegistered(this.identifier);
     }
 
