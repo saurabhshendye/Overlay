@@ -29,13 +29,14 @@ public class Register_request
 //        This method creates a byte array which needs to be written onto the socket
         ByteArrayOutputStream baopstream = new ByteArrayOutputStream();
         DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(baopstream));
-        dout.writeInt(type);
 
         byte[] IP_array = this.IP.getBytes();
         int IP_Len = IP_array.length;
         int Len = IP_Len + 4;
+
+        dout.writeInt(type);
         dout.writeInt(Len);
-        dout.writeInt(port);
+        dout.writeInt(this.port);
         dout.write(IP_array);
         dout.flush();
 

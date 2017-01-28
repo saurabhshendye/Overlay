@@ -40,4 +40,9 @@ public class Registry extends Node
         }
     }
 
+    public static void getRegistered()
+    {
+
+    }
+
 }
