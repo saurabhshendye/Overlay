@@ -36,6 +36,8 @@ public class TCPReceiver extends Thread
             {
                 case 0: WireFormat.register();              // 0 for Registration Request
                         break;
+                case 10: WireFormat.reg_ack();              // 10 for Reg Ack
+                        break;
             }
 
         }

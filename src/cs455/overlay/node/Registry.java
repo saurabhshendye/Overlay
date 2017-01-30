@@ -62,7 +62,17 @@ public class Registry extends Node
         System.out.println("IP Address is : " + IP);
 
         info = new String[]{IP, Integer.toString(port)};
-        Node_info.add(info);
+        if (Node_info.contains(info))
+        {
+            System.out.println("Node already registered");
+        }
+        else
+        {
+            System.out.println("Node added to the list");
+            Node_info.add(info);
+        }
+
+
     }
 
 }
