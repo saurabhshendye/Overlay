@@ -47,6 +47,7 @@ public class WireFormatWidget {
     public void reg_ack()
     {
         System.out.println("Registration Complete");
+
     }
 
 }
