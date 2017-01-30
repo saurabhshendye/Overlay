@@ -12,23 +12,27 @@ import java.io.IOException;
 import static cs455.overlay.node.Messaging_Node.reg_ack_parser;
 import static cs455.overlay.node.Registry.getRegistered;
 
-public class WireFormatWidget {
+public class WireFormatWidget
+{
     private int type;
     private byte[] identifier;
 
     public WireFormatWidget(byte[] marshaledBytes) throws IOException
     {
+        System.out.println("In the constructor of Wire Format");
         ByteArrayInputStream baInputStream = new ByteArrayInputStream(marshaledBytes);
         DataInputStream din = new DataInputStream(new BufferedInputStream(baInputStream));
 
         this.type = din.readInt();
-
+        System.out.println("Type in Wire Format Constructor: " +this.type);
         int Len = din.readInt();
+        System.out.println("Length in Wire Format Constructor: " +Len);
         byte[] data = new byte[Len];
+
 
         din.readFully(data);
         identifier = data;
-        System.out.println(identifier);
+//        System.out.println("Identifier: " + identifier);
 
         din.close();
         baInputStream.close();

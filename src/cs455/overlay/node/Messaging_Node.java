@@ -55,7 +55,7 @@ public class Messaging_Node extends Node
         while(true)
         {
             Socket serving = Msg_server.accept();
-            System.out.println("creating thread");
+            System.out.println("creating thread in Messaging node. ");
             Thread thread_2 = new TCPReceiver(serving);
             thread_2.start();
         }
