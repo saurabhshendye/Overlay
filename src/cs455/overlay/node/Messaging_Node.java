@@ -9,9 +9,6 @@ import cs455.overlay.WireFormats.Register_request;
 import cs455.overlay.transport.TCPReceiver;
 import cs455.overlay.transport.TCPSender;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -71,7 +68,5 @@ public class Messaging_Node extends Node
 
         String Message = new String(byte_data);
         System.out.println("Registration Message: " + Message);
-
-
     }
 }

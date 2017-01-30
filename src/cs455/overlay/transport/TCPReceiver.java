@@ -32,6 +32,7 @@ public class TCPReceiver extends Thread
             WireFormatWidget WireFormat = new WireFormatWidget(data);
 
             int type = WireFormat.getType();
+            System.out.println("Type of message Received: " +type);
             switch (type)
             {
                 case 0: WireFormat.register();              // 0 for Registration Request
@@ -43,7 +44,7 @@ public class TCPReceiver extends Thread
         }
         catch (IOException e1)
         {
-        System.out.println(e1.getMessage());
+            System.out.println(e1.getMessage());
         }
 
     }

@@ -22,6 +22,7 @@ public class Reg_Ack {
         ByteArrayOutputStream baopstream = new ByteArrayOutputStream();
         DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(baopstream));
 
+        System.out.println("Code is :" +this.code);
         byte[] code_array = this.code.getBytes();
         int Len = code_array.length + 4;
 

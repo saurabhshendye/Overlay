@@ -9,6 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+import static cs455.overlay.node.Messaging_Node.reg_ack_parser;
 import static cs455.overlay.node.Registry.getRegistered;
 
 public class WireFormatWidget {
@@ -27,6 +28,7 @@ public class WireFormatWidget {
 
         din.readFully(data);
         identifier = data;
+        System.out.println(identifier);
 
         din.close();
         baInputStream.close();
@@ -41,13 +43,12 @@ public class WireFormatWidget {
     {
         System.out.println("Getting the node registered..");
         getRegistered(this.identifier);
-
     }
 
     public void reg_ack()
     {
         System.out.println("Registration Complete");
-
+        reg_ack_parser(this.identifier);
     }
 
 }
