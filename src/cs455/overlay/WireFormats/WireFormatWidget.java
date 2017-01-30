@@ -41,6 +41,7 @@ public class WireFormatWidget {
     {
         System.out.println("Getting the node registered..");
         getRegistered(this.identifier);
+
     }
 
     public void reg_ack()

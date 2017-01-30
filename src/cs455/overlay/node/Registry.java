@@ -5,7 +5,9 @@
 package cs455.overlay.node;
 
 import cs455.overlay.UserIn.User_Input;
+import cs455.overlay.WireFormats.Reg_Ack;
 import cs455.overlay.transport.TCPReceiver;
+import cs455.overlay.transport.TCPSender;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -45,7 +47,7 @@ public class Registry extends Node
         }
     }
 
-    public static void getRegistered(byte[] byte_data) throws IOException
+    public static synchronized void getRegistered(byte[] byte_data) throws IOException
     {
 //        System.out.println("Got Registered : " +data);
 //        byte[] byte_data = data.getBytes();
@@ -62,16 +64,24 @@ public class Registry extends Node
         System.out.println("IP Address is : " + IP);
 
         info = new String[]{IP, Integer.toString(port)};
+
+        Socket temp_ack_send = new Socket(IP,port);
+        TCPSender send_ack = new TCPSender(temp_ack_send);
         if (Node_info.contains(info))
         {
             System.out.println("Node already registered");
+            Reg_Ack reg_ack = new Reg_Ack("Failed");
+            byte[] Ack  = reg_ack.getByteArray();
+            send_ack.send_data(Ack);
         }
         else
         {
             System.out.println("Node added to the list");
             Node_info.add(info);
+            Reg_Ack reg_ack = new Reg_Ack("Success");
+            byte[] Ack  = reg_ack.getByteArray();
+            send_ack.send_data(Ack);
         }
-
 
     }
 

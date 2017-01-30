@@ -60,4 +60,9 @@ public class Messaging_Node extends Node
             thread_2.start();
         }
     }
+
+    public static void reg_ack_parser()
+    {
+
+    }
 }
