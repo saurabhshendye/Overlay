@@ -14,6 +14,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import static java.lang.System.in;
+
 public class Registry extends Node
 {
     private static int Node_Count;
@@ -83,6 +85,14 @@ public class Registry extends Node
             send_ack.send_data(Ack);
         }
 
+    }
+
+    public static void print_node_info()
+    {
+        for(String[] node: Node_info)
+        {
+            System.out.println("Host: " +node[0] + " Port: " +node[1]);
+        }
     }
 
 }
