@@ -8,6 +8,7 @@ import cs455.overlay.UserIn.User_Input;
 import cs455.overlay.WireFormats.Reg_Ack;
 import cs455.overlay.transport.TCPReceiver;
 import cs455.overlay.transport.TCPSender;
+import cs455.overlay.util.Overlay_Creator;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -51,8 +52,7 @@ public class Registry extends Node
 
     public static synchronized void getRegistered(byte[] byte_data) throws IOException
     {
-//        System.out.println("Got Registered : " +data);
-//        byte[] byte_data = data.getBytes();
+
         ByteArrayInputStream bin = new ByteArrayInputStream(byte_data);
         DataInputStream din = new DataInputStream(new BufferedInputStream(bin));
         String[] info;
@@ -80,6 +80,7 @@ public class Registry extends Node
         {
             System.out.println("Node added to the list");
             Node_info.add(info);
+            Node_Count++;
             Reg_Ack reg_ack = new Reg_Ack("Success");
             byte[] Ack  = reg_ack.getByteArray();
             send_ack.send_data(Ack);
@@ -89,10 +90,28 @@ public class Registry extends Node
 
     public static void print_node_info()
     {
-        for(String[] node: Node_info)
+        if(Node_info.isEmpty())
         {
-            System.out.println("Host: " +node[0] + " Port: " +node[1]);
+            System.out.println("No Nodes Registered yet!!");
         }
+        else
+        {
+            System.out.println("\n");
+            System.out.println("Node IP" + "\t" + "Port");
+            for(String[] node: Node_info)
+            {
+                System.out.println("\n");
+                System.out.println(node[0] +"\t" + node[1]);
+            }
+        }
+    }
+
+    public static void setup_overlay(String command)
+    {
+        int command_len = command.length();
+        int Node_degree = Character.getNumericValue(command.charAt(command_len));
+
+        Overlay_Creator overlay = new Overlay_Creator(Node_degree, Node_Count);
     }
 
 }

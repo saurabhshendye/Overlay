@@ -6,6 +6,7 @@ package cs455.overlay.UserIn;
 import java.util.Scanner;
 
 import static cs455.overlay.node.Registry.print_node_info;
+import static cs455.overlay.node.Registry.setup_overlay;
 
 public class User_Input extends Thread
 {
@@ -23,10 +24,39 @@ public class User_Input extends Thread
 
     private static void input_parser(String command)
     {
-        switch (command)
+        if (command.equals("list-messaging nodes"))
         {
-            case "list-messaging nodes": print_node_info();
-                break;
+            print_node_info();
         }
+        else if (command.equals("list-weights"))
+        {
+            System.out.println("List the weights.");
+        }
+        else if (command.equals("send-overlay-link-weights"))
+        {
+            System.out.println("Send link weights");
+        }
+        else if (command.startsWith("setup-overlay"))
+        {
+            System.out.println("Setup Overlay");
+            setup_overlay(command);
+        }
+        else if (command.startsWith("start"))
+        {
+            System.out.println("Start Exchanging the messages");
+        }
+        else if (command.equals("print-shortest-path"))
+        {
+            System.out.println("Print the shortest path");
+        }
+        else if (command.equals("exit-overlay"))
+        {
+            System.out.println("Exit the overlay");
+        }
+        else
+        {
+            System.out.println("Invalid Command");
+        }
+
     }
 }
