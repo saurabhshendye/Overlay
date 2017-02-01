@@ -109,9 +109,10 @@ public class Registry extends Node
     public static void setup_overlay(String command)
     {
         int command_len = command.length();
-        int Node_degree = Character.getNumericValue(command.charAt(command_len));
+        int Node_degree = Character.getNumericValue(command.charAt(command_len - 1));
 
         Overlay_Creator overlay = new Overlay_Creator(Node_degree, Node_Count);
+        overlay.create_overlay();
         int [][] connections = overlay.getConnection_indicator();
         for (int [] i : connections)
         {
