@@ -33,10 +33,7 @@ public class Overlay_Creator
                     {
                         for (int k = 0; k< (Node_count/2); k++)
                         {
-                            if (j+k< Node_count)
-                            {
-                                connection_indicator[i][j+k] = 1;
-                            }
+                            connection_indicator[i][(j+k)%(Node_count-1)] = 1;
                         }
                     }
                     else
