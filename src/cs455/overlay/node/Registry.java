@@ -112,6 +112,15 @@ public class Registry extends Node
         int Node_degree = Character.getNumericValue(command.charAt(command_len));
 
         Overlay_Creator overlay = new Overlay_Creator(Node_degree, Node_Count);
+        int [][] connections = overlay.getConnection_indicator();
+        for (int [] i : connections)
+        {
+            for (int j : i )
+            {
+                System.out.print(j + "\t");
+            }
+            System.out.println();
+        }
     }
 
 }
