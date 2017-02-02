@@ -29,14 +29,6 @@ public class Overlay_Creator
             {
                 for (int j = 0; j< Node_count; j++)
                 {
-//                    if ((i != j) && (i < j))
-//                    {
-//                        for (int k = 0; k< (Node_count/2); k++)
-//                        {
-//                            connection_indicator[i][(j+k)%Node_count] = 1;
-//                        }
-//                    }
-//                    else
                     if (i == j)
                     {
                         connection_indicator[i][j] = -1;
@@ -59,19 +51,20 @@ public class Overlay_Creator
 
                         }
                     }
-//                    else if(j > i && j <= i+2)
-//                    {
-//                        connection_indicator[i][j] = 1;
-//                        connection_indicator[j][i] = 1;
-//                    }
-                    else if (i >j && j+2 > Node_count)
-                    {
-
-                    }
                 }
             }
         }
     }
+
+    public int[][] link_weights_assignment()
+    {
+        System.out.println("Assigning link weights..");
+        int [][] weights = new int[Node_count][Node_count];
+
+
+        return weights;
+    }
+
 
     public int [][] getConnection_indicator()
     {
