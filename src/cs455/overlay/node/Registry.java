@@ -21,6 +21,7 @@ public class Registry extends Node
 {
     private static int Node_Count;
     private static ArrayList<String[]> Node_info = new ArrayList<String[]>();
+    private static int [][] link_weights;
 //    private static ArrayList<String[]> Node_info;
 
     Registry(int port) throws IOException {
@@ -88,6 +89,30 @@ public class Registry extends Node
 
     }
 
+    public static void setup_overlay(String command)
+    {
+        int command_len = command.length();
+        int Node_degree = Character.getNumericValue(command.charAt(command_len - 1));
+
+        Overlay_Creator overlay = new Overlay_Creator(Node_degree, Node_Count);
+        overlay.create_overlay();
+        int [][] connections = overlay.getConnection_indicator();
+        for (int [] i : connections)
+        {
+            for (int j : i )
+            {
+                System.out.print(j + "\t");
+            }
+            System.out.println();
+        }
+
+        link_weights = overlay.link_weights_assignment();
+
+        print_weights();
+    }
+
+//-------------------------------------------- Printing--------------------------------------------
+
     public static void print_node_info()
     {
         if(Node_info.isEmpty())
@@ -106,15 +131,13 @@ public class Registry extends Node
         }
     }
 
-    public static void setup_overlay(String command)
-    {
-        int command_len = command.length();
-        int Node_degree = Character.getNumericValue(command.charAt(command_len - 1));
 
-        Overlay_Creator overlay = new Overlay_Creator(Node_degree, Node_Count);
-        overlay.create_overlay();
-        int [][] connections = overlay.getConnection_indicator();
-        for (int [] i : connections)
+
+    private static void print_weights()
+    {
+        System.out.println();
+
+        for (int [] i : link_weights)
         {
             for (int j : i )
             {

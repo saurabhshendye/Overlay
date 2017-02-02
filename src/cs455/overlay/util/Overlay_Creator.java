@@ -4,7 +4,7 @@
 package cs455.overlay.util;
 
 
-
+import java.util.Random;
 
 public class Overlay_Creator
 {
@@ -59,8 +59,21 @@ public class Overlay_Creator
     public int[][] link_weights_assignment()
     {
         System.out.println("Assigning link weights..");
-        int [][] weights = new int[Node_count][Node_count];
 
+        int [][] weights = new int[Node_count][Node_count];
+        Random Generate = new Random();
+
+        for (int i = 0; i < Node_count; i++ )
+        {
+            for (int j = 0; j < Node_count; j++)
+            {
+                if(connection_indicator[i][j] == 1)
+                {
+
+                    weights[i][j] = Generate.nextInt(10) + 1;
+                }
+            }
+        }
 
         return weights;
     }
