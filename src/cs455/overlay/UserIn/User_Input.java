@@ -3,9 +3,11 @@
  */
 package cs455.overlay.UserIn;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import static cs455.overlay.node.Registry.print_node_info;
+import static cs455.overlay.node.Registry.send_link_weights;
 import static cs455.overlay.node.Registry.setup_overlay;
 
 public class User_Input extends Thread
@@ -18,11 +20,17 @@ public class User_Input extends Thread
             System.out.println("Enter a Command: ");
             String command = in.nextLine();
             System.out.println("Input from User: " + command);
-            input_parser(command);
+            try
+            {
+                input_parser(command);
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 
-    private static void input_parser(String command)
+    private static void input_parser(String command) throws IOException
     {
         if (command.equals("list-messaging nodes"))
         {
@@ -35,6 +43,7 @@ public class User_Input extends Thread
         else if (command.equals("send-overlay-link-weights"))
         {
             System.out.println("Send link weights");
+            send_link_weights();
         }
         else if (command.startsWith("setup-overlay"))
         {
