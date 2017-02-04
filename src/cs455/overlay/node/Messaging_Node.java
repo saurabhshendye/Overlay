@@ -15,6 +15,7 @@ import java.net.Socket;
 
 public class Messaging_Node extends Node
 {
+    private static String[] link_info;
 
     public Messaging_Node() throws IOException
     {
@@ -66,4 +67,11 @@ public class Messaging_Node extends Node
         String Message = new String(byte_data);
         System.out.println("Registration Message: " + Message);
     }
+
+    public static void link_info_parser(byte[] byte_data)
+    {
+        String Full_link_info = new String(byte_data);
+        link_info = Full_link_info.split(";");
+    }
+
 }

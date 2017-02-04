@@ -33,12 +33,16 @@ public class TCPReceiver extends Thread
             System.out.println("Created object WireFormat");
             int type = WireFormat.getType();
             System.out.println("Type of message Received: " +type);
+
             switch (type)
             {
                 case 0: WireFormat.register();              // 0 for Registration Request
                         break;
                 case 10: WireFormat.reg_ack();              // 10 for Reg Ack
                         break;
+                case 2: WireFormat.link_info_widget();      // 2 for link weights
+                        break;
+
             }
 
         }

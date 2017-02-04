@@ -6,6 +6,7 @@ package cs455.overlay.node;
 
 import cs455.overlay.UserIn.User_Input;
 import cs455.overlay.WireFormats.Link_Weights;
+import cs455.overlay.WireFormats.Messaging_nodes_list;
 import cs455.overlay.WireFormats.Reg_Ack;
 import cs455.overlay.transport.TCPReceiver;
 import cs455.overlay.transport.TCPSender;
@@ -113,13 +114,19 @@ public class Registry extends Node
         print_weights();
     }
 
+
+
+    public static void send_messaging_node_info()
+    {
+        Messaging_nodes_list MN_list = new Messaging_nodes_list();
+    }
+
     public static void send_link_weights() throws IOException
     {
         convert2String();
         Link_Weights LW = new Link_Weights(Link_info);
         byte [] LW_bytes = LW.getByteArray();
         create_and_send(LW_bytes);
-
     }
 
     private static void create_and_send(byte[] B) throws IOException

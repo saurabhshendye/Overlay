@@ -9,6 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+import static cs455.overlay.node.Messaging_Node.link_info_parser;
 import static cs455.overlay.node.Messaging_Node.reg_ack_parser;
 import static cs455.overlay.node.Registry.getRegistered;
 
@@ -54,5 +55,12 @@ public class WireFormatWidget
         System.out.println("Registration Complete");
         reg_ack_parser(this.identifier);
     }
+
+    public void link_info_widget()
+    {
+        System.out.println("Link information received");
+        link_info_parser(this.identifier);
+    }
+
 
 }
