@@ -1,5 +1,5 @@
 /*
- * Created by saurabh on 2/2/17.
+ * Created by saurabh on 2/4/17.
  */
 
 package cs455.overlay.WireFormats;
@@ -9,37 +9,33 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class Link_Weights {
+public class establish_connection_msg
+{
+    private int type = 4;
+    private int Port;
+    private String IP;
 
-    private ArrayList<String> links;
-    private int type = 2;
-
-    public Link_Weights(ArrayList<String> link_info)
+    public establish_connection_msg(String IP, int Port)
     {
-        this.links = link_info;
+        this.IP = IP;
+        this.Port = Port;
     }
 
-    public byte[] getByteArray() throws IOException
+    public byte[] getBytearray() throws IOException
     {
+//        This method creates a byte array which needs to be written onto the socket
         ByteArrayOutputStream baopstream = new ByteArrayOutputStream();
         DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(baopstream));
-        String Full_link = "";
 
-        for(String Link: links)
-        {
-            Full_link = Full_link + Link;
-        }
-
-//        assert Full_link != null;
-        byte [] link_bytes = Full_link.getBytes();
-
-        int Len = link_bytes.length;
+        byte[] IP_array = this.IP.getBytes();
+        int IP_Len = IP_array.length;
+        int Len = IP_Len + 4;
 
         dout.writeInt(type);
         dout.writeInt(Len);
-        dout.write(link_bytes);
+        dout.writeInt(this.Port);
+        dout.write(IP_array);
         dout.flush();
 
         byte[] marshaled = baopstream.toByteArray();
@@ -48,7 +44,5 @@ public class Link_Weights {
         dout.close();
 
         return marshaled;
-
-
     }
 }

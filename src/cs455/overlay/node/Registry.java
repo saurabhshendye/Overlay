@@ -115,7 +115,7 @@ public class Registry
     {
         for (int i = 0; i < Node_Count; i++)
         {
-            String temp = null;
+            String temp = "";
             for (int j = 0; j < Node_Count; j++)
             {
                 if (weights[i][j] != 0 && i > j)
@@ -123,7 +123,7 @@ public class Registry
                     temp = temp + Node_info.get(j)[0] + ":" + Node_info.get(j)[1] + ";";
                 }
             }
-            if (temp == null || temp.isEmpty())
+            if (temp.isEmpty() || temp.equals(""))
             {
                 temp = "None";
             }
