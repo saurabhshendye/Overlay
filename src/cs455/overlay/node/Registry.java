@@ -23,7 +23,7 @@ public class Registry
     private static ArrayList<String[]> Node_info = new ArrayList<>();
     private static int [][] weights;
     private static ArrayList<String> Link_info = new ArrayList<>();
-    private static ArrayList<Socket> socket_list = new ArrayList<>();
+//    private static ArrayList<Socket> socket_list = new ArrayList<>();
 
 
     public static void main(String args[]) throws IOException
@@ -109,8 +109,12 @@ public class Registry
     }
 
 
+    private static void build_messaging_node_list()
+    {
 
-    public static void send_messaging_node_info()
+    }
+
+    private static void send_messaging_node_info()
     {
         Messaging_nodes_list MN_list = new Messaging_nodes_list();
     }
