@@ -16,6 +16,7 @@ import java.net.Socket;
 public class Messaging_Node
 {
     private static String[] link_info;
+    private static String[] Neighbours;
 
 
     public static void main(String args[]) throws IOException
@@ -68,6 +69,26 @@ public class Messaging_Node
     {
         String Full_link_info = new String(byte_data);
         link_info = Full_link_info.split(";");
+    }
+
+    public static void messaging_node_list_parser(byte [] byte_data)
+    {
+        String Node_list = new String(byte_data);
+        if (Node_list.equals("None"))
+        {
+            System.out.println("No need to make a connection");
+        }
+        else
+        {
+            Neighbours = Node_list.split(";");
+
+            System.out.println();
+            for (String N : Neighbours)
+            {
+                System.out.println(N);
+            }
+        }
+
     }
 
 }

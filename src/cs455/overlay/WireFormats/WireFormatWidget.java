@@ -10,6 +10,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import static cs455.overlay.node.Messaging_Node.link_info_parser;
+import static cs455.overlay.node.Messaging_Node.messaging_node_list_parser;
 import static cs455.overlay.node.Messaging_Node.reg_ack_parser;
 import static cs455.overlay.node.Registry.getRegistered;
 
@@ -65,7 +66,9 @@ public class WireFormatWidget
     public void messaging_info_widget()
     {
         System.out.println("Messaging node list received");
+        messaging_node_list_parser(this.identifier);
     }
+
 
 
 }
