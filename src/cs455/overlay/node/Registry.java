@@ -24,6 +24,7 @@ public class Registry
     private static int [][] weights;
     private static ArrayList<String> Link_info = new ArrayList<>();
 //    private static ArrayList<Socket> socket_list = new ArrayList<>();
+    private static ArrayList<String> MN = new ArrayList<>();
 
 
     public static void main(String args[]) throws IOException
@@ -86,7 +87,7 @@ public class Registry
 
     }
 
-    public static void setup_overlay(String command)
+    public static void setup_overlay(String command) throws IOException
     {
         String [] byParts = command.split(" ");
         int Node_degree = Integer.parseInt(byParts[1]);
@@ -106,17 +107,44 @@ public class Registry
         weights = overlay.link_weights_assignment();
 
         print_weights();
+        send_messaging_node_info();
     }
 
 
     private static void build_messaging_node_list()
     {
-
+        for (int i = 0; i < Node_Count; i++)
+        {
+            String temp = null;
+            for (int j = 0; j < Node_Count; j++)
+            {
+                if (weights[i][j] != 0 && i > j)
+                {
+                    temp = temp + Node_info.get(j)[0] + ":" + Node_info.get(j)[1] + ";";
+                }
+            }
+            if (temp == null || temp.isEmpty())
+            {
+                temp = "None";
+            }
+            MN.add(i,temp);
+        }
     }
 
-    private static void send_messaging_node_info()
+    private static void send_messaging_node_info() throws IOException
     {
-        Messaging_nodes_list MN_list = new Messaging_nodes_list();
+        build_messaging_node_list();
+        for (int i = 0; i < Node_Count; i++)
+        {
+            Messaging_nodes_list MN_list = new Messaging_nodes_list(MN.get(i));
+            byte[] B = MN_list.getByteArray();
+
+            Socket MN_send = new Socket(Node_info.get(i)[0], Integer.parseInt(Node_info.get(i)[1]));
+            TCPSender MN_sending = new TCPSender(MN_send);
+            MN_sending.send_data(B);
+
+        }
+
     }
 
     public static void send_link_weights() throws IOException
