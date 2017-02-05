@@ -42,6 +42,8 @@ public class TCPReceiver extends Thread
                         break;
                 case 2: WireFormat.link_info_widget();      // 2 for link weights
                         break;
+                case 3: WireFormat.messaging_info_widget(); // 3 for Messaging node widget
+                        break;
 
             }
 

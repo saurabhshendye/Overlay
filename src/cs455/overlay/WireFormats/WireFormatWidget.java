@@ -62,5 +62,10 @@ public class WireFormatWidget
         link_info_parser(this.identifier);
     }
 
+    public void messaging_info_widget()
+    {
+        System.out.println("Messaging node list received");
+    }
+
 
 }
