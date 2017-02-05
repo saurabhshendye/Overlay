@@ -81,13 +81,22 @@ public class Messaging_Node
         else
         {
             Neighbours = Node_list.split(";");
+            print_messaging_nodes();
 
-            System.out.println();
             for (String N : Neighbours)
             {
-                System.out.println(N);
-            }
 
+            }
+        }
+
+    }
+
+    private static void print_messaging_nodes()
+    {
+        System.out.println();
+        for (String N : Neighbours)
+        {
+            System.out.println(N);
         }
 
     }
