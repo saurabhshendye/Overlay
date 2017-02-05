@@ -24,9 +24,13 @@ public class Messaging_nodes_list
         ByteArrayOutputStream baopstream = new ByteArrayOutputStream();
         DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(baopstream));
 
+        byte[] MN_info_bytes = MN_info.getBytes();
+        int Len = MN_info_bytes.length;
 
-
-
+        dout.writeInt(type);
+        dout.writeInt(Len);
+        dout.write(MN_info_bytes);
+        dout.flush();
 
 
         byte[] marshaled = baopstream.toByteArray();
