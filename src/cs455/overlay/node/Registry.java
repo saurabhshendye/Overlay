@@ -17,23 +17,19 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class Registry extends Node
+public class Registry
 {
     private static int Node_Count;
     private static ArrayList<String[]> Node_info = new ArrayList<>();
     private static int [][] weights;
     private static ArrayList<String> Link_info = new ArrayList<>();
-
-
-    Registry(int port) throws IOException {
-        super(port);
-    }
+    private static ArrayList<Socket> socket_list = new ArrayList<>();
 
 
     public static void main(String args[]) throws IOException
     {
         // Create a Server Socket and bind it to a given port
-        ServerSocket Reg_server = new ServerSocket(Integer.parseInt(args[0]), 5);
+        ServerSocket Reg_server = new ServerSocket(Integer.parseInt(args[0]), 10);
         System.out.println("Server Socket for Registry is Created");
 
         // We need to enable the functionality to continuously accept the user input commands
@@ -92,8 +88,6 @@ public class Registry extends Node
 
     public static void setup_overlay(String command)
     {
-//        int command_len = command.length();
-//        int Node_degree = Character.getNumericValue(command.charAt(command_len - 1));
         String [] byParts = command.split(" ");
         int Node_degree = Integer.parseInt(byParts[1]);
 
