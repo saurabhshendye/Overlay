@@ -24,9 +24,9 @@ public class TCPReceiver extends Thread
 
     public void run()
     {
-        try
+        while (Serving != null)
         {
-            while(Serving != null)
+            try
             {
                 int D_len = din.readInt();
                 byte[] data = new byte[D_len];
@@ -52,13 +52,14 @@ public class TCPReceiver extends Thread
                 }
 
             }
-            System.out.println("Socket is null now");
+            catch (IOException e1)
+            {
+                System.out.println("Error Message: " +e1.getMessage());
+                break;
+            }
 
         }
-        catch (IOException e1)
-        {
-            System.out.println("Error Message: " +e1.getMessage());
-        }
+
 
     }
 }
