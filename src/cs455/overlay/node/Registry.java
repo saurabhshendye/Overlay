@@ -97,16 +97,12 @@ public class Registry
 
         info = new String[]{IP, Integer.toString(port)};
 
-//        String[] connection_IP_Port = {IP ,Integer.toString(local_port)};
-//        String[] server_IP_port = {IP, Integer.toString(port)};
 
         String connection_IP_Port = IP  + ":" + Integer.toString(local_port);
         String server_IP_port = IP + ":" + Integer.toString(port);
 
         IP_Port_Map.put(server_IP_port, connection_IP_Port);
 
-//        Socket temp_ack_send = new Socket(IP,port);
-//        TCPSender send_ack = new TCPSender(temp_ack_send);
 
         // Retrieve the saved socket and create TCPSender object
 
@@ -172,10 +168,7 @@ public class Registry
             String key = Node_info.get(i)[0] + ":" + Node_info.get(i)[1];
             String right_IP_port = IP_Port_Map.get(key);
             System.out.println("Right IP port: " +right_IP_port);
-//            String[] byParts = right_IP_port.split(":");
-//            Socket MN_send = new Socket(Node_info.get(i)[0], Integer.parseInt(Node_info.get(i)[1]));
 
-            System.out.println("Testing HashMap: " + test_map.get(right_IP_port));
             TCPSender MN_sending = TCP_Sender.get(right_IP_port);
             MN_sending.send_and_maintain(B);
 

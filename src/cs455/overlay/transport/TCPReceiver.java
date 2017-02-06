@@ -7,7 +7,7 @@ import cs455.overlay.WireFormats.WireFormatWidget;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.net.SocketException;
+
 
 
 public class TCPReceiver extends Thread
