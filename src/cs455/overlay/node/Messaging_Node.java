@@ -20,9 +20,9 @@ public class Messaging_Node
     private static String[] link_info;
     private static String[] Neighbours;
     private static Socket temperory_socket;
-    private static ConcurrentHashMap<String, Socket> Sockets = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, Thread> TCP_Receiver = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, TCPSender> TCP_Sender = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String[], String[]> Sockets = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String[], Thread> TCP_Receiver = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String[], TCPSender> TCP_Sender = new ConcurrentHashMap<>();
 
     public static void main(String args[]) throws IOException
     {
@@ -33,38 +33,46 @@ public class Messaging_Node
         // Create the Server Socket to continuously Listen
         ServerSocket Msg_server = new ServerSocket();
         Msg_server.bind(null, 5);
-        int port = Msg_server.getLocalPort();
 
-        System.out.println("Port Number: "+ port);
+
+
 
         // Create a temporary Socket and send the registration Request to Registry
         Socket bootstrap = new Socket(registry_ip,registry_port);
-        String BS_key = registry_ip + ":" + Integer.toString(registry_port);
+        String[] BS_key = {registry_ip,  Integer.toString(registry_port)};
 
         // Putting into the HashMap
-        Sockets.put(BS_key, bootstrap);
+//        Sockets.put(BS_key, bootstrap);
 
-        String IP = bootstrap.getLocalAddress().toString();
-        IP = IP.replace("/", "");
-        System.out.println("Temp Socket address: " + IP);
-        int local_port = bootstrap.getLocalPort();
+        // TCP sender object created and put into concurrent HashMap
         TCPSender register = new TCPSender(bootstrap);
-
         TCP_Sender.put(BS_key, register);
 
+        // Components for register request
+        int port = Msg_server.getLocalPort();
+        int local_port = bootstrap.getLocalPort();
+        String IP = bootstrap.getLocalAddress().toString();
+        IP = IP.replace("/", "");
 
+        // Print the components of register request
+        System.out.println("Server Port Number: "+ port);
+        System.out.println("Server Socket IP: " + IP);
+        System.out.println("Local port of Registry Socket is : " + local_port);
 
+        // Build Register Request and convert it to byte array
         Register_request request = new Register_request(port, local_port, IP);
-
         byte[] request_inBytes =  request.getBytearray();
 
 
         // Sending the request
-        register.send_data(request_inBytes);
+        register.send_and_maintain(request_inBytes);
 
+        // Create a User input thread and start
+        // Pending : We need to differentiate it from Registry
         User_Input In = new User_Input();
         In.start();
 
+        // Sit here and wait for incoming connections
         while(true)
         {
             Socket serving = Msg_server.accept();
@@ -79,7 +87,7 @@ public class Messaging_Node
     private static void make_TCP_ReceiverEntry(Socket S, Thread T)
     {
         String[] byParts = S.getRemoteSocketAddress().toString().split(":");
-        String IP_Port = byParts[0].replace("/", "") + ":" +byParts[1];
+        String[] IP_Port = {byParts[0].replace("/", "") ,byParts[1]};
         TCP_Receiver.put(IP_Port, T);
     }
 

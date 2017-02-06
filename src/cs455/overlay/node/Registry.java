@@ -25,9 +25,10 @@ public class Registry
     private static int [][] weights;
     private static ArrayList<String> Link_info = new ArrayList<>();
     private static ArrayList<String> MN = new ArrayList<>();
-    private static ConcurrentHashMap<String, Socket> Sockets = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, Thread> TCP_Receiver = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, TCPSender> TCP_Sender = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String[], String[]> IP_Port_Map = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String[], Thread> TCP_Receiver = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String[], TCPSender> TCP_Sender = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String[], Socket> socket_map = new ConcurrentHashMap<>();
 
 
     public static void main(String args[]) throws IOException
@@ -57,8 +58,9 @@ public class Registry
     private static void make_TCP_ReceiverEntry(Socket S, Thread T)
     {
         String[] byParts = S.getRemoteSocketAddress().toString().split(":");
-        String IP_Port = byParts[0].replace("/", "") + ":" +byParts[1];
+        String[] IP_Port = {byParts[0].replace("/", "") ,byParts[1]};
         TCP_Receiver.put(IP_Port, T);
+        socket_map.put(IP_Port,S);
     }
 
     public static synchronized void getRegistered(byte[] byte_data) throws IOException
@@ -67,27 +69,47 @@ public class Registry
         ByteArrayInputStream bin = new ByteArrayInputStream(byte_data);
         DataInputStream din = new DataInputStream(new BufferedInputStream(bin));
         String[] info;
+
+        // Read the ports
         int port = din.readInt();
         int local_port = din.readInt();
 
+        // Print the ports
         System.out.println("Listening Port Number is: " + port);
         System.out.println("Connection port is: " + local_port);
 
+        // Read the IP address
         byte[] IP_byte = new byte[byte_data.length - 8];
         din.readFully(IP_byte);
         String IP  = new String(IP_byte);
+
+        // Print the IP Address
         System.out.println("IP Address is : " + IP);
 
         info = new String[]{IP, Integer.toString(port)};
 
-        Socket temp_ack_send = new Socket(IP,port);
-        TCPSender send_ack = new TCPSender(temp_ack_send);
+        String[] connection_IP_Port = {IP ,Integer.toString(local_port)};
+        String[] server_IP_port = {IP, Integer.toString(port)};
+
+        IP_Port_Map.put(server_IP_port, connection_IP_Port);
+
+//        Socket temp_ack_send = new Socket(IP,port);
+//        TCPSender send_ack = new TCPSender(temp_ack_send);
+
+        // Retrieve the saved socket and create TCPSender object
+        Socket temp = socket_map.get(connection_IP_Port);
+        TCPSender node_connect = new TCPSender(temp);
+
+        // Put the TCP Sender object into HashMap
+        TCP_Sender.put(server_IP_port,node_connect);
+
+
         if (Node_info.contains(info))
         {
             System.out.println("Node already registered");
             Reg_Ack reg_ack = new Reg_Ack("Failed");
             byte[] Ack  = reg_ack.getByteArray();
-            send_ack.send_data(Ack);
+            node_connect.send_and_maintain(Ack);
         }
         else
         {
@@ -96,7 +118,7 @@ public class Registry
             Node_Count++;
             Reg_Ack reg_ack = new Reg_Ack("Success");
             byte[] Ack  = reg_ack.getByteArray();
-            send_ack.send_data(Ack);
+            node_connect.send_and_maintain(Ack);
         }
 
     }
