@@ -16,6 +16,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Registry
 {
@@ -23,8 +24,10 @@ public class Registry
     private static ArrayList<String[]> Node_info = new ArrayList<>();
     private static int [][] weights;
     private static ArrayList<String> Link_info = new ArrayList<>();
-//    private static ArrayList<Socket> socket_list = new ArrayList<>();
     private static ArrayList<String> MN = new ArrayList<>();
+    private static ConcurrentHashMap<String, Socket> Sockets = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, Thread> TCP_Receiver = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, TCPSender> TCP_Sender = new ConcurrentHashMap<>();
 
 
     public static void main(String args[]) throws IOException
@@ -45,8 +48,17 @@ public class Registry
             Socket serving = Reg_server.accept();
             System.out.println("creating thread");
             Thread thread_2 = new TCPReceiver(serving);
+            System.out.println("Socket is connected to: " + serving.getRemoteSocketAddress().toString());
+            make_TCP_ReceiverEntry(serving, thread_2);
             thread_2.start();
         }
+    }
+
+    private static void make_TCP_ReceiverEntry(Socket S, Thread T)
+    {
+        String[] byParts = S.getRemoteSocketAddress().toString().split(":");
+        String IP_Port = byParts[0].replace("/", "") + ":" +byParts[1];
+        TCP_Receiver.put(IP_Port, T);
     }
 
     public static synchronized void getRegistered(byte[] byte_data) throws IOException

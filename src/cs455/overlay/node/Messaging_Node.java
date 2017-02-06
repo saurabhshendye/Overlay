@@ -12,12 +12,17 @@ import cs455.overlay.transport.TCPSender;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ConcurrentHashMap;
+
 
 public class Messaging_Node
 {
     private static String[] link_info;
     private static String[] Neighbours;
-
+    private static Socket temperory_socket;
+    private static ConcurrentHashMap<String, Socket> Sockets = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, Thread> TCP_Receiver = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, TCPSender> TCP_Sender = new ConcurrentHashMap<>();
 
     public static void main(String args[]) throws IOException
     {
@@ -33,11 +38,21 @@ public class Messaging_Node
         System.out.println("Port Number: "+ port);
 
         // Create a temporary Socket and send the registration Request to Registry
-        Socket temp_socket = new Socket(registry_ip,registry_port);
-        String IP = temp_socket.getLocalAddress().toString();
+        Socket bootstrap = new Socket(registry_ip,registry_port);
+        String BS_key = registry_ip + ":" + Integer.toString(registry_port);
+
+        // Putting into the HashMap
+        Sockets.put(BS_key, bootstrap);
+
+        String IP = bootstrap.getLocalAddress().toString();
         IP = IP.replace("/", "");
         System.out.println("Temp Socket address: " + IP);
-        TCPSender register = new TCPSender(temp_socket);
+
+        TCPSender register = new TCPSender(bootstrap);
+
+        TCP_Sender.put(BS_key, register);
+
+
 
         Register_request request = new Register_request(port, IP);
 
@@ -55,8 +70,17 @@ public class Messaging_Node
             Socket serving = Msg_server.accept();
             System.out.println("creating thread in Messaging node. ");
             Thread thread_2 = new TCPReceiver(serving);
+            make_TCP_ReceiverEntry(serving, thread_2);
+            System.out.println("Socket is connected to: " + serving.getRemoteSocketAddress().toString());
             thread_2.start();
         }
+    }
+
+    private static void make_TCP_ReceiverEntry(Socket S, Thread T)
+    {
+        String[] byParts = S.getRemoteSocketAddress().toString().split(":");
+        String IP_Port = byParts[0].replace("/", "") + ":" +byParts[1];
+        TCP_Receiver.put(IP_Port, T);
     }
 
     public static void reg_ack_parser(byte[] byte_data)
