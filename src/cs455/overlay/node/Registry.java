@@ -112,14 +112,10 @@ public class Registry
 
         Socket temp = socket_map.get(connection_IP_Port);
         System.out.println(test_map.get(connection_IP_Port));
-        if(temp == null)
-        {
-            System.out.println("Null returned");
-        }
         TCPSender node_connect = new TCPSender(temp);
 
         // Put the TCP Sender object into HashMap
-        TCP_Sender.put(server_IP_port,node_connect);
+        TCP_Sender.put(connection_IP_Port,node_connect);
 
 
         if (Node_info.contains(info))
@@ -175,9 +171,11 @@ public class Registry
 
             String key = Node_info.get(i)[0] + ":" + Node_info.get(i)[1];
             String right_IP_port = IP_Port_Map.get(key);
+            System.out.println("Right IP port: " +right_IP_port);
 //            String[] byParts = right_IP_port.split(":");
 //            Socket MN_send = new Socket(Node_info.get(i)[0], Integer.parseInt(Node_info.get(i)[1]));
 
+            System.out.println("Testing HashMap: " + test_map.get(right_IP_port));
             TCPSender MN_sending = TCP_Sender.get(right_IP_port);
             MN_sending.send_and_maintain(B);
 
