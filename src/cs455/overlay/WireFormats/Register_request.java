@@ -17,11 +17,13 @@ public class Register_request
     private int port;
     private String IP;
     private int type = 0;
+    private int local_port;
 
-    public Register_request(int port, String IP)
+    public Register_request(int port, int local_port, String IP)
     {
         this.IP = IP;
         this.port = port;
+        this.local_port = local_port;
     }
 
     public byte[] getBytearray() throws IOException
@@ -32,11 +34,12 @@ public class Register_request
 
         byte[] IP_array = this.IP.getBytes();
         int IP_Len = IP_array.length;
-        int Len = IP_Len + 4;
+        int Len = IP_Len + 8;
 
         dout.writeInt(type);
         dout.writeInt(Len);
         dout.writeInt(this.port);
+        dout.writeInt(this.local_port);
         dout.write(IP_array);
         dout.flush();
 

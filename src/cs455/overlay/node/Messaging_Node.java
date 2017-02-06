@@ -47,14 +47,14 @@ public class Messaging_Node
         String IP = bootstrap.getLocalAddress().toString();
         IP = IP.replace("/", "");
         System.out.println("Temp Socket address: " + IP);
-
+        int local_port = bootstrap.getLocalPort();
         TCPSender register = new TCPSender(bootstrap);
 
         TCP_Sender.put(BS_key, register);
 
 
 
-        Register_request request = new Register_request(port, IP);
+        Register_request request = new Register_request(port, local_port, IP);
 
         byte[] request_inBytes =  request.getBytearray();
 

@@ -68,10 +68,12 @@ public class Registry
         DataInputStream din = new DataInputStream(new BufferedInputStream(bin));
         String[] info;
         int port = din.readInt();
+        int local_port = din.readInt();
 
-        System.out.println("Port Number is: " + port);
+        System.out.println("Listening Port Number is: " + port);
+        System.out.println("Connection port is: " + local_port);
 
-        byte[] IP_byte = new byte[byte_data.length - 4];
+        byte[] IP_byte = new byte[byte_data.length - 8];
         din.readFully(IP_byte);
         String IP  = new String(IP_byte);
         System.out.println("IP Address is : " + IP);
