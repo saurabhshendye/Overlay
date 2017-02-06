@@ -47,15 +47,17 @@ public class TCPReceiver extends Thread
                         break;
                     case 3: WireFormat.messaging_info_widget(); // 3 for Messaging node widget
                         break;
+                    default: System.out.println("Unknown Message");
 
                 }
 
             }
+            System.out.println("Socket is null now");
 
         }
         catch (IOException e1)
         {
-            System.out.println(e1.getMessage());
+            System.out.println("Error Message: " +e1.getMessage());
         }
 
     }
