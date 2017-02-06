@@ -20,9 +20,9 @@ public class Messaging_Node
     private static String[] link_info;
     private static String[] Neighbours;
     private static Socket temperory_socket;
-    private static ConcurrentHashMap<String[], String[]> Sockets = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String[], Thread> TCP_Receiver = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String[], TCPSender> TCP_Sender = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, String[]> Sockets_map = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, Thread> TCP_Receiver = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, TCPSender> TCP_Sender = new ConcurrentHashMap<>();
 
     public static void main(String args[]) throws IOException
     {
@@ -35,11 +35,9 @@ public class Messaging_Node
         Msg_server.bind(null, 5);
 
 
-
-
         // Create a temporary Socket and send the registration Request to Registry
         Socket bootstrap = new Socket(registry_ip,registry_port);
-        String[] BS_key = {registry_ip,  Integer.toString(registry_port)};
+        String BS_key = registry_ip + ":" + Integer.toString(registry_port);
 
         // Putting into the HashMap
 //        Sockets.put(BS_key, bootstrap);
@@ -47,6 +45,10 @@ public class Messaging_Node
         // TCP sender object created and put into concurrent HashMap
         TCPSender register = new TCPSender(bootstrap);
         TCP_Sender.put(BS_key, register);
+
+        // TCP Receiver object created to receive from registry
+        Thread register_rx = new TCPReceiver(bootstrap);
+        register_rx.start();
 
         // Components for register request
         int port = Msg_server.getLocalPort();
@@ -87,8 +89,15 @@ public class Messaging_Node
     private static void make_TCP_ReceiverEntry(Socket S, Thread T)
     {
         String[] byParts = S.getRemoteSocketAddress().toString().split(":");
-        String[] IP_Port = {byParts[0].replace("/", "") ,byParts[1]};
+        String IP = byParts[0].replace("/","");
+//        String[] IP_Port = {IP ,byParts[1]};
+        String IP_Port = IP + ":" + byParts[1];
+        System.out.println("Making the entry with IP: " + IP);
+        System.out.println("Making the entry with port: " + byParts[1]);
         TCP_Receiver.put(IP_Port, T);
+//        socket_map.put(IP_Port,S);
+//        test_map.put(IP_Port, "It is a socket problem then");
+//        System.out.println("Testing HashMap: " + test_map.get(IP_Port));
     }
 
     public static void reg_ack_parser(byte[] byte_data)

@@ -16,6 +16,8 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Registry
@@ -25,10 +27,11 @@ public class Registry
     private static int [][] weights;
     private static ArrayList<String> Link_info = new ArrayList<>();
     private static ArrayList<String> MN = new ArrayList<>();
-    private static ConcurrentHashMap<String[], String[]> IP_Port_Map = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String[], Thread> TCP_Receiver = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String[], TCPSender> TCP_Sender = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String[], Socket> socket_map = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, String> IP_Port_Map = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, Thread> TCP_Receiver = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, TCPSender> TCP_Sender = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, Socket> socket_map = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, String> test_map = new ConcurrentHashMap<>();
 
 
     public static void main(String args[]) throws IOException
@@ -58,9 +61,15 @@ public class Registry
     private static void make_TCP_ReceiverEntry(Socket S, Thread T)
     {
         String[] byParts = S.getRemoteSocketAddress().toString().split(":");
-        String[] IP_Port = {byParts[0].replace("/", "") ,byParts[1]};
+        String IP = byParts[0].replace("/","");
+//        String[] IP_Port = {IP ,byParts[1]};
+        String IP_Port = IP + ":" + byParts[1];
+        System.out.println("Making the entry with IP: " + IP);
+        System.out.println("Making the entry with port: " + byParts[1]);
         TCP_Receiver.put(IP_Port, T);
         socket_map.put(IP_Port,S);
+        test_map.put(IP_Port, "It is a socket problem then");
+        System.out.println("Testing HashMap: " + test_map.get(IP_Port));
     }
 
     public static synchronized void getRegistered(byte[] byte_data) throws IOException
@@ -88,8 +97,11 @@ public class Registry
 
         info = new String[]{IP, Integer.toString(port)};
 
-        String[] connection_IP_Port = {IP ,Integer.toString(local_port)};
-        String[] server_IP_port = {IP, Integer.toString(port)};
+//        String[] connection_IP_Port = {IP ,Integer.toString(local_port)};
+//        String[] server_IP_port = {IP, Integer.toString(port)};
+
+        String connection_IP_Port = IP  + ":" + Integer.toString(local_port);
+        String server_IP_port = IP + ":" + Integer.toString(port);
 
         IP_Port_Map.put(server_IP_port, connection_IP_Port);
 
@@ -97,7 +109,13 @@ public class Registry
 //        TCPSender send_ack = new TCPSender(temp_ack_send);
 
         // Retrieve the saved socket and create TCPSender object
+
         Socket temp = socket_map.get(connection_IP_Port);
+        System.out.println(test_map.get(connection_IP_Port));
+        if(temp == null)
+        {
+            System.out.println("Null returned");
+        }
         TCPSender node_connect = new TCPSender(temp);
 
         // Put the TCP Sender object into HashMap
