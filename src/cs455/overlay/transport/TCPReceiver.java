@@ -25,25 +25,29 @@ public class TCPReceiver extends Thread
     {
         try
         {
-            int D_len = din.readInt();
-            byte[] data = new byte[D_len];
-            System.out.println("Length of the message received: " + D_len);
-            din.readFully(data, 0, D_len);
-            WireFormatWidget WireFormat = new WireFormatWidget(data);
-            System.out.println("Created object WireFormat");
-            int type = WireFormat.getType();
-            System.out.println("Type of message Received: " +type);
-
-            switch (type)
+            while(Serving != null)
             {
-                case 0: WireFormat.register();              // 0 for Registration Request
+                int D_len = din.readInt();
+                byte[] data = new byte[D_len];
+                System.out.println("Length of the message received: " + D_len);
+                din.readFully(data, 0, D_len);
+                WireFormatWidget WireFormat = new WireFormatWidget(data);
+                System.out.println("Created object WireFormat");
+                int type = WireFormat.getType();
+                System.out.println("Type of message Received: " +type);
+
+                switch (type)
+                {
+                    case 0: WireFormat.register();              // 0 for Registration Request
                         break;
-                case 10: WireFormat.reg_ack();              // 10 for Reg Ack
+                    case 10: WireFormat.reg_ack();              // 10 for Reg Ack
                         break;
-                case 2: WireFormat.link_info_widget();      // 2 for link weights
+                    case 2: WireFormat.link_info_widget();      // 2 for link weights
                         break;
-                case 3: WireFormat.messaging_info_widget(); // 3 for Messaging node widget
+                    case 3: WireFormat.messaging_info_widget(); // 3 for Messaging node widget
                         break;
+
+                }
 
             }
 
