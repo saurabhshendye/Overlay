@@ -165,6 +165,26 @@ public class Registry
     }
 
 
+    private static void send_messaging_node_info() throws IOException
+    {
+        build_messaging_node_list();
+        for (int i = 0; i < Node_Count; i++)
+        {
+            Messaging_nodes_list MN_list = new Messaging_nodes_list(MN.get(i));
+            byte[] B = MN_list.getByteArray();
+
+            String key = Node_info.get(i)[0] + ":" + Node_info.get(i)[1];
+            String right_IP_port = IP_Port_Map.get(key);
+//            String[] byParts = right_IP_port.split(":");
+//            Socket MN_send = new Socket(Node_info.get(i)[0], Integer.parseInt(Node_info.get(i)[1]));
+
+            TCPSender MN_sending = TCP_Sender.get(right_IP_port);
+            MN_sending.send_and_maintain(B);
+
+        }
+
+    }
+
     private static void build_messaging_node_list()
     {
         for (int i = 0; i < Node_Count; i++)
@@ -185,21 +205,7 @@ public class Registry
         }
     }
 
-    private static void send_messaging_node_info() throws IOException
-    {
-        build_messaging_node_list();
-        for (int i = 0; i < Node_Count; i++)
-        {
-            Messaging_nodes_list MN_list = new Messaging_nodes_list(MN.get(i));
-            byte[] B = MN_list.getByteArray();
 
-            Socket MN_send = new Socket(Node_info.get(i)[0], Integer.parseInt(Node_info.get(i)[1]));
-            TCPSender MN_sending = new TCPSender(MN_send);
-            MN_sending.send_data(B);
-
-        }
-
-    }
 
     public static void send_link_weights() throws IOException
     {
