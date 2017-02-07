@@ -61,7 +61,7 @@ public class WireFormatWidget
         link_info_parser(this.identifier);
     }
 
-    public void messaging_info_widget()
+    public void messaging_info_widget() throws IOException
     {
         System.out.println("Messaging node list received");
         messaging_node_list_parser(this.identifier);
