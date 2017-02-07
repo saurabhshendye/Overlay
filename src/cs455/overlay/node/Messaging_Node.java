@@ -6,6 +6,7 @@ package cs455.overlay.node;
 
 import cs455.overlay.UserIn.User_Input;
 import cs455.overlay.WireFormats.Register_request;
+import cs455.overlay.WireFormats.establish_connection_msg;
 import cs455.overlay.transport.TCPReceiver;
 import cs455.overlay.transport.TCPSender;
 
@@ -29,6 +30,8 @@ public class Messaging_Node
     private static ConcurrentHashMap<String, Socket> socket_map = new ConcurrentHashMap<>();
     private static ArrayList<String[]> Node_info = new ArrayList<>();
     private static int Node_Count;
+    private static int my_port;
+    private static String my_IP;
 
     public static void main(String args[]) throws IOException
     {
@@ -57,18 +60,18 @@ public class Messaging_Node
         register_rx.start();
 
         // Components for register request
-        int port = Msg_server.getLocalPort();
+        my_port = Msg_server.getLocalPort();
         int local_port = bootstrap.getLocalPort();
         String IP = bootstrap.getLocalAddress().toString();
-        IP = IP.replace("/", "");
+        my_IP = IP.replace("/", "");
 
         // Print the components of register request
-        System.out.println("Server Port Number: "+ port);
-        System.out.println("Server Socket IP: " + IP);
+        System.out.println("Server Port Number: "+ my_port);
+        System.out.println("Server Socket IP: " + my_IP);
         System.out.println("Local port of Registry Socket is : " + local_port);
 
         // Build Register Request and convert it to byte array
-        Register_request request = new Register_request(port, local_port, IP);
+        Register_request request = new Register_request(my_port, local_port, my_IP);
         byte[] request_inBytes =  request.getBytearray();
 
 
@@ -116,7 +119,7 @@ public class Messaging_Node
         link_info = Full_link_info.split(";");
     }
 
-    public static void messaging_node_list_parser(byte [] byte_data)
+    public static void messaging_node_list_parser(byte [] byte_data) throws IOException
     {
         String Node_list = new String(byte_data);
         if (Node_list.equals("None"))
@@ -130,7 +133,29 @@ public class Messaging_Node
 
             for (String N : Neighbours)
             {
-                System.out.print("Connection IP port for Neighbour : " + N + " is :" +IP_Port_Map.get(N));
+                String [] byParts = N.split(":");
+
+                // Creating a socket , TCPSender and TCPReceiver objects
+                Socket MN_socket = new Socket(byParts[0], Integer.parseInt(byParts[1]));
+                TCPSender MN_sender = new TCPSender(MN_socket);
+                Thread MN_receiver = new TCPReceiver(MN_socket);
+
+                // Getting the connection IP port
+                String [] parts = MN_socket.getRemoteSocketAddress().toString().split(":");
+                String connection_IP_port = byParts[0] + ":" + parts[1];
+                System.out.println("Connection IP:Port :  "  + connection_IP_port);
+
+                // Putting the above created objects in Concurrent HashMaps
+                IP_Port_Map.put(N, connection_IP_port);
+                TCP_Receiver.put(connection_IP_port, MN_receiver);
+                TCP_Sender.put(connection_IP_port,MN_sender);
+
+
+                int local_port = MN_socket.getLocalPort();
+                establish_connection_msg conn_msg = new establish_connection_msg(my_IP,my_port,local_port);
+                byte [] conn_msg_bytes = conn_msg.getBytearray();
+                MN_sender.send_and_maintain(conn_msg_bytes);
+
             }
         }
 
