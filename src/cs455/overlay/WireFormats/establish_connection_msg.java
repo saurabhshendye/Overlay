@@ -20,8 +20,9 @@ public class establish_connection_msg
     public establish_connection_msg(String IP, int local_port, int Port)
     {
         this.IP = IP;
-        this.Port = Port;
         this.local_port = local_port;
+        this.Port = Port;
+
     }
 
     public byte[] getBytearray() throws IOException

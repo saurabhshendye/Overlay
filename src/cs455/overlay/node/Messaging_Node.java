@@ -152,7 +152,7 @@ public class Messaging_Node
 
 
                 int local_port = MN_socket.getLocalPort();
-                establish_connection_msg conn_msg = new establish_connection_msg(my_IP,my_port,local_port);
+                establish_connection_msg conn_msg = new establish_connection_msg(my_IP,local_port, my_port);
                 byte [] conn_msg_bytes = conn_msg.getBytearray();
                 MN_sender.send_and_maintain(conn_msg_bytes);
 
