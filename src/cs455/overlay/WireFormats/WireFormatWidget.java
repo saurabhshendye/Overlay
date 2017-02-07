@@ -9,9 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import static cs455.overlay.node.Messaging_Node.link_info_parser;
-import static cs455.overlay.node.Messaging_Node.messaging_node_list_parser;
-import static cs455.overlay.node.Messaging_Node.reg_ack_parser;
+import static cs455.overlay.node.Messaging_Node.*;
 import static cs455.overlay.node.Registry.getRegistered;
 
 public class WireFormatWidget
@@ -69,6 +67,10 @@ public class WireFormatWidget
         messaging_node_list_parser(this.identifier);
     }
 
-
+    public void connection_esablishment()
+    {
+        System.out.println("Connection establishment message received.");
+        connection_request_parser(this.identifier);
+    }
 
 }

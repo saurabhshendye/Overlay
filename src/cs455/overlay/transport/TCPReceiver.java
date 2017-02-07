@@ -47,7 +47,9 @@ public class TCPReceiver extends Thread
                         break;
                     case 3: WireFormat.messaging_info_widget(); // 3 for Messaging node widget
                         break;
-                    default: System.out.println("Unknown Message");
+                    case 4: WireFormat.connection_esablishment();
+                        default: System.out.println("Unknown Message");
+                        break;
 
                 }
 
