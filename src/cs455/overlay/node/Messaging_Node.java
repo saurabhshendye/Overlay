@@ -130,7 +130,7 @@ public class Messaging_Node
 
             for (String N : Neighbours)
             {
-
+                System.out.print("Connection IP port for Neighbour : " + N + " is :" +IP_Port_Map.get(N));
             }
         }
 
