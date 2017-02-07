@@ -210,9 +210,15 @@ public class Registry
     {
         for(String [] Node : Node_info)
         {
-            Socket LW_sock = new Socket(Node[0], Integer.parseInt(Node[1]));
-            TCPSender Wt_send = new TCPSender(LW_sock);
-            Wt_send.send_data(B);
+            String key = Node[0] + ":" + Node[1];
+            String IP_port_value = IP_Port_Map.get(key);
+            System.out.println(IP_port_value);
+
+            TCPSender Wt_send = TCP_Sender.get(IP_port_value);
+            Wt_send.send_and_maintain(B);
+//            Socket LW_sock = new Socket(Node[0], Integer.parseInt(Node[1]));
+//            TCPSender Wt_send = new TCPSender(LW_sock);
+//            Wt_send.send_data(B);
         }
 
     }
