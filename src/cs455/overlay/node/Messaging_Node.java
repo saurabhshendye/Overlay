@@ -154,10 +154,12 @@ public class Messaging_Node
             if (!Nodes.contains(temp[0]))
             {
                 Nodes.add(temp[0]);
+                Node_Count++;
             }
             if (!Nodes.contains(temp[1]))
             {
                 Nodes.add(temp[1]);
+                Node_Count++;
             }
         }
     }
