@@ -128,6 +128,8 @@ public class Messaging_Node
         create_node_list();
         print_node_list();
 
+        Node_Count = Nodes.size();
+        System.out.println("Node Count is: " + Node_Count);
         links_to_array L_A = new links_to_array(Node_Count, link_info, Nodes);
         weights = L_A.getAdjecencyMatrix();
 
@@ -159,12 +161,12 @@ public class Messaging_Node
             if (!Nodes.contains(temp[0]))
             {
                 Nodes.add(temp[0]);
-                Node_Count++;
+//                Node_Count++;
             }
             if (!Nodes.contains(temp[1]))
             {
                 Nodes.add(temp[1]);
-                Node_Count++;
+//                Node_Count++;
             }
         }
     }
