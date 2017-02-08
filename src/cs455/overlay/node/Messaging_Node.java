@@ -117,7 +117,15 @@ public class Messaging_Node
     {
         String Full_link_info = new String(byte_data);
         link_info = Full_link_info.split(";");
-        System.out.println("Link information received");
+        link_info_print();
+    }
+
+    public static void link_info_print()
+    {
+        for (String link : link_info)
+        {
+            System.out.println("Link details : " + link);
+        }
     }
 
     public static void messaging_node_list_parser(byte [] byte_data) throws IOException
