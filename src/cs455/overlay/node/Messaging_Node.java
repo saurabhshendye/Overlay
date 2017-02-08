@@ -24,6 +24,7 @@ public class Messaging_Node
 {
     private static int Node_Count = 0;
     private static int my_port;
+    private static int [][] weights;
     private static String my_IP;
     private static String[] Neighbours;
     private static ArrayList<String []> link_info = new ArrayList<>();
@@ -125,6 +126,7 @@ public class Messaging_Node
         link_info_arraylist(temp_link);
         create_node_list();
         print_node_list();
+
 
 
 
