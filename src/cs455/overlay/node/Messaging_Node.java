@@ -9,6 +9,7 @@ import cs455.overlay.WireFormats.Register_request;
 import cs455.overlay.WireFormats.establish_connection_msg;
 import cs455.overlay.transport.TCPReceiver;
 import cs455.overlay.transport.TCPSender;
+import cs455.overlay.util.links_to_array;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -127,8 +128,10 @@ public class Messaging_Node
         create_node_list();
         print_node_list();
 
+        links_to_array L_A = new links_to_array(Node_Count, link_info, Nodes);
+        weights = L_A.getAdjecencyMatrix();
 
-
+        print_weights();
 
     }
 
@@ -163,6 +166,18 @@ public class Messaging_Node
                 Nodes.add(temp[1]);
                 Node_Count++;
             }
+        }
+    }
+
+    private static void print_weights()
+    {
+        for (int [] i : weights)
+        {
+            for (int b : i)
+            {
+                System.out.print(b + "\t");
+            }
+            System.out.println();
         }
     }
 
