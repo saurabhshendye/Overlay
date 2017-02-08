@@ -67,7 +67,7 @@ public class WireFormatWidget
         messaging_node_list_parser(this.identifier);
     }
 
-    public void connection_esablishment() throws IOException
+    public void connection_establishment() throws IOException
     {
         System.out.println("Connection establishment message received.");
         connection_request_parser(this.identifier);

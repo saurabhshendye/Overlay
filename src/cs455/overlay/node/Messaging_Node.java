@@ -41,7 +41,7 @@ public class Messaging_Node
 
         // Create the Server Socket to continuously Listen
         ServerSocket Msg_server = new ServerSocket();
-        Msg_server.bind(null, 5);
+        Msg_server.bind(null, 10);
 
 
         // Create a temporary Socket and send the registration Request to Registry
@@ -117,6 +117,7 @@ public class Messaging_Node
     {
         String Full_link_info = new String(byte_data);
         link_info = Full_link_info.split(";");
+        System.out.println("Link information received");
     }
 
     public static void messaging_node_list_parser(byte [] byte_data) throws IOException

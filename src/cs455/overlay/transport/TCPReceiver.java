@@ -39,15 +39,15 @@ public class TCPReceiver extends Thread
 
                 switch (type)
                 {
-                    case 0: WireFormat.register();              // 0 for Registration Request
+                    case 0: WireFormat.register();                      // 0 for Registration Request
                         break;
-                    case 10: WireFormat.reg_ack();              // 10 for Reg Ack
+                    case 10: WireFormat.reg_ack();                      // 10 for Reg Ack
                         break;
-                    case 2: WireFormat.link_info_widget();      // 2 for link weights
+                    case 2: WireFormat.link_info_widget();              // 2 for link weights
                         break;
-                    case 3: WireFormat.messaging_info_widget(); // 3 for Messaging node widget
+                    case 3: WireFormat.messaging_info_widget();         // 3 for Messaging node widget
                         break;
-                    case 4: WireFormat.connection_esablishment();
+                    case 4: WireFormat.connection_establishment();      // 4 for Connection request
                         break;
                     default: System.out.println("Unknown Message");
                         break;
