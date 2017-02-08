@@ -28,6 +28,7 @@ public class Messaging_Node
     private static String[] Neighbours;
     private static ArrayList<String []> link_info = new ArrayList<>();
     private static ArrayList<String[]> Node_info = new ArrayList<>();
+    private static ArrayList<String> Nodes = new ArrayList<>();
     private static ConcurrentHashMap<String, String> IP_Port_Map = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, Thread> TCP_Receiver = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, TCPSender> TCP_Sender = new ConcurrentHashMap<>();
@@ -122,6 +123,8 @@ public class Messaging_Node
         String [] temp_link = Full_link_info.split(";");
         link_info_print(temp_link);
         link_info_arraylist(temp_link);
+        create_node_list();
+        print_node_list();
 
 
 
@@ -142,6 +145,29 @@ public class Messaging_Node
             link_info.add(link.split(" "));
         }
 
+    }
+
+    private static void create_node_list()
+    {
+        for (String [] temp : link_info )
+        {
+            if (!Nodes.contains(temp[0]))
+            {
+                Nodes.add(temp[0]);
+            }
+            if (!Nodes.contains(temp[1]))
+            {
+                Nodes.add(temp[1]);
+            }
+        }
+    }
+
+    private static void print_node_list()
+    {
+        for (String S : Nodes)
+        {
+            System.out.println("Node: " + S);
+        }
     }
 
     public static void messaging_node_list_parser(byte [] byte_data) throws IOException
