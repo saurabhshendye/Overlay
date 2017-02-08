@@ -22,16 +22,18 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Messaging_Node
 {
-    private static String[] link_info;
+    private static int Node_Count = 0;
+    private static int my_port;
+    private static String my_IP;
     private static String[] Neighbours;
+    private static ArrayList<String []> link_info = new ArrayList<>();
+    private static ArrayList<String[]> Node_info = new ArrayList<>();
     private static ConcurrentHashMap<String, String> IP_Port_Map = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, Thread> TCP_Receiver = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, TCPSender> TCP_Sender = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, Socket> socket_map = new ConcurrentHashMap<>();
-    private static ArrayList<String[]> Node_info = new ArrayList<>();
-    private static int Node_Count;
-    private static int my_port;
-    private static String my_IP;
+
+
 
     public static void main(String args[]) throws IOException
     {
@@ -115,17 +117,31 @@ public class Messaging_Node
 
     public static void link_info_parser(byte[] byte_data)
     {
+        // Storing the link information in the link_info ArrayList
         String Full_link_info = new String(byte_data);
-        link_info = Full_link_info.split(";");
-        link_info_print();
+        String [] temp_link = Full_link_info.split(";");
+        link_info_print(temp_link);
+        link_info_arraylist(temp_link);
+
+
+
     }
 
-    public static void link_info_print()
+    private static void link_info_print(String[] link_info)
     {
         for (String link : link_info)
         {
             System.out.println("Link details : " + link);
         }
+    }
+
+    private static void link_info_arraylist(String [] links )
+    {
+        for (String link : links)
+        {
+            link_info.add(link.split(" "));
+        }
+
     }
 
     public static void messaging_node_list_parser(byte [] byte_data) throws IOException

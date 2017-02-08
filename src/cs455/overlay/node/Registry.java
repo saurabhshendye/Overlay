@@ -16,15 +16,13 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Registry
 {
     private static int Node_Count;
-    private static ArrayList<String[]> Node_info = new ArrayList<>();
     private static int [][] weights;
+    private static ArrayList<String[]> Node_info = new ArrayList<>();
     private static ArrayList<String> Link_info = new ArrayList<>();
     private static ArrayList<String> MN = new ArrayList<>();
     private static ConcurrentHashMap<String, String> IP_Port_Map = new ConcurrentHashMap<>();
