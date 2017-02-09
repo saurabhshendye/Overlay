@@ -177,7 +177,7 @@ public class Messaging_Node
         {
             for (int b : i)
             {
-                System.out.print(b + "\t");
+                System.out.print(b + "\t" + "\t");
             }
             System.out.println();
         }
