@@ -33,6 +33,18 @@ public class links_to_array
             weights[j][i] = Integer.parseInt(link[2]);
         }
 
+        for(int i = 0; i < Node_count; i++)
+        {
+            for (int j = 0; j < Node_count; j++)
+            {
+                if (i != j && weights[i][j] == 0)
+                {
+                    weights[i][j] = Integer.MAX_VALUE;
+                }
+            }
+
+        }
+
 
         return weights;
     }

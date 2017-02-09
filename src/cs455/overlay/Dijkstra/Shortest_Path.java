@@ -12,7 +12,7 @@ public class Shortest_Path
     private ArrayList<String> Nodes;
     private String source;
 
-    public Shortest_Path(int [][] weight_graph, ArrayList<String> Nodes, String source )
+    public Shortest_Path(int [][] weight_graph, ArrayList<String> Nodes, String source)
     {
         this.Nodes = Nodes;
         this.weight_graph = weight_graph;
@@ -21,6 +21,7 @@ public class Shortest_Path
 
     public void calculatie_distances()
     {
+        int index = Nodes.indexOf(source);
 
     }
 }
