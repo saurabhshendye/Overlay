@@ -10,6 +10,7 @@ import cs455.overlay.WireFormats.Register_request;
 import cs455.overlay.WireFormats.establish_connection_msg;
 import cs455.overlay.transport.TCPReceiver;
 import cs455.overlay.transport.TCPSender;
+import cs455.overlay.util.Counters;
 import cs455.overlay.util.links_to_array;
 
 import java.io.BufferedInputStream;
@@ -36,6 +37,7 @@ public class Messaging_Node
     private static ConcurrentHashMap<String, Thread> TCP_Receiver = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, TCPSender> TCP_Sender = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, Socket> socket_map = new ConcurrentHashMap<>();
+    private static Counters C = new Counters();
 
 
 
@@ -141,8 +143,6 @@ public class Messaging_Node
         path.print_distances();
 
         print_successors(path);
-
-
     }
 
     private static void print_successors(Shortest_Path path)
@@ -167,7 +167,6 @@ public class Messaging_Node
         {
             link_info.add(link.split(" "));
         }
-
     }
 
     private static void create_node_list()
@@ -246,7 +245,6 @@ public class Messaging_Node
 
             }
         }
-
     }
 
     public static void connection_request_parser(byte [] byte_data) throws IOException
@@ -281,8 +279,6 @@ public class Messaging_Node
         String server_IP_port = IP + ":" + Integer.toString(port);
         IP_Port_Map.put(server_IP_port, connection_IP_Port);
 
-
-
         // Retrieve the saved socket and create TCPSender object
         Socket temp = socket_map.get(connection_IP_Port);
 
@@ -299,7 +295,12 @@ public class Messaging_Node
 
         System.out.println("Number of rounds to perform: " +rounds);
 
+        // Select the random node from the Nodes list
+
+
     }
+
+
 
     private static void print_messaging_nodes()
     {
@@ -309,5 +310,4 @@ public class Messaging_Node
             System.out.println(N);
         }
     }
-
 }
