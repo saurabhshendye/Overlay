@@ -292,6 +292,14 @@ public class Messaging_Node
         TCP_Sender.put(connection_IP_Port,node_connect);
     }
 
+    public static void Task_Initiate_Parser(byte [] byte_data)
+    {
+        String temp = new String(byte_data);
+        int rounds = Integer.parseInt(temp);
+
+        System.out.println("Number of rounds to perform: " +rounds);
+    }
+
     private static void print_messaging_nodes()
     {
         System.out.println();
