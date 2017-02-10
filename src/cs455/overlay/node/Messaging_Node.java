@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -183,7 +182,7 @@ public class Messaging_Node
         {
             for (int b : i)
             {
-                System.out.print(b + "\t" + "\t");
+                System.out.print(b + "\t" );
             }
             System.out.println();
         }

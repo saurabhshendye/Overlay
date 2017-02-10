@@ -106,10 +106,10 @@ public class Shortest_Path
 
     public void print_distances()
     {
-        System.out.println();
+        System.out.println("Shortest Distances are: ");
         for (int i : distance)
         {
-            System.out.print(i + "/t");
+            System.out.println(i);
         }
     }
 }
