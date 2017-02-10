@@ -42,6 +42,4 @@ public class Counters
         sent_summation = sent_summation + num;
     }
 
-
-
 }

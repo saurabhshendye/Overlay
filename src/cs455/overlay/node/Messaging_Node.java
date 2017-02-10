@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -296,8 +297,10 @@ public class Messaging_Node
         System.out.println("Number of rounds to perform: " +rounds);
 
         // Select the random node from the Nodes list
+        int rand = new Random().nextInt(Nodes.size());
+        String sink = Nodes.get(rand);
 
-
+        System.out.println("Selected sink node is: " +sink);
     }
 
 
