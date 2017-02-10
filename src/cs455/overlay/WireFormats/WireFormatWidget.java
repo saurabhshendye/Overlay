@@ -78,4 +78,9 @@ public class WireFormatWidget
         System.out.println("Task Initiate message received");
         Task_Initiate_Parser(this.identifier);
     }
+
+    public void peer_message()
+    {
+        peer_message_parser(this.identifier);
+    }
 }
