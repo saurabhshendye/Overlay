@@ -48,6 +48,21 @@ public class Shortest_Path
             visited[nearest_node_index] = true;
 
 
+            for (int j = 0; j < Node_count; j++)
+            {
+
+                if (!visited[j] && weight_graph[nearest_node_index][j] != 0)
+                {
+                    if (distance[nearest_node_index] != Integer.MAX_VALUE)
+                    {
+                        if (distance[j] > distance[nearest_node_index] + weight_graph[nearest_node_index][j])
+                        {
+                            distance[j] = distance[nearest_node_index] + weight_graph[nearest_node_index][j];
+                        }
+                    }
+                }
+            }
+
             if  (i != index)
             {
 
