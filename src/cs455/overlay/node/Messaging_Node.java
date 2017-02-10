@@ -298,6 +298,7 @@ public class Messaging_Node
         int rounds = Integer.parseInt(temp);
 
         System.out.println("Number of rounds to perform: " +rounds);
+
     }
 
     private static void print_messaging_nodes()
@@ -307,7 +308,6 @@ public class Messaging_Node
         {
             System.out.println(N);
         }
-
     }
 
 }
