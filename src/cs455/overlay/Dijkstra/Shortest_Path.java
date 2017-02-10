@@ -119,9 +119,10 @@ public class Shortest_Path
     {
         // Node_key = destination node
         // node_value = Successor
+        System.out.println("Added:  " + current_node + " as predecessor for: " + Nodes.get(i));
         String Node_key = Nodes.get(i);
         Successors.put(Node_key, current_node);
-        System.out.println("Added:  " + current_node + " as predecessor for: " + Nodes.get(i));
+
     }
 
     private String get_successor(String node_key)
