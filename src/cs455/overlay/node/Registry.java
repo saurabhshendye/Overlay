@@ -244,6 +244,13 @@ public class Registry
         }
 
     }
+
+    public static void start_parser(String command)
+    {
+        String [] byParts = command.split(" ");
+        int Number_of_rounds = Integer.parseInt(byParts[1]);
+    }
+
 //-------------------------------------------- Printing--------------------------------------------
 
     public static void print_node_info()
