@@ -87,7 +87,7 @@ public class Shortest_Path
     {
         String nearest_node = Nodes.get(nearest);
         System.out.println("Checking for the difference..");
-        if (!Arrays.equals(reference, distance))
+        if (!reference.equals(distance))
         {
             System.out.println("There is a difference in two arrays");
             for (int i = 0; i < Node_count; i++)
