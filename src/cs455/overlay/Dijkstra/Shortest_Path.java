@@ -108,7 +108,7 @@ public class Shortest_Path
                     {
                         Add_successor(get_successor(Nodes.get(i)), i);
                     }
-                    System.out.println("Added:  " + current_node + " as predecessor for: " + Nodes.get(i));
+//                    System.out.println("Added:  " + current_node + " as predecessor for: " + Nodes.get(i));
                     System.out.println();
                 }
             }
@@ -121,14 +121,15 @@ public class Shortest_Path
         // node_value = Successor
         String Node_key = Nodes.get(i);
         Successors.put(Node_key, current_node);
+        System.out.println("Added:  " + current_node + " as predecessor for: " + Nodes.get(i));
     }
 
-    private String get_successor(String node_value)
+    private String get_successor(String node_key)
     {
 //        String Node_key = Nodes.get(i);
+         return Successors.get(node_key);
 
-
-        return node_value;
+//        return node_value;
     }
 
     private void getAdjacent(int index)
