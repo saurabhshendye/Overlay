@@ -8,6 +8,7 @@ import cs455.overlay.UserIn.User_Input;
 import cs455.overlay.WireFormats.Link_Weights;
 import cs455.overlay.WireFormats.Messaging_nodes_list;
 import cs455.overlay.WireFormats.Reg_Ack;
+import cs455.overlay.WireFormats.Task_Initiate;
 import cs455.overlay.transport.TCPReceiver;
 import cs455.overlay.transport.TCPSender;
 import cs455.overlay.util.Overlay_Creator;
@@ -194,7 +195,14 @@ public class Registry
         }
     }
 
-
+    public static void start_parser(String command) throws IOException
+    {
+        String [] byParts = command.split(" ");
+        String Number_of_rounds = byParts[1];
+        Task_Initiate start = new Task_Initiate(Number_of_rounds);
+        byte [] TI_msg = start.getByteArray();
+        create_and_send(TI_msg);
+    }
 
     public static void send_link_weights() throws IOException
     {
@@ -218,8 +226,6 @@ public class Registry
 //            TCPSender Wt_send = new TCPSender(LW_sock);
 //            Wt_send.send_data(B);
         }
-
-
     }
 
     private static void convert2String()
@@ -245,11 +251,7 @@ public class Registry
 
     }
 
-    public static void start_parser(String command)
-    {
-        String [] byParts = command.split(" ");
-        int Number_of_rounds = Integer.parseInt(byParts[1]);
-    }
+
 
 //-------------------------------------------- Printing--------------------------------------------
 
