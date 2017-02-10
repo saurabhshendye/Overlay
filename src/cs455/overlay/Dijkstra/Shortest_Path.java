@@ -21,7 +21,7 @@ public class Shortest_Path
         this.Node_count = Node_count;
     }
 
-    public void calculatie_distances()
+    public void calculate_distances()
     {
         //Distance and visited arrays initialized
         int [] distance = new int[Node_count];
@@ -30,21 +30,65 @@ public class Shortest_Path
         // Getting the index of source node
         int index = Nodes.indexOf(source);
 
+        // Making all distances equal to infinity and visited flags to false
+        distance = distance_initialization(distance);
+        visited = visited_initialization(visited);
+
         // Setting the distance of src node from itself to zero
         // Also marking the source node as visited
         distance[index] = 0;
-        visited[index] = true;
+//        visited[index] = true;
+
+        // Find the nearest node
+
 
         for (int i = 0; i < Node_count - 1; i++)
         {
+            int nearest_node_index = find_nearest_node(visited, distance);
+            visited[nearest_node_index] = true;
+
+
             if  (i != index)
             {
 
             }
         }
 
+    }
 
+    private int find_nearest_node(boolean [] visited, int [] distance)
+    {
+        int shortest_distance = Integer.MAX_VALUE;
+        int nearest_node_index = -1;
 
+        for (int i = 0; i < Node_count; i++)
+        {
+            if (!visited[i] && distance[i] <= shortest_distance)
+            {
+                shortest_distance = distance[i];
+                nearest_node_index = i;
+            }
+        }
 
+        return nearest_node_index;
+    }
+
+    private int [] distance_initialization(int [] distance)
+    {
+        for (int i = 0; i < Node_count; i++)
+        {
+            distance[i] = Integer.MAX_VALUE;
+        }
+
+        return distance;
+    }
+
+    private boolean [] visited_initialization(boolean [] visited)
+    {
+        for (int i = 0; i < Node_count; i++)
+        {
+            visited[i] = false;
+        }
+        return visited;
     }
 }
