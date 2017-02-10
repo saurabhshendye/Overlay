@@ -82,14 +82,16 @@ public class Shortest_Path
         }
     }
 
-    private void find_difference(int[] referece, int nearest)
+    private void find_difference(int[] reference, int nearest)
     {
         String nearest_node = Nodes.get(nearest);
-        if (!Arrays.equals(referece, distance))
+        System.out.println("Checking for the difference..");
+        if (!Arrays.equals(reference, distance))
         {
+            System.out.println("There is a difference in two arrays");
             for (int i = 0; i < Node_count; i++)
             {
-                if (referece[i] != distance[i])
+                if (reference[i] != distance[i])
                 {
                     if (Adjacent.contains(nearest_node))
                     {
