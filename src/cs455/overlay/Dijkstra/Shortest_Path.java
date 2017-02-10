@@ -6,6 +6,7 @@ package cs455.overlay.Dijkstra;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Shortest_Path
 {
@@ -15,6 +16,7 @@ public class Shortest_Path
     private int Node_count;
     private int [] distance;
     private ArrayList<String> Adjacent;
+    private ConcurrentHashMap<String, String> Successors;
 
     public Shortest_Path(int [][] weight_graph, ArrayList<String> Nodes, String source)
     {
@@ -24,6 +26,7 @@ public class Shortest_Path
         this.Node_count = Nodes.size();
         this.distance = new int[Node_count];
         this.Adjacent = new ArrayList<>();
+        this.Successors = new ConcurrentHashMap<>();
     }
 
     public void calculate_distances()
@@ -88,7 +91,7 @@ public class Shortest_Path
 
     private void find_difference(int[] reference, int nearest)
     {
-        String nearest_node = Nodes.get(nearest);
+        String current_node = Nodes.get(nearest);
         System.out.println("Checking for the difference..");
         if (!Arrays.equals(reference, distance))
         {
@@ -97,31 +100,35 @@ public class Shortest_Path
             {
                 if (reference[i] != distance[i])
                 {
-                    if (Adjacent.contains(nearest_node))
+                    if (Adjacent.contains(current_node))
                     {
-                        Add_successor(nearest_node, i);
-
+                        Add_successor(current_node, i);
                     }
                     else
                     {
-                        Add_successor(get_successor(nearest_node), i);
-
+                        Add_successor(get_successor(Nodes.get(i)), i);
                     }
-                    System.out.println("Added Successor for: " + Nodes.get(i));
+                    System.out.println("Added:  " + current_node + " as predecessor for: " + Nodes.get(i));
+                    System.out.println();
                 }
             }
         }
     }
 
-    private void Add_successor(String node_id, int i)
+    private void Add_successor(String current_node, int i)
     {
-
+        // Node_key = destination node
+        // node_value = Successor
+        String Node_key = Nodes.get(i);
+        Successors.put(Node_key, current_node);
     }
 
-    private String get_successor(String node_id)
+    private String get_successor(String node_value)
     {
+//        String Node_key = Nodes.get(i);
 
-        return node_id;
+
+        return node_value;
     }
 
     private void getAdjacent(int index)
