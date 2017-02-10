@@ -50,6 +50,7 @@ public class Shortest_Path
         // Find the nearest node
 
 
+
         for (int i = 0; i < Node_count - 1; i++)
         {
             int nearest_node_index = find_nearest_node(visited, distance);
@@ -57,7 +58,9 @@ public class Shortest_Path
 
             // Make a distance reference array in order to detect the changes
             // and thereby detecting the successor
-            int [] dist_reference = distance;
+            int [] dist_reference = new int[Node_count];
+            System.arraycopy(distance,0, dist_reference,0, distance.length);
+//            dist_reference = distance;
 
             for (int j = 0; j < Node_count; j++)
             {
@@ -87,7 +90,7 @@ public class Shortest_Path
     {
         String nearest_node = Nodes.get(nearest);
         System.out.println("Checking for the difference..");
-        if (!reference.equals(distance))
+        if (!Arrays.equals(reference, distance))
         {
             System.out.println("There is a difference in two arrays");
             for (int i = 0; i < Node_count; i++)
