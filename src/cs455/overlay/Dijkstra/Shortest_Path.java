@@ -44,7 +44,7 @@ public class Shortest_Path
         visited = visited_initialization(visited);
 
         // get the adjacent nodes
-        getAdjacent(index);
+        findAdjacent(index);
 
         // Setting the distance of src node from itself to zero
         // Also marking the source node as visited
@@ -136,7 +136,7 @@ public class Shortest_Path
 //        return node_value;
     }
 
-    private void getAdjacent(int index)
+    private void findAdjacent(int index)
     {
         for (int i = 0; i < Node_count; i++)
         {
@@ -189,6 +189,11 @@ public class Shortest_Path
         {
             System.out.println(i);
         }
+    }
+
+    public ArrayList<String> getAdjacent()
+    {
+        return Adjacent;
     }
 
 

@@ -39,6 +39,7 @@ public class Messaging_Node
     private static ConcurrentHashMap<String, TCPSender> TCP_Sender = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, Socket> socket_map = new ConcurrentHashMap<>();
     private static Counters C = new Counters();
+    private static Shortest_Path P;
 
 
 
@@ -140,6 +141,7 @@ public class Messaging_Node
 
         String source = my_IP + ":" +Integer.toString(my_port);
         Shortest_Path path = new Shortest_Path(weights, Nodes, source);
+        P = path;
         path.calculate_distances();
         path.print_distances();
 
@@ -318,7 +320,8 @@ public class Messaging_Node
 
     private static void Start_Transmitting(int rounds, String sink)
     {
-
+        ArrayList<String> Adj = P.getAdjacent();
+        System.out.println(P.get_successor(sink));
     }
 
     public static void peer_message_parser(byte [] byte_data)
