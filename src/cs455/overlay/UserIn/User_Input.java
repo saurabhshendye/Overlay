@@ -6,9 +6,7 @@ package cs455.overlay.UserIn;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static cs455.overlay.node.Registry.print_node_info;
-import static cs455.overlay.node.Registry.send_link_weights;
-import static cs455.overlay.node.Registry.setup_overlay;
+import static cs455.overlay.node.Registry.*;
 
 public class User_Input extends Thread
 {
@@ -53,6 +51,7 @@ public class User_Input extends Thread
         else if (command.startsWith("start"))
         {
             System.out.println("Start Exchanging the messages");
+            start_parser(command);
         }
         else if (command.equals("print-shortest-path"))
         {
