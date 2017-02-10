@@ -5,6 +5,7 @@
 package cs455.overlay.Dijkstra;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Shortest_Path
 {
@@ -82,7 +83,38 @@ public class Shortest_Path
 
     private void find_difference(int[] referece, int nearest)
     {
+        String nearest_node = Nodes.get(nearest);
+        if (!Arrays.equals(referece, distance))
+        {
+            for (int i = 0; i < Node_count; i++)
+            {
+                if (referece[i] != distance[i])
+                {
+                    if (Adjacent.contains(nearest_node))
+                    {
+                        Add_successor(nearest_node, i);
 
+                    }
+                    else
+                    {
+                        Add_successor(get_successor(nearest_node), i);
+
+                    }
+                    System.out.println("Added Successor for: " + nearest_node);
+                }
+            }
+        }
+    }
+
+    private void Add_successor(String node_id, int i)
+    {
+
+    }
+
+    private String get_successor(String node_id)
+    {
+
+        return node_id;
     }
 
     private void getAdjacent(int index)
