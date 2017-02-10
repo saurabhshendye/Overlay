@@ -49,7 +49,8 @@ public class TCPReceiver extends Thread
                         break;
                     case 4: WireFormat.connection_establishment();      // 4 for Connection request
                         break;
-                    case 5:
+                    case 5: WireFormat.Task_initiate_widget();
+                        break;
                     default: System.out.println("Unknown Message");
                         break;
 
