@@ -49,6 +49,7 @@ public class TCPReceiver extends Thread
                         break;
                     case 4: WireFormat.connection_establishment();      // 4 for Connection request
                         break;
+                    case 5:
                     default: System.out.println("Unknown Message");
                         break;
 
