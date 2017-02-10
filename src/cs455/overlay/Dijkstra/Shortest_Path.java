@@ -23,6 +23,7 @@ public class Shortest_Path
         this.source = source;
         this.Node_count = Nodes.size();
         this.distance = new int[Node_count];
+        this.Adjacent = new ArrayList<>();
     }
 
     public void calculate_distances()
