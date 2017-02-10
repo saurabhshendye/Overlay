@@ -68,6 +68,7 @@ public class Shortest_Path
                         if (distance[j] > distance[nearest_node_index] + weight_graph[nearest_node_index][j])
                         {
                             distance[j] = distance[nearest_node_index] + weight_graph[nearest_node_index][j];
+                            System.out.println("Modified the distance array");
                         }
                     }
                 }
