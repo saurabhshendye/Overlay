@@ -13,13 +13,14 @@ public class Shortest_Path
     private String source;
     private int Node_count;
     private int [] distance;
+    private ArrayList<String> Adjacent;
 
-    public Shortest_Path(int [][] weight_graph, ArrayList<String> Nodes, String source, int Node_count)
+    public Shortest_Path(int [][] weight_graph, ArrayList<String> Nodes, String source)
     {
         this.Nodes = Nodes;
         this.weight_graph = weight_graph;
         this.source = source;
-        this.Node_count = Node_count;
+        this.Node_count = Nodes.size();
         this.distance = new int[Node_count];
     }
 
@@ -36,6 +37,9 @@ public class Shortest_Path
         distance = distance_initialization(distance);
         visited = visited_initialization(visited);
 
+        // get the adjacent nodes
+        getAdjacent(index);
+
         // Setting the distance of src node from itself to zero
         // Also marking the source node as visited
         distance[index] = 0;
@@ -48,6 +52,10 @@ public class Shortest_Path
         {
             int nearest_node_index = find_nearest_node(visited, distance);
             visited[nearest_node_index] = true;
+
+            // Make a distance reference array in order to detect the changes
+            // and thereby detecting the successor
+            int [] dist_reference = distance;
 
             for (int j = 0; j < Node_count; j++)
             {
@@ -63,9 +71,27 @@ public class Shortest_Path
                 }
             }
 
+            find_difference(dist_reference, nearest_node_index);
+
             if  (i != index)
             {
 
+            }
+        }
+    }
+
+    private void find_difference(int[] referece, int nearest)
+    {
+
+    }
+
+    private void getAdjacent(int index)
+    {
+        for (int i = 0; i < Node_count; i ++)
+        {
+            if (weight_graph[index][i] != 0)
+            {
+                Adjacent.add(Nodes.get(i));
             }
         }
     }

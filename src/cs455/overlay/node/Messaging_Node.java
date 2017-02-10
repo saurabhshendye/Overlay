@@ -136,7 +136,7 @@ public class Messaging_Node
         print_weights();
 
         String source = my_IP + ":" +Integer.toString(my_port);
-        Shortest_Path path = new Shortest_Path(weights, Nodes, source, Node_Count);
+        Shortest_Path path = new Shortest_Path(weights, Nodes, source);
         path.calculate_distances();
         path.print_distances();
 
