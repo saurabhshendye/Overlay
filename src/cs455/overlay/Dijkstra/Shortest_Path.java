@@ -12,6 +12,7 @@ public class Shortest_Path
     private ArrayList<String> Nodes;
     private String source;
     private int Node_count;
+    private int [] distance;
 
     public Shortest_Path(int [][] weight_graph, ArrayList<String> Nodes, String source, int Node_count)
     {
@@ -19,12 +20,13 @@ public class Shortest_Path
         this.weight_graph = weight_graph;
         this.source = source;
         this.Node_count = Node_count;
+        this.distance = new int[Node_count];
     }
 
     public void calculate_distances()
     {
         //Distance and visited arrays initialized
-        int [] distance = new int[Node_count];
+
         boolean [] visited = new boolean[Node_count];
 
         // Getting the index of source node
@@ -47,10 +49,8 @@ public class Shortest_Path
             int nearest_node_index = find_nearest_node(visited, distance);
             visited[nearest_node_index] = true;
 
-
             for (int j = 0; j < Node_count; j++)
             {
-
                 if (!visited[j] && weight_graph[nearest_node_index][j] != 0)
                 {
                     if (distance[nearest_node_index] != Integer.MAX_VALUE)
@@ -68,7 +68,6 @@ public class Shortest_Path
 
             }
         }
-
     }
 
     private int find_nearest_node(boolean [] visited, int [] distance)
@@ -84,7 +83,6 @@ public class Shortest_Path
                 nearest_node_index = i;
             }
         }
-
         return nearest_node_index;
     }
 
@@ -94,7 +92,6 @@ public class Shortest_Path
         {
             distance[i] = Integer.MAX_VALUE;
         }
-
         return distance;
     }
 
@@ -105,5 +102,14 @@ public class Shortest_Path
             visited[i] = false;
         }
         return visited;
+    }
+
+    public void print_distances()
+    {
+        System.out.println();
+        for (int i : distance)
+        {
+            System.out.print(i + "/t");
+        }
     }
 }

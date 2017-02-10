@@ -4,6 +4,7 @@
 
 package cs455.overlay.node;
 
+import cs455.overlay.Dijkstra.Shortest_Path;
 import cs455.overlay.UserIn.User_Input;
 import cs455.overlay.WireFormats.Register_request;
 import cs455.overlay.WireFormats.establish_connection_msg;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -109,7 +111,6 @@ public class Messaging_Node
         System.out.println("Making the entry with port: " + byParts[1]);
         TCP_Receiver.put(IP_Port, T);
         socket_map.put(IP_Port,S);
-
     }
 
     public static void reg_ack_parser(byte[] byte_data)
@@ -134,6 +135,11 @@ public class Messaging_Node
         weights = L_A.getAdjecencyMatrix();
 
         print_weights();
+
+        String source = my_IP + ":" +Integer.toString(my_port);
+        Shortest_Path path = new Shortest_Path(weights, Nodes, source, Node_Count);
+        path.calculate_distances();
+        path.print_distances();
 
     }
 
