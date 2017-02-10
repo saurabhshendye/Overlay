@@ -107,7 +107,7 @@ public class Shortest_Path
                     }
                     else
                     {
-                        Add_successor(get_successor(Nodes.get(i)), i);
+                        Add_successor(get_successor(current_node), i);
                     }
 //                    System.out.println("Added:  " + current_node + " as predecessor for: " + Nodes.get(i));
                     System.out.println();
