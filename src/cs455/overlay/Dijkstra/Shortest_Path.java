@@ -119,10 +119,11 @@ public class Shortest_Path
 
     private void getAdjacent(int index)
     {
-        for (int i = 0; i < Node_count; i ++)
+        for (int i = 0; i < Node_count; i++)
         {
             if (weight_graph[index][i] != 0)
             {
+                System.out.println("Node added: " + Nodes.get(i));
                 Adjacent.add(Nodes.get(i));
             }
         }
