@@ -107,7 +107,7 @@ public class Shortest_Path
                         Add_successor(get_successor(nearest_node), i);
 
                     }
-                    System.out.println("Added Successor for: " + nearest_node);
+                    System.out.println("Added Successor for: " + Nodes.get(i));
                 }
             }
         }
