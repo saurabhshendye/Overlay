@@ -310,9 +310,16 @@ public class Messaging_Node
 
         System.out.println("Source Node (myself): " +self_id);
         System.out.println("Selected sink node is: " +sink);
+
+        // Start sending messages
+        Start_Transmitting(rounds, sink);
+
     }
 
+    private static void Start_Transmitting(int rounds, String sink)
+    {
 
+    }
 
     private static void print_messaging_nodes()
     {
