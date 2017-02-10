@@ -140,6 +140,11 @@ public class Messaging_Node
         path.calculate_distances();
         path.print_distances();
 
+        for (String N : Nodes)
+        {
+            System.out.println("Successor for Node: " + N + "is: " + path.get_successor(N));
+        }
+
     }
 
     private static void link_info_print(String[] link_info)

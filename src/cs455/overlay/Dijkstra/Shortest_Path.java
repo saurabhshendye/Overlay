@@ -31,6 +31,7 @@ public class Shortest_Path
 
     public void calculate_distances()
     {
+        Successors.put(source,source);
         //Distance and visited arrays initialized
 
         boolean [] visited = new boolean[Node_count];
@@ -127,7 +128,7 @@ public class Shortest_Path
 
     }
 
-    private String get_successor(String node_key)
+    public String get_successor(String node_key)
     {
 //        String Node_key = Nodes.get(i);
          return Successors.get(node_key);
@@ -189,4 +190,6 @@ public class Shortest_Path
             System.out.println(i);
         }
     }
+
+
 }
