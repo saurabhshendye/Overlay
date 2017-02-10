@@ -142,7 +142,7 @@ public class Messaging_Node
 
         for (String N : Nodes)
         {
-            System.out.println("Successor for Node: " + N + "is: " + path.get_successor(N));
+            System.out.println("Successor for Node: " + N + " is: " + path.get_successor(N));
         }
 
     }
