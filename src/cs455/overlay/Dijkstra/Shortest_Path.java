@@ -101,7 +101,7 @@ public class Shortest_Path
             {
                 if (reference[i] != distance[i])
                 {
-                    if (Adjacent.contains(current_node))
+                    if (Adjacent.contains(current_node) || current_node.equals(source))
                     {
                         Add_successor(current_node, i);
                     }
