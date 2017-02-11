@@ -348,7 +348,7 @@ public class Messaging_Node
         }
     }
 
-    private synchronized static String find_next_hop(String sink)
+    private static String find_next_hop(String sink)
     {
         String predecessor = P.get_successor(sink);
         String self_id = my_IP + ":" + my_port;
@@ -376,7 +376,7 @@ public class Messaging_Node
         return right_addr;
     }
 
-    public synchronized static void peer_message_parser(byte [] byte_data) throws IOException
+    public static void peer_message_parser(byte [] byte_data) throws IOException
     {
         String self_id = my_IP + ":" + my_port;
 
