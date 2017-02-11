@@ -345,6 +345,12 @@ public class Messaging_Node
                 Msg_send.send_and_maintain(byte_msg);
             }
         }
+        send_task_complete();
+    }
+
+    private static void send_task_complete()
+    {
+
     }
 
     private synchronized static String find_next_hop(String sink)
@@ -419,6 +425,7 @@ public class Messaging_Node
             System.out.println(N);
         }
     }
+
 
     public static void print_counters()
     {
