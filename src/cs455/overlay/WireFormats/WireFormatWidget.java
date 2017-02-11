@@ -24,9 +24,9 @@ public class WireFormatWidget
         DataInputStream din = new DataInputStream(new BufferedInputStream(baInputStream));
 
         this.type = din.readInt();
-        System.out.println("Type in Wire Format Constructor: " +this.type);
+//        System.out.println("Type in Wire Format Constructor: " +this.type);
         int Len = din.readInt();
-        System.out.println("Length in Wire Format Constructor: " +Len);
+//        System.out.println("Length in Wire Format Constructor: " +Len);
         byte[] data = new byte[Len];
 
 
