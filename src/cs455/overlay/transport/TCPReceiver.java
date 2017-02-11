@@ -44,8 +44,6 @@ public class TCPReceiver extends Thread
                         break;
                     case 10: WireFormat.reg_ack();                      // 10 for Reg Ack
                         break;
-                    case 16: WireFormat.Task_complete_widget();         // 16 for Task Complete message
-                        break;
                     case 2: WireFormat.link_info_widget();              // 2 for link weights
                         break;
                     case 3: WireFormat.messaging_info_widget();         // 3 for Messaging node widget
@@ -56,22 +54,20 @@ public class TCPReceiver extends Thread
                         break;
                     case 6: WireFormat.peer_message();                  // 6 for peer messages
                         break;
+                    case 16: WireFormat.Task_complete_widget();         // 16 for Task Complete message
+                        break;
                     case 7: WireFormat.de_register();                   // 7 for de-register request
                         break;
                     default: System.out.println("Unknown Message");
                         break;
 
                 }
-
             }
             catch (IOException e1)
             {
                 System.out.println("Error Message: " +e1.getMessage());
                 break;
             }
-
         }
-
-
     }
 }
