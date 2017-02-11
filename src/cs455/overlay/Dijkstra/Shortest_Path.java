@@ -125,7 +125,7 @@ public class Shortest_Path
 
     }
 
-    public String get_successor(String node_key)
+    public synchronized String get_successor(String node_key)
     {
 //        String Node_key = Nodes.get(i);
          return Successors.get(node_key);
