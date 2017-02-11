@@ -323,27 +323,32 @@ public class Messaging_Node
         String predecessor = P.get_successor(sink);
         String self_id = my_IP + ":" + my_port;
 
-//        if (self_id.equals(predecessor))
-//        {
-//            System.out.println("They are equal");
-//        }
-//
-//        if (!self_id.equals(predecessor))
-//        {
-//            System.out.println("They are not equal");
-//        }
+        String right_addr;
 
-        String next_hop = predecessor;
-        while (!self_id.equals(predecessor))
+        if (self_id.equals(predecessor))
         {
+            System.out.println("They are equal");
+            right_addr = IP_Port_Map.get(sink);
+        }
+        else
+        {
+            System.out.println("They are not equal");
+            String next_hop = predecessor;
+            while (!self_id.equals(predecessor))
+            {
 //            System.out.println("Predecessor: " +predecessor);
-            next_hop = predecessor;
-            predecessor = P.get_successor(predecessor);
+                next_hop = predecessor;
+                predecessor = P.get_successor(predecessor);
+            }
+            right_addr = IP_Port_Map.get(next_hop);
         }
 
-        System.out.println("next hop: " +next_hop);
+
+
+
+//        System.out.println("next hop: " +next_hop);
 //        System.out.println("Predecessor: " +predecessor);
-        String right_addr = IP_Port_Map.get(next_hop);
+
         System.out.println("Right IP Port: " +right_addr);
         TCPSender Msg_send = TCP_Sender.get(right_addr);
 
@@ -361,9 +366,6 @@ public class Messaging_Node
                 Msg_send.send_and_maintain(byte_msg);
             }
         }
-
-
-
     }
 
     public static void peer_message_parser(byte [] byte_data)
