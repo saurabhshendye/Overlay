@@ -333,7 +333,7 @@ public class Messaging_Node
 //            System.out.println("They are not equal");
 //        }
 
-        String next_hop = "";
+        String next_hop = predecessor;
         while (!self_id.equals(predecessor))
         {
 //            System.out.println("Predecessor: " +predecessor);
@@ -347,7 +347,7 @@ public class Messaging_Node
         System.out.println("Right IP Port: " +right_addr);
         TCPSender Msg_send = TCP_Sender.get(right_addr);
 
-        String [] next_node = predecessor.split(":");
+//        String [] next_node = predecessor.split(":");
 
         Random generate = new Random();
 
