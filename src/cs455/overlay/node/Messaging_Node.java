@@ -332,7 +332,7 @@ public class Messaging_Node
         }
         //        while (!Adj.contains(P.get_successor(sink)))
 
-        System.out.println(P.get_successor(sink));
+//        System.out.println(P.get_successor(sink));
 
 
     }
