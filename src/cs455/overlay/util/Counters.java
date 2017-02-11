@@ -61,4 +61,14 @@ public class Counters
     {
         return relayed_tracker;
     }
+
+    public long getSent_summation()
+    {
+        return sent_summation;
+    }
+
+    public long getReceive_summation()
+    {
+        return receive_summation;
+    }
 }

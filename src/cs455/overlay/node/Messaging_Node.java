@@ -419,4 +419,11 @@ public class Messaging_Node
             System.out.println(N);
         }
     }
+
+    public static void print_counters()
+    {
+        System.out.println("Number of messages Received: "+ C.getReceive_tracker());
+        System.out.println("Number of messages sent: "+ C.getSent_summation());
+        System.out.println("Number of messages relayed: " +C.getRelayed_tracker());
+    }
 }
