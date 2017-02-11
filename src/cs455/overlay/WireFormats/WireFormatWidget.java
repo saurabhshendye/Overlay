@@ -10,6 +10,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import static cs455.overlay.node.Messaging_Node.*;
+import static cs455.overlay.node.Registry.DeRegister;
 import static cs455.overlay.node.Registry.getRegistered;
 
 public class WireFormatWidget
@@ -82,5 +83,12 @@ public class WireFormatWidget
     public void peer_message() throws IOException
     {
         peer_message_parser(this.identifier);
+    }
+
+    public void de_register() throws IOException
+    {
+        System.out.println("De-register message received");
+        DeRegister(this.identifier);
+
     }
 }

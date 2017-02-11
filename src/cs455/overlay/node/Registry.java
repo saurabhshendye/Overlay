@@ -132,6 +132,11 @@ public class Registry
 
     }
 
+    public synchronized static void DeRegister(byte [] byte_data)
+    {
+
+    }
+
     public static void setup_overlay(String command) throws IOException
     {
         String [] byParts = command.split(" ");

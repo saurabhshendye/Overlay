@@ -54,6 +54,8 @@ public class TCPReceiver extends Thread
                         break;
                     case 6: WireFormat.peer_message();
                         break;
+                    case 7: WireFormat.de_register();
+                        break;
                     default: System.out.println("Unknown Message");
                         break;
 
