@@ -27,7 +27,7 @@ public class TCPSender
         dout.close();
     }
 
-    public synchronized void send_and_maintain(byte[] data_to_send) throws IOException
+    public void send_and_maintain(byte[] data_to_send) throws IOException
     {
         int D_len = data_to_send.length;
         dout.writeInt(D_len);
