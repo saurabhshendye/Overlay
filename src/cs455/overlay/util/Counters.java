@@ -42,4 +42,8 @@ public class Counters
         sent_summation = sent_summation + num;
     }
 
+    public synchronized void increment_relayed()
+    {
+        relayed_tracker++;
+    }
 }

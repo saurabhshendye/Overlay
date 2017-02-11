@@ -319,7 +319,37 @@ public class Messaging_Node
     }
 
     private static void Start_Transmitting(int rounds, String sink) throws IOException {
-        ArrayList<String> Adj = P.getAdjacent();
+//        ArrayList<String> Adj = P.getAdjacent();
+
+
+
+//        System.out.println("next hop: " +next_hop);
+//        System.out.println("Predecessor: " +predecessor);
+
+        String right_addr = find_next_hop(sink);
+
+        System.out.println("Right IP Port: " +right_addr);
+        TCPSender Msg_send = TCP_Sender.get(right_addr);
+
+//        String [] next_node = predecessor.split(":");
+
+        Random generate = new Random();
+
+        for (int i = 0; i < rounds; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                long val = generate.nextLong();
+                C.increment_tx(val);
+                Message_Exchange p_msg = new Message_Exchange(sink,val);
+                byte [] byte_msg = p_msg.getByteArray();
+                Msg_send.send_and_maintain(byte_msg);
+            }
+        }
+    }
+
+    private static String find_next_hop(String sink)
+    {
         String predecessor = P.get_successor(sink);
         String self_id = my_IP + ":" + my_port;
 
@@ -343,34 +373,43 @@ public class Messaging_Node
             right_addr = IP_Port_Map.get(next_hop);
         }
 
-
-
-
-//        System.out.println("next hop: " +next_hop);
-//        System.out.println("Predecessor: " +predecessor);
-
-        System.out.println("Right IP Port: " +right_addr);
-        TCPSender Msg_send = TCP_Sender.get(right_addr);
-
-//        String [] next_node = predecessor.split(":");
-
-        Random generate = new Random();
-
-        for (int i = 0; i < rounds; i++)
-        {
-            for (int j = 0; j < 5; j++)
-            {
-                long val = generate.nextLong();
-                Message_Exchange p_msg = new Message_Exchange(predecessor,val);
-                byte [] byte_msg = p_msg.getByteArray();
-                Msg_send.send_and_maintain(byte_msg);
-            }
-        }
+        return right_addr;
     }
 
-    public static void peer_message_parser(byte [] byte_data)
+    public static void peer_message_parser(byte [] byte_data) throws IOException
     {
+        String self_id = my_IP + ":" + my_port;
 
+        ByteArrayInputStream bin = new ByteArrayInputStream(byte_data);
+        DataInputStream din = new DataInputStream(new BufferedInputStream(bin));
+
+        long num = din.readLong();
+
+        byte[] dest_byte = new byte[byte_data.length - 8];
+        din.readFully(dest_byte);
+        String dest  = new String(dest_byte);
+
+        if (dest.equals(self_id))
+        {
+            System.out.println("This is for me");
+            C.increment_rx(num);
+
+        }
+        else
+        {
+            // Increment the counter
+            System.out.println("This is not for me");
+            C.increment_relayed();
+
+            // Re-Create the message to be forwarded
+            Message_Exchange p_msg = new Message_Exchange(dest,num);
+            byte [] byte_msg = p_msg.getByteArray();
+
+            // Get the right socket
+            String right_addr = find_next_hop(dest);
+            TCPSender Msg_send = TCP_Sender.get(right_addr);
+            Msg_send.send_and_maintain(byte_msg);
+        }
     }
 
     private static void print_messaging_nodes()

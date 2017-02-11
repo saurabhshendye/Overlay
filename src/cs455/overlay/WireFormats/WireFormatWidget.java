@@ -79,7 +79,7 @@ public class WireFormatWidget
         Task_Initiate_Parser(this.identifier);
     }
 
-    public void peer_message()
+    public void peer_message() throws IOException
     {
         peer_message_parser(this.identifier);
     }
