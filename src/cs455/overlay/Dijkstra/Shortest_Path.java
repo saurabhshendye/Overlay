@@ -109,7 +109,7 @@ public class Shortest_Path
                         Add_successor(get_successor(current_node), i);
                     }
 //                    System.out.println("Added:  " + current_node + " as predecessor for: " + Nodes.get(i));
-                    System.out.println();
+//                    System.out.println();
                 }
             }
         }
@@ -184,7 +184,7 @@ public class Shortest_Path
         System.out.println("Shortest Distances are: ");
         for (int i : distance)
         {
-            System.out.println(i);
+//            System.out.println(i);
         }
     }
 
