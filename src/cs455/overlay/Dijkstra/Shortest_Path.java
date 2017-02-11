@@ -75,7 +75,7 @@ public class Shortest_Path
                         if (distance[j] > distance[nearest_node_index] + weight_graph[nearest_node_index][j])
                         {
                             distance[j] = distance[nearest_node_index] + weight_graph[nearest_node_index][j];
-                            System.out.println("Modified the distance array");
+//                            System.out.println("Modified the distance array");
                         }
                     }
                 }
@@ -83,21 +83,18 @@ public class Shortest_Path
 
             find_difference(dist_reference, nearest_node_index);
 
-            if  (i != index)
-            {
 
-            }
         }
     }
 
     private void find_difference(int[] reference, int nearest)
     {
         String current_node = Nodes.get(nearest);
-        System.out.println("Nearest node is: " +Nodes.get(nearest));
-        System.out.println("Checking for the difference..");
+//        System.out.println("Nearest node is: " +Nodes.get(nearest));
+//        System.out.println("Checking for the difference..");
         if (!Arrays.equals(reference, distance))
         {
-            System.out.println("There is a difference in two arrays");
+//            System.out.println("There is a difference in two arrays");
             for (int i = 0; i < Node_count; i++)
             {
                 if (reference[i] != distance[i])
@@ -122,7 +119,7 @@ public class Shortest_Path
     {
         // Node_key = destination node
         // node_value = Successor
-        System.out.println("Added:  " + current_node + " as predecessor for: " + Nodes.get(i));
+//        System.out.println("Added:  " + current_node + " as predecessor for: " + Nodes.get(i));
         String Node_key = Nodes.get(i);
         Successors.put(Node_key, current_node);
 
@@ -142,7 +139,7 @@ public class Shortest_Path
         {
             if (weight_graph[index][i] != 0)
             {
-                System.out.println("Node added: " + Nodes.get(i));
+//                System.out.println("Node added: " + Nodes.get(i));
                 Adjacent.add(Nodes.get(i));
             }
         }
