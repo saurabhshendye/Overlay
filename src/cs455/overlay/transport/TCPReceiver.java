@@ -31,7 +31,8 @@ public class TCPReceiver extends Thread
                 int D_len = din.readInt();
                 byte[] data = new byte[D_len];
                 System.out.println("Length of the message received: " + D_len);
-                din.readFully(data, 0, D_len);
+//                din.readFully(data, 0, D_len);
+                din.readFully(data);
                 WireFormatWidget WireFormat = new WireFormatWidget(data);
 //                System.out.println("Created object WireFormat");
                 int type = WireFormat.getType();
