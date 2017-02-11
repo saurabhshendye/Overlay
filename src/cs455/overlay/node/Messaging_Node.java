@@ -230,6 +230,7 @@ public class Messaging_Node
                 Socket MN_socket = new Socket(byParts[0], Integer.parseInt(byParts[1]));
                 TCPSender MN_sender = new TCPSender(MN_socket);
                 Thread MN_receiver = new TCPReceiver(MN_socket);
+                MN_receiver.start();
 
                 // Getting the connection IP port
                 String [] parts = MN_socket.getRemoteSocketAddress().toString().split(":");
