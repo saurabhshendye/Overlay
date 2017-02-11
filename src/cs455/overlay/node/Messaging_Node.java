@@ -339,7 +339,9 @@ public class Messaging_Node
             predecessor = P.get_successor(predecessor);
         }
 
+        System.out.println("Final Predecessor: " +predecessor);
         String right_addr = IP_Port_Map.get(predecessor);
+        System.out.println("Right IP Port: " +right_addr);
         TCPSender Msg_send = TCP_Sender.get(right_addr);
 
         String [] next_node = predecessor.split(":");
