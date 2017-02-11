@@ -406,6 +406,7 @@ public class Messaging_Node
 
             // Get the right socket
             String right_addr = find_next_hop(dest);
+            System.out.println("Forwarding the message to: "+right_addr);
             TCPSender Msg_send = TCP_Sender.get(right_addr);
             Msg_send.send_and_maintain(byte_msg);
         }
