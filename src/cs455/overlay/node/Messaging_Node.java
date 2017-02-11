@@ -317,6 +317,12 @@ public class Messaging_Node
         // Start sending messages
         Start_Transmitting(rounds, sink);
 
+        // Print Task Summary
+        System.out.println("Enter command 'print-counters' to view the summary");
+
+        // Send task summary to registry
+        send_task_complete();
+
     }
 
     private static void Start_Transmitting(int rounds, String sink) throws IOException {
@@ -345,7 +351,7 @@ public class Messaging_Node
                 Msg_send.send_and_maintain(byte_msg);
             }
         }
-        send_task_complete();
+
     }
 
     private static void send_task_complete()
