@@ -256,6 +256,12 @@ public class Registry
 
     }
 
+    public synchronized static void Task_complete_parser(byte[] byte_data)
+    {
+
+    }
+
+
 
 
 //-------------------------------------------- Printing--------------------------------------------

@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import static cs455.overlay.node.Messaging_Node.*;
 import static cs455.overlay.node.Registry.DeRegister;
+import static cs455.overlay.node.Registry.Task_complete_parser;
 import static cs455.overlay.node.Registry.getRegistered;
 
 public class WireFormatWidget
@@ -90,5 +91,10 @@ public class WireFormatWidget
         System.out.println("De-register message received");
         DeRegister(this.identifier);
 
+    }
+
+    public void Task_complete_widget()
+    {
+        Task_complete_parser(this.identifier);
     }
 }
