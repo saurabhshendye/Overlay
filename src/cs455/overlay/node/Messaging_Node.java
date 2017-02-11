@@ -334,9 +334,8 @@ public class Messaging_Node
             System.out.println("They are not equal");
         }
 
-        while (!self_id.equals(P.get_successor(predecessor)))
+        while (!self_id.equals(predecessor))
         {
-
             System.out.println("Predecessor: " +predecessor);
             predecessor = P.get_successor(predecessor);
         }
