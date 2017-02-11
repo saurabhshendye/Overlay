@@ -348,7 +348,7 @@ public class Messaging_Node
         }
     }
 
-    private static String find_next_hop(String sink)
+    private synchronized static String find_next_hop(String sink)
     {
         String predecessor = P.get_successor(sink);
         String self_id = my_IP + ":" + my_port;
@@ -357,12 +357,12 @@ public class Messaging_Node
 
         if (self_id.equals(predecessor))
         {
-            System.out.println("They are equal");
+//            System.out.println("They are equal");
             right_addr = IP_Port_Map.get(sink);
         }
         else
         {
-            System.out.println("They are not equal");
+//            System.out.println("They are not equal");
             String next_hop = predecessor;
             while (!self_id.equals(predecessor))
             {
@@ -376,7 +376,7 @@ public class Messaging_Node
         return right_addr;
     }
 
-    public static void peer_message_parser(byte [] byte_data) throws IOException
+    public synchronized static void peer_message_parser(byte [] byte_data) throws IOException
     {
         String self_id = my_IP + ":" + my_port;
 
@@ -391,13 +391,13 @@ public class Messaging_Node
 
         if (dest.equals(self_id))
         {
-            System.out.println("This is for me");
+//            System.out.println("This is for me");
             C.increment_rx(num);
         }
         else
         {
             // Increment the counter
-            System.out.println("This is not for me");
+//            System.out.println("This is not for me");
             C.increment_relayed();
 
             // Re-Create the message to be forwarded
@@ -425,5 +425,7 @@ public class Messaging_Node
         System.out.println("Number of messages Received: "+ C.getReceive_tracker());
         System.out.println("Number of messages sent: "+ C.getSent_tracker());
         System.out.println("Number of messages relayed: " +C.getRelayed_tracker());
+        System.out.println("Sent Summation: " +C.getSent_summation());
+        System.out.println("Received Summation: " +C.getReceive_summation());
     }
 }
