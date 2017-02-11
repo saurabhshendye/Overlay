@@ -139,7 +139,7 @@ public class Shortest_Path
         {
             if (weight_graph[index][i] != 0)
             {
-//                System.out.println("Node added: " + Nodes.get(i));
+                System.out.println("Node added: " + Nodes.get(i));
                 Adjacent.add(Nodes.get(i));
             }
         }
