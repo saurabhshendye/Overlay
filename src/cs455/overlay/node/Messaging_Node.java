@@ -251,7 +251,7 @@ public class Messaging_Node
         }
     }
 
-    public static void connection_request_parser(byte [] byte_data) throws IOException
+    public synchronized static void connection_request_parser(byte [] byte_data) throws IOException
     {
         ByteArrayInputStream bin = new ByteArrayInputStream(byte_data);
         DataInputStream din = new DataInputStream(new BufferedInputStream(bin));
@@ -388,7 +388,7 @@ public class Messaging_Node
         byte[] dest_byte = new byte[byte_data.length - 8];
         din.readFully(dest_byte);
         String dest  = new String(dest_byte);
-
+        System.out.println("Message is for: " +dest);
         if (dest.equals(self_id))
         {
 //            System.out.println("This is for me");
