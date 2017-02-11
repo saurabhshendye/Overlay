@@ -324,6 +324,16 @@ public class Messaging_Node
         String predecessor = P.get_successor(sink);
         String self_id = my_IP + ":" + my_port;
 
+        if (self_id.equals(P.get_successor(predecessor)))
+        {
+            System.out.println("They are equal");
+        }
+
+        if (!self_id.equals(P.get_successor(predecessor)))
+        {
+            System.out.println("They are not equal");
+        }
+
         while (!self_id.equals(P.get_successor(predecessor)))
         {
 
