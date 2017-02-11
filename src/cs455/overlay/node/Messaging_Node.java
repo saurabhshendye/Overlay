@@ -333,13 +333,16 @@ public class Messaging_Node
 //            System.out.println("They are not equal");
 //        }
 
+        String next_hop = "";
         while (!self_id.equals(predecessor))
         {
             System.out.println("Predecessor: " +predecessor);
+            next_hop = predecessor;
             predecessor = P.get_successor(predecessor);
         }
 
-        System.out.println("Final Predecessor: " +predecessor);
+        System.out.println("next hop: " +next_hop);
+        System.out.println("Predecessor: " +predecessor);
         String right_addr = IP_Port_Map.get(predecessor);
         System.out.println("Right IP Port: " +right_addr);
         TCPSender Msg_send = TCP_Sender.get(right_addr);
