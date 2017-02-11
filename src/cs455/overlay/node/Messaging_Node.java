@@ -6,6 +6,7 @@ package cs455.overlay.node;
 
 import cs455.overlay.Dijkstra.Shortest_Path;
 import cs455.overlay.UserIn.User_Input;
+import cs455.overlay.WireFormats.Message_Exchange;
 import cs455.overlay.WireFormats.Register_request;
 import cs455.overlay.WireFormats.establish_connection_msg;
 import cs455.overlay.transport.TCPReceiver;
@@ -291,8 +292,7 @@ public class Messaging_Node
         TCP_Sender.put(connection_IP_Port,node_connect);
     }
 
-    public static void Task_Initiate_Parser(byte [] byte_data)
-    {
+    public static void Task_Initiate_Parser(byte [] byte_data) throws IOException {
         String temp = new String(byte_data);
         int rounds = Integer.parseInt(temp);
 
@@ -318,30 +318,44 @@ public class Messaging_Node
 
     }
 
-    private static void Start_Transmitting(int rounds, String sink)
-    {
+    private static void Start_Transmitting(int rounds, String sink) throws IOException {
         ArrayList<String> Adj = P.getAdjacent();
         String predecessor = P.get_successor(sink);
         String self_id = my_IP + ":" + my_port;
 
-        if (self_id.equals(predecessor))
-        {
-            System.out.println("They are equal");
-        }
-
-        if (!self_id.equals(predecessor))
-        {
-            System.out.println("They are not equal");
-        }
+//        if (self_id.equals(predecessor))
+//        {
+//            System.out.println("They are equal");
+//        }
+//
+//        if (!self_id.equals(predecessor))
+//        {
+//            System.out.println("They are not equal");
+//        }
 
         while (!self_id.equals(predecessor))
         {
             System.out.println("Predecessor: " +predecessor);
             predecessor = P.get_successor(predecessor);
         }
-        //        while (!Adj.contains(P.get_successor(sink)))
 
-//        System.out.println(P.get_successor(sink));
+        TCPSender Msg_send = TCP_Sender.get(predecessor);
+
+        String [] next_node = predecessor.split(":");
+
+        Random generate = new Random();
+
+        for (int i = 0; i < rounds; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                long val = generate.nextLong();
+                Message_Exchange p_msg = new Message_Exchange(predecessor,val);
+                byte [] byte_msg = p_msg.getByteArray();
+                Msg_send.send_and_maintain(byte_msg);
+            }
+        }
+
 
 
     }

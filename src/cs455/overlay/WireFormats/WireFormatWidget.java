@@ -73,7 +73,7 @@ public class WireFormatWidget
         connection_request_parser(this.identifier);
     }
 
-    public void Task_initiate_widget()
+    public void Task_initiate_widget() throws IOException
     {
         System.out.println("Task Initiate message received");
         Task_Initiate_Parser(this.identifier);
