@@ -321,7 +321,20 @@ public class Messaging_Node
     private static void Start_Transmitting(int rounds, String sink)
     {
         ArrayList<String> Adj = P.getAdjacent();
+        String predecessor = P.get_successor(sink);
+        String self_id = my_IP + ":" + my_port;
+
+        while (!self_id.equals(P.get_successor(predecessor)))
+        {
+
+            System.out.println("Predecessor: " +predecessor);
+            predecessor = P.get_successor(predecessor);
+        }
+        //        while (!Adj.contains(P.get_successor(sink)))
+
         System.out.println(P.get_successor(sink));
+
+
     }
 
     public static void peer_message_parser(byte [] byte_data)
