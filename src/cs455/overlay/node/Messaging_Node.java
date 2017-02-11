@@ -393,7 +393,6 @@ public class Messaging_Node
         {
             System.out.println("This is for me");
             C.increment_rx(num);
-
         }
         else
         {

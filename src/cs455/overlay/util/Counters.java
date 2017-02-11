@@ -46,4 +46,19 @@ public class Counters
     {
         relayed_tracker++;
     }
+
+    public int getReceive_tracker()
+    {
+        return receive_tracker;
+    }
+
+    public int getSent_tracker()
+    {
+        return sent_tracker;
+    }
+
+    public int getRelayed_tracker()
+    {
+        return relayed_tracker;
+    }
 }

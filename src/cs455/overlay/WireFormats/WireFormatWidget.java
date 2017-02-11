@@ -19,7 +19,7 @@ public class WireFormatWidget
 
     public WireFormatWidget(byte[] marshaledBytes) throws IOException
     {
-        System.out.println("In the constructor of Wire Format");
+//        System.out.println("In the constructor of Wire Format");
         ByteArrayInputStream baInputStream = new ByteArrayInputStream(marshaledBytes);
         DataInputStream din = new DataInputStream(new BufferedInputStream(baInputStream));
 
