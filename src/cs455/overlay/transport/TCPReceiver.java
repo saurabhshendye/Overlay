@@ -44,7 +44,7 @@ public class TCPReceiver extends Thread
                         break;
                     case 10: WireFormat.reg_ack();                      // 10 for Reg Ack
                         break;
-                    case 16:                                            // 16 for Task Complete message
+                    case 16: WireFormat.Task_complete_widget();         // 16 for Task Complete message
                         break;
                     case 2: WireFormat.link_info_widget();              // 2 for link weights
                         break;
