@@ -5,10 +5,7 @@
 package cs455.overlay.node;
 
 import cs455.overlay.UserIn.User_Input;
-import cs455.overlay.WireFormats.Link_Weights;
-import cs455.overlay.WireFormats.Messaging_nodes_list;
-import cs455.overlay.WireFormats.Reg_Ack;
-import cs455.overlay.WireFormats.Task_Initiate;
+import cs455.overlay.WireFormats.*;
 import cs455.overlay.transport.TCPReceiver;
 import cs455.overlay.transport.TCPSender;
 import cs455.overlay.util.Overlay_Creator;
@@ -258,7 +255,7 @@ public class Registry
 
     }
 
-    public synchronized static void Task_complete_parser(byte[] byte_data) throws InterruptedException
+    public synchronized static void Task_complete_parser(byte[] byte_data) throws InterruptedException, IOException
     {
         System.out.println("Task Complete message received");
         Task_complete_tracker++;
@@ -272,9 +269,11 @@ public class Registry
 
     }
 
-    private static void send_pull_traffic_summary()
+    private static void send_pull_traffic_summary() throws IOException
     {
-
+        Pull_traffic_summary pull = new Pull_traffic_summary();
+        byte [] byte_message = pull.getByteArray();
+        create_and_send(byte_message);
     }
 
 

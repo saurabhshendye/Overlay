@@ -90,11 +90,15 @@ public class WireFormatWidget
     {
         System.out.println("De-register message received");
         DeRegister(this.identifier);
-
     }
 
-    public void Task_complete_widget()
+    public void Task_complete_widget() throws IOException, InterruptedException
     {
         Task_complete_parser(this.identifier);
+    }
+
+    public void pull_summary_widget()
+    {
+        System.out.println("Pull traffic summary message received");
     }
 }
