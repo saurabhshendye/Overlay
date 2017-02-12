@@ -8,6 +8,7 @@ import cs455.overlay.Dijkstra.Shortest_Path;
 import cs455.overlay.UserIn.User_Input;
 import cs455.overlay.WireFormats.Message_Exchange;
 import cs455.overlay.WireFormats.Register_request;
+import cs455.overlay.WireFormats.Task_complete;
 import cs455.overlay.WireFormats.establish_connection_msg;
 import cs455.overlay.transport.TCPReceiver;
 import cs455.overlay.transport.TCPSender;
@@ -31,6 +32,7 @@ public class Messaging_Node
     private static int my_port;
     private static int [][] weights;
     private static String my_IP;
+    private static String BS_key;
     private static String[] Neighbours;
     private static ArrayList<String []> link_info = new ArrayList<>();
     private static ArrayList<String[]> Node_info = new ArrayList<>();
@@ -58,7 +60,7 @@ public class Messaging_Node
 
         // Create a temporary Socket and send the registration Request to Registry
         Socket bootstrap = new Socket(registry_ip,registry_port);
-        String BS_key = registry_ip + ":" + Integer.toString(registry_port);
+        BS_key = registry_ip + ":" + Integer.toString(registry_port);
 
         // Putting into the HashMap
 //        Sockets.put(BS_key, bootstrap);
@@ -358,15 +360,24 @@ public class Messaging_Node
 
     }
 
-    private static void send_task_complete()
+    private static void send_task_complete() throws IOException
     {
+        // Creating task complete message
+        Task_complete TC = new Task_complete();
+        byte [] Bytes = TC.getByteArray();
 
+        TCPSender send_TC = TCP_Sender.get(BS_key);
+        send_TC.send_and_maintain(Bytes);
     }
 
-    public static void traffic_summary_parser() throws IOException
+    public static void traffic_summary_request_parser() throws IOException
     {
         byte [] summary_bytes = C.getByteArray();
+
+        TCPSender send_summary = TCP_Sender.get(BS_key);
+        send_summary.send_and_maintain(summary_bytes);
     }
+
     private synchronized static String find_next_hop(String sink)
     {
         String predecessor = P.get_successor(sink);

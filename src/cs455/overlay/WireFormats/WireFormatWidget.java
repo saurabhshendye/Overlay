@@ -97,9 +97,9 @@ public class WireFormatWidget
         Task_complete_parser(this.identifier);
     }
 
-    public void pull_summary_widget()
+    public void pull_summary_widget() throws IOException
     {
         System.out.println("Pull traffic summary message received");
-        traffic_summary_parser();
+        traffic_summary_request_parser();
     }
 }
