@@ -18,11 +18,13 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 public class Registry
 {
     private static int Node_Count;
     private static int [][] weights;
+    private static int Task_complete_tracker;
     private static ArrayList<String[]> Node_info = new ArrayList<>();
     private static ArrayList<String> Link_info = new ArrayList<>();
     private static ArrayList<String> MN = new ArrayList<>();
@@ -256,7 +258,21 @@ public class Registry
 
     }
 
-    public synchronized static void Task_complete_parser(byte[] byte_data)
+    public synchronized static void Task_complete_parser(byte[] byte_data) throws InterruptedException
+    {
+        System.out.println("Task Complete message received");
+        Task_complete_tracker++;
+        if (Task_complete_tracker == Node_Count)
+        {
+            System.out.println("Wait for 15 seconds");
+            TimeUnit.SECONDS.sleep(15);
+            System.out.println("Send pull traffic summary message");
+            send_pull_traffic_summary();
+        }
+
+    }
+
+    private static void send_pull_traffic_summary()
     {
 
     }
