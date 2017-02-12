@@ -60,6 +60,7 @@ public class TCPReceiver extends Thread
                         break;
                     case 8: WireFormat.pull_summary_widget();           // 8 for pull traffic summary
                         break;
+                    case 9: WireFormat.summary_widget();
                     default: System.out.println("Unknown Message");
                         break;
 
