@@ -359,6 +359,10 @@ public class Messaging_Node
 
     }
 
+    public static void traffic_summary_parser()
+    {
+
+    }
     private synchronized static String find_next_hop(String sink)
     {
         String predecessor = P.get_successor(sink);

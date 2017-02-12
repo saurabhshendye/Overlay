@@ -4,8 +4,14 @@ package cs455.overlay.util;
  * Created by saurabh on 2/10/2017.
  */
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 public class Counters
 {
+    private int type = 9;
     private int receive_tracker;
     private int sent_tracker;
     private int relayed_tracker;
@@ -71,4 +77,31 @@ public class Counters
     {
         return receive_summation;
     }
+
+    public byte [] getByteArray() throws IOException
+    {
+        // This method creates a byte array which needs to be written onto the socket
+        ByteArrayOutputStream baopstream = new ByteArrayOutputStream();
+        DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(baopstream));
+
+        int Len = 28;
+
+        dout.writeInt(type);
+        dout.writeInt(Len);
+        dout.writeInt(receive_tracker);
+        dout.writeInt(sent_tracker);
+        dout.writeInt(relayed_tracker);
+        dout.writeLong(receive_summation);
+        dout.writeLong(sent_summation);
+        dout.flush();
+
+
+        byte[] marshaled = baopstream.toByteArray();
+
+        baopstream.close();
+        dout.close();
+
+        return marshaled;
+    }
+
 }

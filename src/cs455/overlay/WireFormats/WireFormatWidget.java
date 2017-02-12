@@ -100,5 +100,6 @@ public class WireFormatWidget
     public void pull_summary_widget()
     {
         System.out.println("Pull traffic summary message received");
+        traffic_summary_parser();
     }
 }

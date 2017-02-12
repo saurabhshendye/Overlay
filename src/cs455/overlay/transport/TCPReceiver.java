@@ -59,6 +59,7 @@ public class TCPReceiver extends Thread
                     case 7: WireFormat.de_register();                   // 7 for de-register request
                         break;
                     case 8: WireFormat.pull_summary_widget();           // 8 for pull traffic summary
+                        break;
                     default: System.out.println("Unknown Message");
                         break;
 
@@ -68,8 +69,10 @@ public class TCPReceiver extends Thread
             {
                 System.out.println("Error Message: " +e1.getMessage());
                 break;
-            } catch (InterruptedException e) {
+            } catch (InterruptedException e)
+            {
                 e.printStackTrace();
+                break;
             }
         }
     }
