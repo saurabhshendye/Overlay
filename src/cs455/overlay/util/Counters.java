@@ -17,14 +17,16 @@ public class Counters
     private int relayed_tracker;
     private long sent_summation;
     private long receive_summation;
+    private String IP_Port;
 
-    public Counters()
+    public Counters(String IP_Port)
     {
         this.receive_tracker = 0;
         this.sent_tracker = 0;
         this.relayed_tracker = 0;
         this.sent_summation = 0;
         this.receive_summation = 0;
+        this.IP_Port = IP_Port;
     }
 
     public void set_counters_toZero()
@@ -84,7 +86,10 @@ public class Counters
         ByteArrayOutputStream baopstream = new ByteArrayOutputStream();
         DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(baopstream));
 
-        int Len = 28;
+        byte [] IP_P_bytes = IP_Port.getBytes();
+//        int Len = 28;
+        int Len = IP_P_bytes.length;
+        Len = Len + 28;
 
         dout.writeInt(type);
         dout.writeInt(Len);
@@ -93,6 +98,7 @@ public class Counters
         dout.writeInt(relayed_tracker);
         dout.writeLong(receive_summation);
         dout.writeLong(sent_summation);
+        dout.write(IP_P_bytes);
         dout.flush();
 
 

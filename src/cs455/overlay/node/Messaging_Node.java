@@ -39,8 +39,9 @@ public class Messaging_Node
     private static ConcurrentHashMap<String, Thread> TCP_Receiver = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, TCPSender> TCP_Sender = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, Socket> socket_map = new ConcurrentHashMap<>();
-    private static Counters C = new Counters();
+//    private static Counters C = new Counters();
     private static Shortest_Path P;
+    private static Counters C;
 
 
 
@@ -85,6 +86,9 @@ public class Messaging_Node
         Register_request request = new Register_request(my_port, local_port, my_IP);
         byte[] request_inBytes =  request.getBytearray();
 
+        // Initiating Counter Variable
+        String self_id = my_IP + ":" + my_port;
+        C = new Counters(self_id);
 
         // Sending the request
         register.send_and_maintain(request_inBytes);
@@ -359,9 +363,9 @@ public class Messaging_Node
 
     }
 
-    public static void traffic_summary_parser()
+    public static void traffic_summary_parser() throws IOException
     {
-
+        byte [] summary_bytes = C.getByteArray();
     }
     private synchronized static String find_next_hop(String sink)
     {
