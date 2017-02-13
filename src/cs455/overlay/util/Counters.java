@@ -38,19 +38,19 @@ public class Counters
         this.receive_summation = 0;
     }
 
-    public void increment_rx(long num)
+    public synchronized void increment_rx(long num)
     {
         receive_tracker++;
         receive_summation = receive_summation + num;
     }
 
-    public void increment_tx(long num)
+    public synchronized void increment_tx(long num)
     {
         sent_tracker++;
         sent_summation = sent_summation + num;
     }
 
-    public void increment_relayed()
+    public synchronized void increment_relayed()
     {
         relayed_tracker++;
     }
