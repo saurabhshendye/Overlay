@@ -9,7 +9,7 @@ import cs455.overlay.WireFormats.*;
 import cs455.overlay.transport.TCPReceiver;
 import cs455.overlay.transport.TCPSender;
 import cs455.overlay.util.Overlay_Creator;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -293,14 +293,11 @@ public class Registry
     public synchronized static void increment_track_counter()
     {
         System.out.println("Node count is: " +Node_Count);
+        summary_tracker++;
+        System.out.println("Summary Tracker: " +summary_tracker);
         if (summary_tracker == Node_Count)
         {
             print_traffic_summary();
-        }
-        else
-        {
-            summary_tracker++;
-            System.out.println("Summary Tracker: " +summary_tracker);
         }
     }
 
