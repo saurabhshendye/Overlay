@@ -14,6 +14,7 @@ import static cs455.overlay.node.Registry.DeRegister;
 import static cs455.overlay.node.Registry.Task_complete_parser;
 import static cs455.overlay.node.Registry.getRegistered;
 
+
 public class WireFormatWidget
 {
     private int type;
@@ -106,5 +107,7 @@ public class WireFormatWidget
     public void summary_widget()
     {
         System.out.println("Summary received");
+//        traffic_summary_parser();
     }
+
 }

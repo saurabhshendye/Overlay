@@ -276,7 +276,15 @@ public class Registry
         create_and_send(byte_message);
     }
 
+    public synchronized static void traffic_summary_parser(byte [] byte_data)
+    {
+        ByteArrayInputStream bin = new ByteArrayInputStream(byte_data);
+        DataInputStream din = new DataInputStream(new BufferedInputStream(bin));
 
+
+
+
+    }
 
 
 //-------------------------------------------- Printing--------------------------------------------
