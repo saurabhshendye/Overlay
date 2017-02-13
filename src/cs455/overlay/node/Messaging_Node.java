@@ -397,7 +397,7 @@ public class Messaging_Node
         C.set_counters_toZero();
     }
 
-    private synchronized static String find_next_hop(String sink)
+    private static String find_next_hop(String sink)
     {
         String predecessor = P.get_successor(sink);
         String self_id = my_IP + ":" + my_port;
