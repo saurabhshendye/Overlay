@@ -77,7 +77,7 @@ public class StatsCollectorAndDisplay
         {
 //            System.out.println(N + "\t" + Receive_track.get(N) + "\t" + send_track.get(N));
 //            System.out.format()
-            String N = Node_Ids.get(i);
+            String N = Node_Ids.get(i-1);
             table[i] = new String []{N, Receive_track.get(N), send_track.get(N), relayed_track.get(N),
                                         receive_summation.get(N), send_summation.get(N)};
         }
