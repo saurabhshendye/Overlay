@@ -265,8 +265,8 @@ public class Registry
         Task_complete_tracker++;
         if (Task_complete_tracker == Node_Count)
         {
-            System.out.println("Wait for 30 seconds");
-            TimeUnit.SECONDS.sleep(30);
+            System.out.println("Wait for 40 seconds");
+            TimeUnit.SECONDS.sleep(40);
             System.out.println("Send pull traffic summary message");
             send_pull_traffic_summary();
         }
