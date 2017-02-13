@@ -53,11 +53,21 @@ public class StatsCollectorAndDisplay
     public static void print_traffic_summary()
     {
         System.out.println("Printing Traffic Summary");
-        System.out.println("Node ID" + "\t" + "Received" + "\t" + "Sent");
+        final Object[][] table = new String[Node_Ids.size()][];
+//        System.out.println("Node ID" + "\t\t" + "Received" + "\t" + "Sent");
 
-        for (String N: Node_Ids)
+        for (int i = 0; i < Node_Ids.size(); i++)
         {
-            System.out.println(N + "\t" + Receive_track.get(N) + "\t" + send_track.get(N));
+//            System.out.println(N + "\t" + Receive_track.get(N) + "\t" + send_track.get(N));
+//            System.out.format()
+            String N = Node_Ids.get(i);
+            table[i] = new String []{N, Receive_track.get(N), send_track.get(N), relayed_track.get(N),
+                                        receive_summation.get(N), send_summation.get(N)};
+        }
+
+        for (final Object[] row: table)
+        {
+            System.out.format("%15s%15s%15s%15s%15s%15s\n", row);
         }
     }
 
