@@ -393,6 +393,8 @@ public class Messaging_Node
 
         TCPSender send_summary = TCP_Sender.get(BS_key);
         send_summary.send_and_maintain(summary_bytes);
+
+        C.set_counters_toZero();
     }
 
     private synchronized static String find_next_hop(String sink)
