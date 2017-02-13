@@ -174,7 +174,7 @@ public class Registry
 
             String key = Node_info.get(i)[0] + ":" + Node_info.get(i)[1];
             String right_IP_port = IP_Port_Map.get(key);
-            System.out.println("Right IP port: " +right_IP_port);
+//            System.out.println("Right IP port: " +right_IP_port);
 
             TCPSender MN_sending = TCP_Sender.get(right_IP_port);
             MN_sending.send_and_maintain(B);
@@ -265,8 +265,8 @@ public class Registry
         Task_complete_tracker++;
         if (Task_complete_tracker == Node_Count)
         {
-            System.out.println("Wait for 15 seconds");
-            TimeUnit.SECONDS.sleep(15);
+            System.out.println("Wait for 30 seconds");
+            TimeUnit.SECONDS.sleep(30);
             System.out.println("Send pull traffic summary message");
             send_pull_traffic_summary();
         }
@@ -280,15 +280,6 @@ public class Registry
         create_and_send(byte_message);
     }
 
-//    public synchronized static void traffic_summary_parser(byte [] byte_data)
-//    {
-//        ByteArrayInputStream bin = new ByteArrayInputStream(byte_data);
-//        DataInputStream din = new DataInputStream(new BufferedInputStream(bin));
-//
-//
-//
-//
-//    }
 
     public synchronized static void increment_track_counter()
     {
