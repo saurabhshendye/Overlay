@@ -291,12 +291,14 @@ public class Registry
 
     public synchronized static void increment_track_counter()
     {
+        System.out.println("Node count is: " +Node_Count);
         if (summary_tracker != Node_Count)
         {
             summary_tracker++;
         }
         else
         {
+
             print_traffic_summary();
         }
 
