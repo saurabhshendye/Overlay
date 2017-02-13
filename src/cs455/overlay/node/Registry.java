@@ -17,11 +17,14 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
+import static cs455.overlay.util.StatsCollectorAndDisplay.print_traffic_summary;
+
 public class Registry
 {
     private static int Node_Count;
     private static int [][] weights;
     private static int Task_complete_tracker;
+    private static int summary_tracker = 0;
     private static ArrayList<String[]> Node_info = new ArrayList<>();
     private static ArrayList<String> Link_info = new ArrayList<>();
     private static ArrayList<String> MN = new ArrayList<>();
@@ -285,6 +288,20 @@ public class Registry
 //
 //
 //    }
+
+    public synchronized static void increment_track_counter()
+    {
+        if (summary_tracker != Node_Count)
+        {
+            summary_tracker++;
+        }
+        else
+        {
+            print_traffic_summary();
+        }
+
+
+    }
 
 
 //-------------------------------------------- Printing--------------------------------------------

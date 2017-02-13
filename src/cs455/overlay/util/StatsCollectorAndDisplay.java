@@ -10,6 +10,8 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static cs455.overlay.node.Registry.increment_track_counter;
+
 public class StatsCollectorAndDisplay
 {
     private static ConcurrentHashMap<String, String> Receive_track = new ConcurrentHashMap<>();
@@ -41,6 +43,13 @@ public class StatsCollectorAndDisplay
         receive_summation.put(ID, Long.toString(rec_sum));
         send_summation.put(ID, Long.toString(sent_sum));
 
+        increment_track_counter();
+
+    }
+
+    public static void print_traffic_summary()
+    {
+        System.out.println("Printing Traffic Summary");
     }
 
 //    public static void main(String [] args)
