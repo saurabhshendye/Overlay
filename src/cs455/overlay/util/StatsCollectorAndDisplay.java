@@ -15,6 +15,11 @@ import static cs455.overlay.node.Registry.increment_track_counter;
 
 public class StatsCollectorAndDisplay
 {
+    private static int receive_O = 0;
+    private static int send_O = 0;
+    private static int relayed_O = 0;
+    private static long rec_sum_O = 0;
+    private static long sent_sum_O = 0;
     private static ConcurrentHashMap<String, String> Receive_track = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, String> send_track = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, String> relayed_track = new ConcurrentHashMap<>();
@@ -29,10 +34,19 @@ public class StatsCollectorAndDisplay
         DataInputStream din = new DataInputStream(new BufferedInputStream(bin));
 
         int receive = din.readInt();
+        receive_O = receive_O + receive;
+
         int sent = din.readInt();
+        send_O = send_O + sent;
+
         int relayed = din.readInt();
+        relayed_O = relayed_O + relayed;
+
         long rec_sum = din.readLong();
+        rec_sum_O = rec_sum_O + rec_sum;
+
         long sent_sum = din.readLong();
+        sent_sum_O = sent_sum_O + sent_sum;
 
         byte [] ID_byte = new byte[byte_data.length - 28];
         din.readFully(ID_byte);
@@ -53,10 +67,13 @@ public class StatsCollectorAndDisplay
     public static void print_traffic_summary()
     {
         System.out.println("Printing Traffic Summary");
-        final Object[][] table = new String[Node_Ids.size()][];
+        final Object[][] table = new String[Node_Ids.size() + 2][];
 //        System.out.println("Node ID" + "\t\t" + "Received" + "\t" + "Sent");
+        table[0] = new String[] {"Node ID", "Received Msg Count", "Sent Msg Count",
+                                    "Relayed Msg Count", "Summation of Rcvd values",
+                                "Sum of sent vals"};
 
-        for (int i = 0; i < Node_Ids.size(); i++)
+        for (int i = 1; i <= Node_Ids.size(); i++)
         {
 //            System.out.println(N + "\t" + Receive_track.get(N) + "\t" + send_track.get(N));
 //            System.out.format()
@@ -65,9 +82,13 @@ public class StatsCollectorAndDisplay
                                         receive_summation.get(N), send_summation.get(N)};
         }
 
+        table[Node_Ids.size() + 1] = new String[] {"Total", Integer.toString(receive_O), Integer.toString(send_O),
+                                        Integer.toString(relayed_O), Long.toString(rec_sum_O),
+                                        Long.toString(sent_sum_O)};
+
         for (final Object[] row: table)
         {
-            System.out.format("%15s%15s%15s%15s\t%15s\t%15s\n", row);
+            System.out.format("%20s%20s%20s%20s%20s%20s\n", row);
         }
     }
 
