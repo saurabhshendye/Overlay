@@ -426,7 +426,7 @@ public class Messaging_Node
         return right_addr;
     }
 
-    public static void peer_message_parser(byte [] byte_data) throws IOException
+    public synchronized static void peer_message_parser(byte [] byte_data) throws IOException
     {
         String self_id = my_IP + ":" + my_port;
 
