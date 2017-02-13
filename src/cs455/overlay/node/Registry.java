@@ -9,6 +9,7 @@ import cs455.overlay.WireFormats.*;
 import cs455.overlay.transport.TCPReceiver;
 import cs455.overlay.transport.TCPSender;
 import cs455.overlay.util.Overlay_Creator;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -299,6 +300,7 @@ public class Registry
         else
         {
             summary_tracker++;
+            System.out.println("Summary Tracker: " +summary_tracker);
         }
     }
 
