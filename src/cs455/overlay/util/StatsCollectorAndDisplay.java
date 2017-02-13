@@ -67,7 +67,7 @@ public class StatsCollectorAndDisplay
 
         for (final Object[] row: table)
         {
-            System.out.format("%15s%15s%15s%15s%15s%15s\n", row);
+            System.out.format("%15s%15s%15s%15s\t%15s\t%15s\n", row);
         }
     }
 
