@@ -13,6 +13,7 @@ import static cs455.overlay.node.Messaging_Node.*;
 import static cs455.overlay.node.Registry.DeRegister;
 import static cs455.overlay.node.Registry.Task_complete_parser;
 import static cs455.overlay.node.Registry.getRegistered;
+import static cs455.overlay.util.StatsCollectorAndDisplay.traffic_summary_parser;
 
 
 public class WireFormatWidget
@@ -104,10 +105,10 @@ public class WireFormatWidget
         traffic_summary_request_parser();
     }
 
-    public void summary_widget()
+    public void summary_widget() throws IOException
     {
         System.out.println("Summary received");
-//        traffic_summary_parser();
+        traffic_summary_parser(this.identifier);
     }
 
 }

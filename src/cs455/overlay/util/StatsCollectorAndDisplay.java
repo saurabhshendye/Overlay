@@ -42,4 +42,9 @@ public class StatsCollectorAndDisplay
         send_summation.put(ID, Long.toString(sent_sum));
 
     }
+
+//    public static void main(String [] args)
+//    {
+//
+//    }
 }
