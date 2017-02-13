@@ -289,6 +289,7 @@ public class Registry
         if (summary_tracker == Node_Count)
         {
             print_traffic_summary();
+            summary_tracker = 0;
         }
     }
 
