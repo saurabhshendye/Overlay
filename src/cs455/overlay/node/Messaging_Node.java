@@ -305,23 +305,23 @@ public class Messaging_Node
 
         System.out.println("Number of rounds to perform: " +rounds);
 
-        String self_id = my_IP + ":" + my_port;
+//        String self_id = my_IP + ":" + my_port;
+//
+//        // Select the random node from the Nodes list
+//        int rand = new Random().nextInt(Nodes.size());
+//        String sink = Nodes.get(rand);
+//
+//        while (sink.equals(self_id))
+//        {
+//            rand = new Random().nextInt(Nodes.size());
+//            sink = Nodes.get(rand);
+//        }
 
-        // Select the random node from the Nodes list
-        int rand = new Random().nextInt(Nodes.size());
-        String sink = Nodes.get(rand);
-
-        while (sink.equals(self_id))
-        {
-            rand = new Random().nextInt(Nodes.size());
-            sink = Nodes.get(rand);
-        }
-
-        System.out.println("Source Node (myself): " +self_id);
-        System.out.println("Selected sink node is: " +sink);
+//        System.out.println("Source Node (myself): " +self_id);
+//        System.out.println("Selected sink node is: " +sink);
 
         // Start sending messages
-        Start_Transmitting(rounds, sink);
+        Start_Transmitting(rounds);
 
         // Print Task Summary
         System.out.println("Enter command 'print-counters' to view the summary");
@@ -331,16 +331,16 @@ public class Messaging_Node
 
     }
 
-    private static void Start_Transmitting(int rounds, String sink) throws IOException {
+    private static void Start_Transmitting(int rounds) throws IOException {
 //        ArrayList<String> Adj = P.getAdjacent();
 
 //        System.out.println("next hop: " +next_hop);
 //        System.out.println("Predecessor: " +predecessor);
 
-        String right_addr = find_next_hop(sink);
-
-        System.out.println("Right IP Port: " +right_addr);
-        TCPSender Msg_send = TCP_Sender.get(right_addr);
+//        String right_addr = find_next_hop(sink);
+//
+//        System.out.println("Right IP Port: " +right_addr);
+//        TCPSender Msg_send = TCP_Sender.get(right_addr);
 
 //        String [] next_node = predecessor.split(":");
 
@@ -348,6 +348,23 @@ public class Messaging_Node
 
         for (int i = 0; i < rounds; i++)
         {
+            String self_id = my_IP + ":" + my_port;
+
+            // Select the random node from the Nodes list
+            int rand = new Random().nextInt(Nodes.size());
+            String sink = Nodes.get(rand);
+
+            while (sink.equals(self_id))
+            {
+                rand = new Random().nextInt(Nodes.size());
+                sink = Nodes.get(rand);
+            }
+
+            String right_addr = find_next_hop(sink);
+
+            System.out.println("Right IP Port: " +right_addr);
+            TCPSender Msg_send = TCP_Sender.get(right_addr);
+
             for (int j = 0; j < 5; j++)
             {
                 long val = generate.nextLong();
