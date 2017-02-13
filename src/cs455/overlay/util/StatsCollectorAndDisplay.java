@@ -66,12 +66,14 @@ public class StatsCollectorAndDisplay
 
     public static void print_traffic_summary()
     {
+        System.out.println();
         System.out.println("Printing Traffic Summary");
+        System.out.println();
         final Object[][] table = new String[Node_Ids.size() + 2][];
 //        System.out.println("Node ID" + "\t\t" + "Received" + "\t" + "Sent");
         table[0] = new String[] {"Node ID", "Received Msg Count", "Sent Msg Count",
-                                    "Relayed Msg Count", "Summation of Rcvd values",
-                                "Sum of sent vals"};
+                                    "Relayed Msg Count", "Sum of Rcvd values",
+                                "Sum of sent values"};
 
         for (int i = 1; i <= Node_Ids.size(); i++)
         {
@@ -88,7 +90,7 @@ public class StatsCollectorAndDisplay
 
         for (final Object[] row: table)
         {
-            System.out.format("%20s%20s%20s%20s%20s%20s\n", row);
+            System.out.format("%22s%22s%22s%22s%22s%22s\n", row);
         }
     }
 
