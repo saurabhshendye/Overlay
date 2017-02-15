@@ -149,6 +149,7 @@ public class Registry
 
         info = new String[]{IP, Integer.toString(port)};
 
+
         String server_IP_port = IP + ":" + Integer.toString(port);
 
         String test = IP_Port_Map.get(server_IP_port);
@@ -166,10 +167,14 @@ public class Registry
             TCPSender DR_send = TCP_Sender.get(test);
             DR_send.send_data(DR_bytes);
 
+            int ind = Node_info.indexOf(info);
+
             IP_Port_Map.remove(server_IP_port);
             TCP_Sender.remove(test);
             socket_map.remove(test);
-            Node_info.remove(info);
+            Node_info.remove(ind);
+
+            System.out.println(IP_Port_Map.get(server_IP_port));
 
         }
         else
