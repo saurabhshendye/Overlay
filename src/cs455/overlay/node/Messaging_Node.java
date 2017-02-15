@@ -6,10 +6,7 @@ package cs455.overlay.node;
 
 import cs455.overlay.Dijkstra.Shortest_Path;
 import cs455.overlay.UserIn.User_Input;
-import cs455.overlay.WireFormats.Message_Exchange;
-import cs455.overlay.WireFormats.Register_request;
-import cs455.overlay.WireFormats.Task_complete;
-import cs455.overlay.WireFormats.establish_connection_msg;
+import cs455.overlay.WireFormats.*;
 import cs455.overlay.transport.TCPReceiver;
 import cs455.overlay.transport.TCPSender;
 import cs455.overlay.util.Counters;
@@ -128,6 +125,13 @@ public class Messaging_Node
         String Message = new String(byte_data);
         System.out.println("Registration Message: " + Message);
     }
+    
+    public static void exit_overlay_parser() throws IOException
+    {
+        De_register exit_request = new De_register(my_IP, my_port);
+        byte [] exit_bytes = exit_request.getByteArray();
+
+    }
 
     public static void link_info_parser(byte[] byte_data)
     {
@@ -171,7 +175,7 @@ public class Messaging_Node
         }
     }
 
-    private static void link_info_arraylist(String [] links )
+    private static void link_info_arraylist(String [] links)
     {
         for (String link : links)
         {
