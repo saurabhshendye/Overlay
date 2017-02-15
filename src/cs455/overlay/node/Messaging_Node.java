@@ -444,16 +444,17 @@ public class Messaging_Node
             System.out.println("-------------------------------------------------");
             if (!node.equals(self_id))
             {
-                while (!node.equals(self_id))
-                {
-                    next_hop = node;
-                    System.out.println(node);
-                    node = P.get_successor(node);
-                    int next_hop_ind = Nodes.indexOf(next_hop);
-                    int node_index = node.indexOf(node);
-                    System.out.println("Link Weight: " +weights[next_hop_ind][node_index]);
-
-                }
+//                while (!node.equals(self_id))
+//                {
+//                    next_hop = node;
+//                    System.out.println(node);
+//                    node = P.get_successor(node);
+//                    int next_hop_ind = Nodes.indexOf(next_hop);
+//                    int node_index = node.indexOf(node);
+//                    System.out.println("Link Weight: " +weights[next_hop_ind][node_index]);
+//
+//                }
+                P.print_path(node);
             }
         }
     }
