@@ -111,4 +111,9 @@ public class WireFormatWidget
         traffic_summary_parser(this.identifier);
     }
 
+    public void DE_ACK_Widget()
+    {
+        System.out.println("Deregister ACK received");
+    }
+
 }

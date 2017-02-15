@@ -58,6 +58,8 @@ public class TCPReceiver extends Thread
                         break;
                     case 7: WireFormat.de_register();                   // 7 for de-register request
                         break;
+                    case 17: WireFormat.DE_ACK_Widget();
+                        break;
                     case 8: WireFormat.pull_summary_widget();           // 8 for pull traffic summary
                         break;
                     case 9: WireFormat.summary_widget();

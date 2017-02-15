@@ -157,6 +157,13 @@ public class Registry
         {
             System.out.println("Node : " +server_IP_port +"is removed from the list");
             System.out.println("Send the de-register ack to the node");
+
+            DER_ACK DACK = new DER_ACK();
+            byte[] DR_bytes = DACK.getByteArray();
+
+            TCPSender DR_send = TCP_Sender.get(server_IP_port);
+            DR_send.send_and_maintain(DR_bytes);
+
             IP_Port_Map.remove(server_IP_port);
 
         }
