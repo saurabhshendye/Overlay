@@ -444,18 +444,25 @@ public class Messaging_Node
             System.out.println("-------------------------------------------------");
             if (!node.equals(self_id))
             {
-//                next_hop = node;
+
+                ArrayList<String> paths = new ArrayList<>();
                 System.out.println("Destination: "+node);
                 while (!node.equals(self_id))
                 {
-                    next_hop = node;
+//                    next_hop = node;
 
-                    int next_hop_ind = Nodes.indexOf(next_hop);
+//                    int next_hop_ind = Nodes.indexOf(next_hop);
                     node = P.get_successor(node);
-                    System.out.println("Next hop: " +node);
-                    int node_index = node.indexOf(node);
-                    System.out.println("Link Weight: " +weights[next_hop_ind][node_index]);
+                    paths.add(node);
+//                    System.out.println("Next hop: " +node);
+//                    int node_index = node.indexOf(node);
+//                    System.out.println("Link Weight: " +weights[next_hop_ind][node_index]);
 
+                }
+
+                for (String hop: paths)
+                {
+                    System.out.println(hop);
                 }
 //                P.print_path(node);
 
