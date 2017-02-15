@@ -446,7 +446,8 @@ public class Messaging_Node
             {
 
                 ArrayList<String> paths = new ArrayList<>();
-                System.out.println("Destination: "+node);
+                String Dest = node;
+                System.out.println("Destination: "+Dest);
                 while (!node.equals(self_id))
                 {
 //                    next_hop = node;
@@ -460,9 +461,30 @@ public class Messaging_Node
 
                 }
 
-                for (String hop: paths)
+//                for (String hop: paths)
+//                {
+//                    System.out.println(hop);
+//                }
+                System.out.println("Has the destination variable changed ? " +Dest);
+                for (int i = 0; i < paths.size(); i++)
                 {
-                    System.out.println(hop);
+                    if (i == 0)
+                    {
+                        int Dest_ind = Nodes.indexOf(Dest);
+                        String current = paths.get(i);
+                        int current_ind = Nodes.indexOf(current);
+                        System.out.println("Link Weight: " +weights[Dest_ind][current_ind]);
+                        System.out.println(current);
+                    }
+                    else
+                    {
+                        String current = paths.get(i);
+                        int current_ind = Nodes.indexOf(current);
+                        String predecessor = paths.get(i-1);
+                        int prev_ind = Nodes.indexOf(predecessor);
+                        System.out.println("Link Weight: " +weights[prev_ind][current_ind]);
+                        System.out.println(current);
+                    }
                 }
 //                P.print_path(node);
 
