@@ -465,15 +465,14 @@ public class Messaging_Node
 //                {
 //                    System.out.println(hop);
 //                }
-                System.out.println("Has the destination variable changed ? " +Dest);
                 for (int i = 0; i < paths.size(); i++)
                 {
                     if (i == 0)
                     {
-                        int Dest_ind = Nodes.indexOf(Dest);
+//                        int Dest_ind = Nodes.indexOf(Dest);
                         String current = paths.get(i);
-                        int current_ind = Nodes.indexOf(current);
-                        System.out.println("Link Weight: " +weights[Dest_ind][current_ind]);
+//                        int current_ind = Nodes.indexOf(current);
+//                        System.out.println("Link Weight: " +weights[Dest_ind][current_ind]);
                         System.out.println(current);
                     }
                     else
