@@ -55,12 +55,12 @@ public class Registry
 //            System.out.println("creating thread");
             Thread thread_2 = new TCPReceiver(serving);
 //            System.out.println("Socket is connected to: " + serving.getRemoteSocketAddress().toString());
-            make_TCP_ReceiverEntry(serving, thread_2);
+            make_TCP_ReceiverEntry(serving);
             thread_2.start();
         }
     }
 
-    private static void make_TCP_ReceiverEntry(Socket S, Thread T)
+    private static void make_TCP_ReceiverEntry(Socket S)
     {
         String[] byParts = S.getRemoteSocketAddress().toString().split(":");
         String IP = byParts[0].replace("/","");
@@ -361,7 +361,7 @@ public class Registry
             {
 //                System.out.println("\n");
                 String N = node[0] + "  " + ":" + node[1];
-                System.out.println("Node - " + (Node_info.indexOf(node)+ 1) + N );
+                System.out.println("Node-" + (Node_info.indexOf(node)+ 1) + " " + N);
             }
         }
     }
