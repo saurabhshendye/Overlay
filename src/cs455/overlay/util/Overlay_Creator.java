@@ -58,7 +58,7 @@ public class Overlay_Creator
 
     public int[][] link_weights_assignment()
     {
-        System.out.println("Assigning link weights..");
+//        System.out.println("Assigning link weights..");
 
         int [][] weights = new int[Node_count][Node_count];
         Random Generate = new Random();

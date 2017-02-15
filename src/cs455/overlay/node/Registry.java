@@ -52,7 +52,7 @@ public class Registry
             // The execution of a program is blocked here
             // It will not go further till there is a input from the network
             Socket serving = Reg_server.accept();
-            System.out.println("creating thread");
+//            System.out.println("creating thread");
             Thread thread_2 = new TCPReceiver(serving);
 //            System.out.println("Socket is connected to: " + serving.getRemoteSocketAddress().toString());
             make_TCP_ReceiverEntry(serving, thread_2);
@@ -257,6 +257,8 @@ public class Registry
         Link_Weights LW = new Link_Weights(Link_info);
         byte [] LW_bytes = LW.getByteArray();
         create_and_send(LW_bytes);
+        System.out.println("Weights sent to Messaging Nodes");
+        System.out.println("Enter command 'list-weights' to view the link details");
     }
 
     private static void create_and_send(byte[] B) throws IOException
