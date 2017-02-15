@@ -449,9 +449,10 @@ public class Messaging_Node
                 while (!node.equals(self_id))
                 {
                     next_hop = node;
-                    System.out.println(node);
+
                     int next_hop_ind = Nodes.indexOf(next_hop);
                     node = P.get_successor(node);
+                    System.out.println("Next hop: " +node);
                     int node_index = node.indexOf(node);
                     System.out.println("Link Weight: " +weights[next_hop_ind][node_index]);
 
