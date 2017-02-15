@@ -18,7 +18,7 @@ public class Shortest_Path
     private int [] distance;
     private ArrayList<String> Adjacent;
     private ConcurrentHashMap<String, String> Successors;
-    private HashMap<String, ArrayList<String>> paths;
+//    private HashMap<String, ArrayList<String>> paths;
 
     public Shortest_Path(int [][] weight_graph, ArrayList<String> Nodes, String source)
     {
@@ -125,31 +125,32 @@ public class Shortest_Path
         String Node_key = Nodes.get(i);
         Successors.put(Node_key, current_node);
 
-        if (paths.containsKey(Node_key))
-        {
-            ArrayList<String> temp = paths.get(Node_key);
-            temp.add(current_node);
-            paths.put(Node_key, temp);
-        }
-        else
-        {
-            ArrayList<String> path_array = new ArrayList<>();
-            path_array.add(current_node);
-            paths.put(Node_key, path_array);
-        }
-
+//
+//        if (paths.containsKey(Node_key))
+//        {
+//            ArrayList<String> temp = paths.get(Node_key);
+//            temp.add(current_node);
+//            paths.put(Node_key, temp);
+//        }
+//        else
+//        {
+//            ArrayList<String> path_array = new ArrayList<>();
+//            path_array.add(current_node);
+//            paths.put(Node_key, path_array);
+//        }
+//
     }
 
-    public void print_path(String destination)
-    {
-        ArrayList<String> hops = paths.get(destination);
-
-        for (String hop: hops)
-        {
-            System.out.println(hop);
-        }
-
-    }
+//    public void print_path(String destination)
+//    {
+//        ArrayList<String> hops = paths.get(destination);
+//
+//        for (String hop: hops)
+//        {
+//            System.out.println(hop);
+//        }
+//
+//    }
 
     public synchronized String get_successor(String node_key)
     {
