@@ -71,7 +71,7 @@ public class Registry
 //        TCP_Receiver.put(IP_Port, T);
         socket_map.put(IP_Port,S);
 //        test_map.put(IP_Port, "It is a socket problem then");
-        System.out.println("Testing HashMap: " + test_map.get(IP_Port));
+//        System.out.println("Testing HashMap: " + test_map.get(IP_Port));
     }
 
     public static synchronized void getRegistered(byte[] byte_data) throws IOException
@@ -109,7 +109,7 @@ public class Registry
         // Retrieve the saved socket and create TCPSender object
 
         Socket temp = socket_map.get(connection_IP_Port);
-        System.out.println(test_map.get(connection_IP_Port));
+//        System.out.println(test_map.get(connection_IP_Port));
         TCPSender node_connect = new TCPSender(temp);
 
         // Put the TCP Sender object into HashMap
