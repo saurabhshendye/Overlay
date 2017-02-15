@@ -161,7 +161,9 @@ public class Registry
             DER_ACK DACK = new DER_ACK();
             byte[] DR_bytes = DACK.getByteArray();
 
-            TCPSender DR_send = TCP_Sender.get(server_IP_port);
+
+
+            TCPSender DR_send = TCP_Sender.get(test);
             DR_send.send_and_maintain(DR_bytes);
 
             IP_Port_Map.remove(server_IP_port);
