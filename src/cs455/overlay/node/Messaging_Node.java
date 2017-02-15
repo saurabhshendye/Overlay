@@ -104,7 +104,7 @@ public class Messaging_Node
             System.out.println("creating thread in Messaging node. ");
             Thread thread_2 = new TCPReceiver(serving);
             make_TCP_ReceiverEntry(serving);
-            System.out.println("Socket is connected to: " + serving.getRemoteSocketAddress().toString());
+//            System.out.println("Socket is connected to: " + serving.getRemoteSocketAddress().toString());
             thread_2.start();
         }
     }
