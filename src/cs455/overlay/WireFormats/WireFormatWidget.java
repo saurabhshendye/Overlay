@@ -114,6 +114,7 @@ public class WireFormatWidget
     public void DE_ACK_Widget()
     {
         System.out.println("Deregister ACK received");
+        exit_all();
     }
 
 }
