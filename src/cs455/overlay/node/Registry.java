@@ -267,7 +267,7 @@ public class Registry
         {
             String key = Node[0] + ":" + Node[1];
             String IP_port_value = IP_Port_Map.get(key);
-            System.out.println(IP_port_value);
+//            System.out.println(IP_port_value);
 
             TCPSender Wt_send = TCP_Sender.get(IP_port_value);
             Wt_send.send_and_maintain(B);
@@ -357,9 +357,11 @@ public class Registry
             System.out.println("\n");
             System.out.println("Node IP" + "\t" + "Port");
             for(String[] node: Node_info)
+//            for (int i = 0; i< Node_info.size();,)
             {
-                System.out.println("\n");
-                System.out.println(node[0] +"\t" + node[1]);
+//                System.out.println("\n");
+                String N = node[0] + "  " + ":" + node[1];
+                System.out.println("Node - " + (Node_info.indexOf(node)+ 1) + N );
             }
         }
     }
