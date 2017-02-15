@@ -54,7 +54,7 @@ public class Registry
             Socket serving = Reg_server.accept();
             System.out.println("creating thread");
             Thread thread_2 = new TCPReceiver(serving);
-            System.out.println("Socket is connected to: " + serving.getRemoteSocketAddress().toString());
+//            System.out.println("Socket is connected to: " + serving.getRemoteSocketAddress().toString());
             make_TCP_ReceiverEntry(serving, thread_2);
             thread_2.start();
         }
@@ -66,8 +66,8 @@ public class Registry
         String IP = byParts[0].replace("/","");
 //        String[] IP_Port = {IP ,byParts[1]};
         String IP_Port = IP + ":" + byParts[1];
-        System.out.println("Making the entry with IP: " + IP);
-        System.out.println("Making the entry with port: " + byParts[1]);
+//        System.out.println("Making the entry with IP: " + IP);
+//        System.out.println("Making the entry with port: " + byParts[1]);
 //        TCP_Receiver.put(IP_Port, T);
         socket_map.put(IP_Port,S);
 //        test_map.put(IP_Port, "It is a socket problem then");
@@ -186,19 +186,19 @@ public class Registry
 
         Overlay_Creator overlay = new Overlay_Creator(Node_degree, Node_Count);
         overlay.create_overlay();
-        int [][] connections = overlay.getConnection_indicator();
-        for (int [] i : connections)
-        {
-            for (int j : i )
-            {
-                System.out.print(j + "\t");
-            }
-            System.out.println();
-        }
+//        int [][] connections = overlay.getConnection_indicator();
+//        for (int [] i : connections)
+//        {
+//            for (int j : i )
+//            {
+//                System.out.print(j + "\t");
+//            }
+//            System.out.println();
+//        }
 
         weights = overlay.link_weights_assignment();
 
-        print_weights();
+//        print_weights();
         send_messaging_node_info();
     }
 

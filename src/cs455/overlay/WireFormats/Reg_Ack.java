@@ -22,12 +22,12 @@ public class Reg_Ack {
         ByteArrayOutputStream baopstream = new ByteArrayOutputStream();
         DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(baopstream));
 
-        System.out.println("Code is :" +this.code);
+//        System.out.println("Code is :" +this.code);
         byte[] code_array = this.code.getBytes();
         int Len = code_array.length;
 
-        System.out.println("Type is :" +type);
-        System.out.println("Length at sending side in Reg_Ack is : " + Len);
+//        System.out.println("Type is :" +type);
+//        System.out.println("Length at sending side in Reg_Ack is : " + Len);
         dout.writeInt(type);
         dout.writeInt(Len);
         dout.write(code_array);
