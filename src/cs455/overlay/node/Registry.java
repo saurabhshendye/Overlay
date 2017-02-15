@@ -169,6 +169,7 @@ public class Registry
             IP_Port_Map.remove(server_IP_port);
             TCP_Sender.remove(test);
             socket_map.remove(test);
+            Node_info.remove(info);
 
         }
         else
@@ -295,6 +296,15 @@ public class Registry
             }
         }
 
+    }
+
+    public static void print_links()
+    {
+        System.out.println();
+        for (String link: Link_info)
+        {
+            System.out.println(link);
+        }
     }
 
     public synchronized static void Task_complete_parser(byte[] byte_data) throws InterruptedException, IOException

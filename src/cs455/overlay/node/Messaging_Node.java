@@ -433,6 +433,26 @@ public class Messaging_Node
         return right_addr;
     }
 
+    public static void print_shortest_path()
+    {
+        String self_id = my_IP + ":" + Integer.toString(my_port);
+
+        System.out.println("Self ID: " +self_id);
+        for (String node: Nodes)
+        {
+//            String next_hop = node;
+            if (!node.equals(self_id))
+            {
+                while (!node.equals(self_id))
+                {
+                    //                next_hop = node;
+                    System.out.println(node);
+                    node = P.get_successor(node);
+                }
+            }
+        }
+    }
+
     public synchronized static void peer_message_parser(byte [] byte_data) throws IOException
     {
         String self_id = my_IP + ":" + my_port;
@@ -483,6 +503,8 @@ public class Messaging_Node
             System.out.println(N);
         }
     }
+
+
 
 
     public static void print_counters()

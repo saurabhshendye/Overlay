@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import static cs455.overlay.node.Messaging_Node.exit_overlay_parser;
 import static cs455.overlay.node.Messaging_Node.print_counters;
+import static cs455.overlay.node.Messaging_Node.print_shortest_path;
 import static cs455.overlay.node.Registry.*;
 
 public class User_Input extends Thread
@@ -39,6 +40,7 @@ public class User_Input extends Thread
         else if (command.equals("list-weights"))
         {
             System.out.println("List the weights.");
+            print_links();
         }
         else if (command.equals("send-overlay-link-weights"))
         {
@@ -58,6 +60,7 @@ public class User_Input extends Thread
         else if (command.equals("print-shortest-path"))
         {
             System.out.println("Print the shortest path");
+            print_shortest_path();
         }
         else if (command.equals("exit-overlay"))
         {
