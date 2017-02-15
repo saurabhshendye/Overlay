@@ -26,7 +26,8 @@ public class Registry
     private static int [][] weights;
     private static int Task_complete_tracker;
     private static int summary_tracker = 0;
-    private static ArrayList<String[]> Node_info = new ArrayList<>();
+//    private static ArrayList<String[]> Node_info = new ArrayList<>();
+    private static ArrayList<String> Node_info = new ArrayList<>();
     private static ArrayList<String> Link_info = new ArrayList<>();
     private static ArrayList<String> MN = new ArrayList<>();
     private static ConcurrentHashMap<String, String> IP_Port_Map = new ConcurrentHashMap<>();
@@ -79,7 +80,8 @@ public class Registry
 
         ByteArrayInputStream bin = new ByteArrayInputStream(byte_data);
         DataInputStream din = new DataInputStream(new BufferedInputStream(bin));
-        String[] info;
+//        String[] info;
+        String info;
 
         // Read the ports
         int port = din.readInt();
@@ -97,8 +99,8 @@ public class Registry
         // Print the IP Address
         System.out.println("IP Address is : " + IP);
 
-        info = new String[]{IP, Integer.toString(port)};
-
+//        info = new String[]{IP, Integer.toString(port)};
+        info = IP + ":" + Integer.toString(port);
 
         String connection_IP_Port = IP  + ":" + Integer.toString(local_port);
         String server_IP_port = IP + ":" + Integer.toString(port);
@@ -139,7 +141,8 @@ public class Registry
     {
         ByteArrayInputStream bin = new ByteArrayInputStream(byte_data);
         DataInputStream din = new DataInputStream(new BufferedInputStream(bin));
-        String[] info;
+//        String[] info;
+        String info;
 
         // Read the port
         int port = din.readInt();
@@ -147,7 +150,8 @@ public class Registry
         din.readFully(IP_byte);
         String IP  = new String(IP_byte);
 
-        info = new String[]{IP, Integer.toString(port)};
+//        info = new String[]{IP, Integer.toString(port)};
+        info = IP + ":" + Integer.toString(port);
 
 
         String server_IP_port = IP + ":" + Integer.toString(port);
@@ -224,7 +228,8 @@ public class Registry
             Messaging_nodes_list MN_list = new Messaging_nodes_list(MN.get(i));
             byte[] B = MN_list.getByteArray();
 
-            String key = Node_info.get(i)[0] + ":" + Node_info.get(i)[1];
+//            String key = Node_info.get(i)[0] + ":" + Node_info.get(i)[1];
+            String key = Node_info.get(i);
             String right_IP_port = IP_Port_Map.get(key);
 //            System.out.println("Right IP port: " +right_IP_port);
 
@@ -244,7 +249,8 @@ public class Registry
             {
                 if (weights[i][j] != 0 && i > j)
                 {
-                    temp = temp + Node_info.get(j)[0] + ":" + Node_info.get(j)[1] + ";";
+//                    temp = temp + Node_info.get(j)[0] + ":" + Node_info.get(j)[1] + ";";
+                    temp = temp + Node_info.get(j) + ";";
                 }
             }
             if (temp.isEmpty() || temp.equals(""))
@@ -276,9 +282,11 @@ public class Registry
 
     private static void create_and_send(byte[] B) throws IOException
     {
-        for(String [] Node : Node_info)
+//        for(String [] Node : Node_info)
+        for (String Node: Node_info)
         {
-            String key = Node[0] + ":" + Node[1];
+//            String key = Node[0] + ":" + Node[1];
+            String key = Node;
             String IP_port_value = IP_Port_Map.get(key);
 //            System.out.println(IP_port_value);
 
@@ -300,9 +308,12 @@ public class Registry
                 {
                     if (weights[i][j] != 0)
                     {
-                        String temp = Node_info.get(i)[0] + ":" + Node_info.get(i)[1] + " " +
-                                Node_info.get(j)[0] + ":" + Node_info.get(j)[1] + " " +
-                                Integer.toString(weights[i][j]) + ";";
+//                        String temp = Node_info.get(i)[0] + ":" + Node_info.get(i)[1] + " " +
+//                                Node_info.get(j)[0] + ":" + Node_info.get(j)[1] + " " +
+//                                Integer.toString(weights[i][j]) + ";";
+
+                        String temp = Node_info.get(i)+ " " +
+                                Node_info.get(j) + " " + Integer.toString(weights[i][j]) + ";";
 
                         Link_info.add(temp);
                     }
@@ -369,12 +380,12 @@ public class Registry
         {
             System.out.println("\n");
             System.out.println("Node IP" + "\t" + "Port");
-            for(String[] node: Node_info)
-//            for (int i = 0; i< Node_info.size();,)
+//            for(String[] node: Node_info)
+            for (String node : Node_info)
             {
 //                System.out.println("\n");
-                String N = node[0] + "  " + ":" + node[1];
-                System.out.println("Node-" + (Node_info.indexOf(node)+ 1) + " " + N);
+//                String N = node[0] + "  " + ":" + node[1];
+                System.out.println("Node-" + (Node_info.indexOf(node)+ 1) + " " + node);
             }
         }
     }
