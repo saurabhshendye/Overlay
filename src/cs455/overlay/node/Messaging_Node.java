@@ -479,10 +479,10 @@ public class Messaging_Node
                     else
                     {
                         String current = paths.get(i);
-                        int current_ind = Nodes.indexOf(current);
+//                        int current_ind = Nodes.indexOf(current);
                         String predecessor = paths.get(i-1);
-                        int prev_ind = Nodes.indexOf(predecessor);
-                        System.out.println("Link Weight: " +weights[prev_ind][current_ind]);
+//                        int prev_ind = Nodes.indexOf(predecessor);
+//                        System.out.println("Link Weight: " +weights[prev_ind][current_ind]);
                         System.out.println(current);
                     }
                 }
