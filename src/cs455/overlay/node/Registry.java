@@ -164,9 +164,11 @@ public class Registry
 
 
             TCPSender DR_send = TCP_Sender.get(test);
-            DR_send.send_and_maintain(DR_bytes);
+            DR_send.send_data(DR_bytes);
 
             IP_Port_Map.remove(server_IP_port);
+            TCP_Sender.remove(test);
+            socket_map.remove(test);
 
         }
         else
