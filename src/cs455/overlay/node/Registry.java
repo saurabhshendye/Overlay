@@ -295,7 +295,6 @@ public class Registry
 
             }
         }
-
     }
 
     public static void print_links()
