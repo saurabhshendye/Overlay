@@ -38,7 +38,7 @@ public class Messaging_Node
     private static ArrayList<String[]> Node_info = new ArrayList<>();
     private static ArrayList<String> Nodes = new ArrayList<>();
     private static ConcurrentHashMap<String, String> IP_Port_Map = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, Thread> TCP_Receiver = new ConcurrentHashMap<>();
+//    private static ConcurrentHashMap<String, Thread> TCP_Receiver = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, TCPSender> TCP_Sender = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, Socket> socket_map = new ConcurrentHashMap<>();
 //    private static Counters C = new Counters();
@@ -119,7 +119,7 @@ public class Messaging_Node
         String IP_Port = IP + ":" + byParts[1];
         System.out.println("Making the entry with IP: " + IP);
         System.out.println("Making the entry with port: " + byParts[1]);
-        TCP_Receiver.put(IP_Port, T);
+//        TCP_Receiver.put(IP_Port, T);
         socket_map.put(IP_Port,S);
     }
 
@@ -245,7 +245,7 @@ public class Messaging_Node
 
                 // Putting the above created objects in Concurrent HashMaps
                 IP_Port_Map.put(N, connection_IP_port);
-                TCP_Receiver.put(connection_IP_port, MN_receiver);
+//                TCP_Receiver.put(connection_IP_port, MN_receiver);
                 TCP_Sender.put(connection_IP_port,MN_sender);
 
 

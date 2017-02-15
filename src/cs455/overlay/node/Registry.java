@@ -30,7 +30,7 @@ public class Registry
     private static ArrayList<String> Link_info = new ArrayList<>();
     private static ArrayList<String> MN = new ArrayList<>();
     private static ConcurrentHashMap<String, String> IP_Port_Map = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, Thread> TCP_Receiver = new ConcurrentHashMap<>();
+//    private static ConcurrentHashMap<String, Thread> TCP_Receiver = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, TCPSender> TCP_Sender = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, Socket> socket_map = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, String> test_map = new ConcurrentHashMap<>();
@@ -68,7 +68,7 @@ public class Registry
         String IP_Port = IP + ":" + byParts[1];
         System.out.println("Making the entry with IP: " + IP);
         System.out.println("Making the entry with port: " + byParts[1]);
-        TCP_Receiver.put(IP_Port, T);
+//        TCP_Receiver.put(IP_Port, T);
         socket_map.put(IP_Port,S);
         test_map.put(IP_Port, "It is a socket problem then");
         System.out.println("Testing HashMap: " + test_map.get(IP_Port));
@@ -135,8 +135,35 @@ public class Registry
 
     }
 
-    public synchronized static void DeRegister(byte [] byte_data)
+    public synchronized static void DeRegister(byte [] byte_data) throws IOException
     {
+        ByteArrayInputStream bin = new ByteArrayInputStream(byte_data);
+        DataInputStream din = new DataInputStream(new BufferedInputStream(bin));
+        String[] info;
+
+        // Read the port
+        int port = din.readInt();
+        byte[] IP_byte = new byte[byte_data.length - 4];
+        din.readFully(IP_byte);
+        String IP  = new String(IP_byte);
+
+        info = new String[]{IP, Integer.toString(port)};
+
+        String server_IP_port = IP + ":" + Integer.toString(port);
+
+        String test = IP_Port_Map.get(server_IP_port);
+
+        if (test != null)
+        {
+            System.out.println("Node : " +server_IP_port +"is removed from the list");
+            System.out.println("Send the de-register ack to the node");
+            IP_Port_Map.remove(server_IP_port);
+
+        }
+        else
+        {
+            System.out.println("This node is not in the list");
+        }
 
     }
 
