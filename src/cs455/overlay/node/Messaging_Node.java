@@ -103,13 +103,13 @@ public class Messaging_Node
             Socket serving = Msg_server.accept();
             System.out.println("creating thread in Messaging node. ");
             Thread thread_2 = new TCPReceiver(serving);
-            make_TCP_ReceiverEntry(serving, thread_2);
+            make_TCP_ReceiverEntry(serving);
             System.out.println("Socket is connected to: " + serving.getRemoteSocketAddress().toString());
             thread_2.start();
         }
     }
 
-    private static void make_TCP_ReceiverEntry(Socket S, Thread T)
+    private static void make_TCP_ReceiverEntry(Socket S)
     {
         String[] byParts = S.getRemoteSocketAddress().toString().split(":");
         String IP = byParts[0].replace("/","");
@@ -440,15 +440,19 @@ public class Messaging_Node
         System.out.println("Self ID: " +self_id);
         for (String node: Nodes)
         {
-//            String next_hop = node;
+            String next_hop;
             System.out.println("-------------------------------------------------");
             if (!node.equals(self_id))
             {
                 while (!node.equals(self_id))
                 {
-                    //                next_hop = node;
+                    next_hop = node;
                     System.out.println(node);
                     node = P.get_successor(node);
+                    int next_hop_ind = Nodes.indexOf(next_hop);
+                    int node_index = node.indexOf(node);
+                    System.out.println("Link Weight: " +weights[next_hop_ind][node_index]);
+
                 }
             }
         }
