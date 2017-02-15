@@ -469,6 +469,12 @@ public class Messaging_Node
         }
     }
 
+    public static void exit_all()
+    {
+        System.out.println("Terminating...");
+        System.exit(0);
+    }
+
     private static void print_messaging_nodes()
     {
         System.out.println();
