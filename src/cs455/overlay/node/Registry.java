@@ -174,7 +174,11 @@ public class Registry
             socket_map.remove(test);
             Node_info.remove(info);
 
-            System.out.println(IP_Port_Map.get(server_IP_port));
+//            System.out.println(IP_Port_Map.get(server_IP_port));
+            if (Node_info.contains(info))
+            {
+                System.out.println("It is still there..");
+            }
 
         }
         else
