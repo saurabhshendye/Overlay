@@ -114,8 +114,8 @@ public class Messaging_Node
         String[] byParts = S.getRemoteSocketAddress().toString().split(":");
         String IP = byParts[0].replace("/","");
         String IP_Port = IP + ":" + byParts[1];
-        System.out.println("Making the entry with IP: " + IP);
-        System.out.println("Making the entry with port: " + byParts[1]);
+//        System.out.println("Making the entry with IP: " + IP);
+//        System.out.println("Making the entry with port: " + byParts[1]);
 //        TCP_Receiver.put(IP_Port, T);
         socket_map.put(IP_Port,S);
     }
@@ -151,15 +151,15 @@ public class Messaging_Node
         links_to_array L_A = new links_to_array(Node_Count, link_info, Nodes);
         weights = L_A.getAdjecencyMatrix();
 
-        print_weights();
+//        print_weights();
 
         String source = my_IP + ":" +Integer.toString(my_port);
         Shortest_Path path = new Shortest_Path(weights, Nodes, source);
         P = path;
         path.calculate_distances();
-        path.print_distances();
+//        path.print_distances();
 
-        print_successors(path);
+//        print_successors(path);
     }
 
     private static void print_successors(Shortest_Path path)
@@ -369,7 +369,7 @@ public class Messaging_Node
 
             String right_addr = find_next_hop(sink);
 
-            System.out.println("Right IP Port: " +right_addr);
+//            System.out.println("Right IP Port: " +right_addr);
             TCPSender Msg_send = TCP_Sender.get(right_addr);
 
             for (int j = 0; j < 5; j++)
@@ -467,7 +467,7 @@ public class Messaging_Node
         byte[] dest_byte = new byte[byte_data.length - 8];
         din.readFully(dest_byte);
         String dest  = new String(dest_byte);
-        System.out.println("Message is for: " +dest);
+//        System.out.println("Message is for: " +dest);
         if (dest.equals(self_id))
         {
 //            System.out.println("This is for me");
@@ -485,7 +485,7 @@ public class Messaging_Node
 
             // Get the right socket
             String right_addr = find_next_hop(dest);
-            System.out.println("Forwarding the message to: "+right_addr);
+//            System.out.println("Forwarding the message to: "+right_addr);
             TCPSender Msg_send = TCP_Sender.get(right_addr);
             Msg_send.send_and_maintain(byte_msg);
         }
