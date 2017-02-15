@@ -131,6 +131,9 @@ public class Messaging_Node
         De_register exit_request = new De_register(my_IP, my_port);
         byte [] exit_bytes = exit_request.getByteArray();
 
+        TCPSender exit = TCP_Sender.get(BS_key);
+        exit.send_and_maintain(exit_bytes);
+
     }
 
     public static void link_info_parser(byte[] byte_data)

@@ -6,6 +6,7 @@ package cs455.overlay.UserIn;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static cs455.overlay.node.Messaging_Node.exit_overlay_parser;
 import static cs455.overlay.node.Messaging_Node.print_counters;
 import static cs455.overlay.node.Registry.*;
 
@@ -61,6 +62,7 @@ public class User_Input extends Thread
         else if (command.equals("exit-overlay"))
         {
             System.out.println("Exit the overlay");
+            exit_overlay_parser();
         }
         else if (command.equals("print-counters"))
         {
