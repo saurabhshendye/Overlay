@@ -70,7 +70,7 @@ public class Registry
         System.out.println("Making the entry with port: " + byParts[1]);
 //        TCP_Receiver.put(IP_Port, T);
         socket_map.put(IP_Port,S);
-        test_map.put(IP_Port, "It is a socket problem then");
+//        test_map.put(IP_Port, "It is a socket problem then");
         System.out.println("Testing HashMap: " + test_map.get(IP_Port));
     }
 
@@ -303,7 +303,8 @@ public class Registry
         System.out.println();
         for (String link: Link_info)
         {
-            System.out.println(link);
+            link = link.replace(";","");
+            System.out.println("Link: " +link);
         }
     }
 
