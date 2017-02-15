@@ -155,7 +155,7 @@ public class Registry
 
         if (test != null)
         {
-            System.out.println("Node : " +server_IP_port +"is removed from the list");
+            System.out.println("Node : " +server_IP_port + " is removed from the list");
             System.out.println("Send the de-register ack to the node");
 
             DER_ACK DACK = new DER_ACK();

@@ -125,17 +125,17 @@ public class Shortest_Path
         String Node_key = Nodes.get(i);
         Successors.put(Node_key, current_node);
 
-        if (paths.get(Node_key) == null)
-        {
-            ArrayList<String> path_array = new ArrayList<>();
-            path_array.add(current_node);
-            paths.put(Node_key, path_array);
-        }
-        else
+        if (paths.containsKey(Node_key))
         {
             ArrayList<String> temp = paths.get(Node_key);
             temp.add(current_node);
             paths.put(Node_key, temp);
+        }
+        else
+        {
+            ArrayList<String> path_array = new ArrayList<>();
+            path_array.add(current_node);
+            paths.put(Node_key, path_array);
         }
 
     }
