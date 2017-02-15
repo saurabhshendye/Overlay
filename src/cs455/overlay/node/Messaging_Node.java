@@ -441,6 +441,7 @@ public class Messaging_Node
         for (String node: Nodes)
         {
 //            String next_hop = node;
+            System.out.println("-------------------------------------------------");
             if (!node.equals(self_id))
             {
                 while (!node.equals(self_id))
