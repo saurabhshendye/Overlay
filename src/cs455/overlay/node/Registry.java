@@ -172,7 +172,7 @@ public class Registry
             IP_Port_Map.remove(server_IP_port);
             TCP_Sender.remove(test);
             socket_map.remove(test);
-            Node_info.remove(ind);
+            Node_info.remove(info);
 
             System.out.println(IP_Port_Map.get(server_IP_port));
 
