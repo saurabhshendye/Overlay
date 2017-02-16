@@ -101,6 +101,7 @@ public class StatsCollectorAndDisplay
         relayed_O = 0;
         rec_sum_O = 0;
         sent_sum_O = 0;
+        Node_Ids.clear();
     }
 
 //    public static void main(String [] args)
