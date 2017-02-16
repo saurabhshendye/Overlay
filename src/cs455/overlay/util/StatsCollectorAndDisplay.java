@@ -94,6 +94,15 @@ public class StatsCollectorAndDisplay
         }
     }
 
+    public static void make_all_zero()
+    {
+        receive_O = 0;
+        send_O = 0;
+        relayed_O = 0;
+        rec_sum_O = 0;
+        sent_sum_O = 0;
+    }
+
 //    public static void main(String [] args)
 //    {
 //

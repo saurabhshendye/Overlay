@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
+import static cs455.overlay.util.StatsCollectorAndDisplay.make_all_zero;
 import static cs455.overlay.util.StatsCollectorAndDisplay.print_traffic_summary;
 
 public class Registry
@@ -357,6 +358,8 @@ public class Registry
         {
             print_traffic_summary();
             summary_tracker = 0;
+            Task_complete_tracker = 0;
+            make_all_zero();
         }
     }
 
